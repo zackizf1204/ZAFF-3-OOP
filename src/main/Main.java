@@ -229,5 +229,6 @@ public class Main {
       input=new Scanner(System.in);
       inputScan=input.next().charAt(0);
     } while (inputScan !='4');
+    System.out.println("Mikon");
   }
 }
