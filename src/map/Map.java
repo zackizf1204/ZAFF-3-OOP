@@ -10,9 +10,9 @@ public class Map {
   private MapObject[][] position;
   private Tile[][] dataTiles;
 
-  /**
-   *
+  /** Constructor map.
    */
+
   public Map() {
     int i;
     int j;
@@ -28,10 +28,9 @@ public class Map {
     }
   }
 
-  /**
-   *
-   * @param inputSizeX
-   * @param inputSizeY
+  /** Constructor map.
+   * @param inputSizeX masukkan ukuran X
+   * @param inputSizeY masukkan ukuran Y
    */
 
   public Map(int inputSizeX, int inputSizeY) {
@@ -61,6 +60,12 @@ public class Map {
     return(sizeY);
   }
 
+  public MapObject getMapObject (int i, int j) {
+    return (position[j][i]);
+  }
+  public Tile getTile (int i, int j) {
+    return (dataTiles[j][i]);
+  }
   /**
    *
    * @param inputSizeX
@@ -79,3 +84,9 @@ public class Map {
     sizeY = inputSizeY;
   }
 }
+  public void setPosition(int i, int j, MapObject data) {
+    position[j][i] = data;
+  }
+  public void setDataTiles(int i, int j, Tile data) {
+    dataTiles[j][i] = data;
+  }
