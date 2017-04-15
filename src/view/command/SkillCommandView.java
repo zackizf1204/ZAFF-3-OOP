@@ -20,7 +20,7 @@ public class SkillCommandView extends CommandView {
     } catch (Exception e) {
       System.out.println(e);
     }
-
+    setToolTipText("BIJI NAGA JAKI");
     addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
