@@ -29,11 +29,11 @@ public class CommandView extends JButton {
     JPanel panelcommand = new JPanel();
     panelcommand.add(new AttackCommandView());
     panelcommand.add(new SkillCommandView());
+    panelcommand.add(new ExitCommandView());
     frame.getContentPane().add(panelcommand);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    frame.pack();
-    //frame.setUndecorated(true);
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    frame.setUndecorated(true);
     frame.setVisible(true);
   }
 
