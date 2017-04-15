@@ -8,16 +8,20 @@ package object;
 public class MapObject {
   private int absis;
   private int ordinat;
+  private String objectType;
 
   public MapObject() {
     absis = 0;
     ordinat = 0;
   }
 
-
   public MapObject(int absis, int ordinat) {
     this.absis = absis;
     this.ordinat = ordinat;
+  }
+
+  public String getObjectType() {
+    return objectType;
   }
 
   public int getAbsis() {
@@ -36,4 +40,7 @@ public class MapObject {
     this.ordinat = ordinat;
   }
 
+  public void setObjectType(String objectType) {
+    this.objectType = objectType;
+  }
 }
