@@ -1,6 +1,5 @@
 package timer;
 
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,17 +10,14 @@ import java.util.TimerTask;
  */
 
 public class Stopwatch {
-  static int interval;
-  static Timer timer;
+  private int interval;
+  private Timer timer;
 
   public Stopwatch() {
-    /*Scanner sc = new Scanner(System.in);
-    System.out.print("Input seconds => : ");
-    String secs = sc.nextLine();*/
     int delay = 1000;
     int period = 1000;
     timer = new Timer();
-    interval = 60;//Integer.parseInt(secs);
+    interval = 60;
     System.out.println(interval);
     timer.scheduleAtFixedRate(new TimerTask() {
 
@@ -32,10 +28,14 @@ public class Stopwatch {
     }, delay, period);
   }
 
-  private static final int setInterval() {
+  private int setInterval() {
     if (interval == 1) {
       timer.cancel();
     }
     return --interval;
+  }
+
+  public int getInterval() {
+    return interval;
   }
 }
