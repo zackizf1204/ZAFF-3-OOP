@@ -25,6 +25,7 @@ public class PowerUp extends Item {
     setAddIntelligence(ran.nextInt(2));
     setAddStrength(ran.nextInt(2));
     setAddAgility(ran.nextInt(2));
+    setAddMov(ran.nextInt(10) / 10);
   }
 
   public PowerUp(int inputX, int inputY) {
