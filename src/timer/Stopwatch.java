@@ -20,10 +20,8 @@ public class Stopwatch {
     interval = 60;
     System.out.println(interval);
     timer.scheduleAtFixedRate(new TimerTask() {
-
       public void run() {
         System.out.println(setInterval());
-
       }
     }, delay, period);
   }
