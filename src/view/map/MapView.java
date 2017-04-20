@@ -1,15 +1,25 @@
 package view.map;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import map.Map;
-
-import java.awt.*;
-import javax.swing.*;
 
 /**
  * Created by Finiko on 4/15/2017.
  */
 public class MapView extends JPanel {
-  public void View(Map inputMap) throws Exception {
+  /**
+   *
+   * @param inputMap
+   * @throws Exception
+   */
+  public void view(Map inputMap) throws Exception {
     int x;
     int y;
 
@@ -20,7 +30,7 @@ public class MapView extends JPanel {
 
     JPanel mapPanel = new JPanel(mapLayout);
     JPanel objectPanel = new JPanel(objectLayout);
-    objectPanel.setOpaque(false);
+    objectPanel.setOpaque(true);
 
     frame.getContentPane().add(mapPanel);
     frame.getContentPane().add(objectPanel);
