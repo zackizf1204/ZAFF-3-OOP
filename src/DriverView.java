@@ -77,6 +77,9 @@ public class DriverView {
     return cp;
   }
 
+  public String getTimer(){
+    return cp.getTimerLabel();
+  }
   private class UpdateUITask extends TimerTask {
 
     int nSeconds = 5;

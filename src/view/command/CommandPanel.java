@@ -48,6 +48,10 @@ public class CommandPanel extends JPanel {
     bijijaki.setText(i + "");
 
   }
+
+  public String getTimerLabel() {
+    return bijijaki.getText();
+  }
   public void runCommandPanel() {
     Stopwatch stp = new Stopwatch();
     //while (stp.getInterval() > 0) {

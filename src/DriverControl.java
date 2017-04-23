@@ -1,3 +1,7 @@
+import map.Map;
+import object.Unit;
+import object.item.Recovery;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,17 +12,22 @@ import java.awt.*;
  */
 public class DriverControl {
   private DriverView view;
+  private DriverModel model;
 
   public DriverControl() {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        //view = new DriverView();
+        Map m = new Map(15,20);
+        m.setMapObject(0,new Recovery(0,0));
+        m.setMapObject(1,new Unit(10,10,10,10,10,10,5,5,0));
+
+        view = new DriverView(m);
       }
     });
   }
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     new DriverControl();
   }
 }
