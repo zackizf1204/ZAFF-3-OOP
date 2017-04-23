@@ -1,35 +1,27 @@
+package timer;
 
-package view.command;
 
-import timer.Stopwatch;
+import view.command.*;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.imageio.ImageIO;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.*;
 
-
 /**
- * Created by 13515017 / Putu Arya Pradipta.
- * Tanggal 4/13/2017.
- * FileName : CommandView.java.
+ * Created by Zacki Zulfikar Fauzi on 19-Apr-17.
+ * NIM  : 13515147
+ * File : Clock.java
  */
-public class CommandView extends JButton {
-  /**
-   * Konstrutktor CommandView.
-   * menghasilkan sebuah button yang telah terkustomisasi.
-   */
-  public CommandView() {
-    super();
-    setBorderPainted(false);
-    setContentAreaFilled(false);
-    setOpaque(false);
-    setBackground(new Color(0,0,0,0));
-  }
+public class Clock {
 
-  public static void main(String[] args) {
-    JFrame frame = new JFrame("FATHUR BANGSAT");
+  private Timer timer = new Timer();
+  private JLabel timeLabel = new JLabel(" ", JLabel.CENTER);
+
+  public Clock() {
+    JFrame frame = new JFrame("Seconds");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     JPanel newp = new JPanel(new BorderLayout());
     JPanel endp = new JPanel(new BorderLayout());
     JPanel panelcommand = new JPanel(new GridLayout(2,2));
@@ -54,11 +46,44 @@ public class CommandView extends JButton {
     newp.add(cp,BorderLayout.PAGE_START);
     endp.add(allunit,BorderLayout.LINE_START);
     newp.add(endp,BorderLayout.PAGE_END);
+    newp.add(timeLabel,BorderLayout.CENTER);
+
     frame.add(newp);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     frame.setUndecorated(true);
     frame.setVisible(true);
+    timer.schedule(new UpdateUITask(), 0, 1000);
+  }
 
+  private class UpdateUITask extends TimerTask {
+
+    int nSeconds = 5;
+
+    @Override
+    public void run() {
+      EventQueue.invokeLater(new Runnable() {
+
+        @Override
+        public void run() {
+          if (nSeconds == 0) {
+            timer.cancel();
+          }
+          timeLabel.setText(String.valueOf(nSeconds--));
+
+        }
+      });
+    }
+  }
+
+  public static void main(String args[]) {
+    EventQueue.invokeLater(new Runnable() {
+
+      @Override
+      public void run() {
+        final Clock clock = new Clock();
+      }
+    });
   }
 }
+

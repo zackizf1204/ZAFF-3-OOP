@@ -10,7 +10,7 @@ import java.io.IOException;
  * Tanggal 4/15/2017.
  * FileName : UnitView.java.
  */
-public class UnitView extends JPanel{
+public class UnitView extends JPanel {
   public UnitView() {
     super();
     GridBagLayout gridbag = new GridBagLayout();
