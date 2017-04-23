@@ -1,30 +1,17 @@
-import timer.Stopwatch;
-
-import java.awt.*;
+import object.Player;
 
 /**
- * Created by 13515017 / Putu Arya Pradipta.
- * Tanggal 4/17/2017.
- * FileName : DriverModel.java.
+ * Created by Fathur on 23-Apr-17.
+ * NIM : 13515068
+ * File : DriverModel.java
  */
 public class DriverModel {
-/*
+  DriverModel(){
+    Player[]  listPlayer;
+    listPlayer = new Player [4];
+    listPlayer[0] = new Player("Player 1",1,1,1);
+    listPlayer[1] = new Player("Player 2",2,1,10;
+    listPlayer[2] = new Player("Player 3",3,10,10;
+    listPlayer[3] = new Player("Player 4",4,10,1);
 
-  public void Attack(Unit a,Unit b);
-  unit a menyerang unit b
-  eksekusi a.attack
-
-  public void TakeItem(Unit a, Item x);
-
-  public void Wait();
-  //terminate semua program
-  //reload
-
-  public void Skill(Unit a, int skillnum)
-  //eksekusi skill nomer skillnum
-
-  modifikasi driverview dengan mengambil query dari drivermodel
-  public void updateui(drivermodel)
-  // gambar menurut drivermodel
-*/
 }
