@@ -19,13 +19,15 @@ public class DriverControl {
   private DriverModel model;
 
   public DriverControl() {
+    model = new DriverModel(2);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
         Map m = new Map(15,20);
-        m.setMapObject(0,new Recovery(0,0));
-        m.setMapObject(1,new Unit(1,5,5));
-        view = new DriverView(m);
+        m.setMapObject(0,new Recovery(10,10));
+        m.setMapObject(1,model.getCurrentPlayer(0).getUnit(0));
+        m.setMapObject(2,model.getCurrentPlayer(1).getUnit(0));
+        view = new DriverView(model);
         AttackCommandView attack = view.getAttack();
         attack.addMouseListener(new MouseListener() {
           @Override
@@ -48,7 +50,7 @@ public class DriverControl {
           public void mouseEntered(MouseEvent e) {
             JButton c = (JButton) e.getComponent();
             try {
-              Image img = ImageIO.read(getClass().getResource("../../assets/attackbuttononhover.png"));
+              Image img = ImageIO.read(getClass().getResource("assets/attackbuttononhover.png"));
               c.setIcon(new ImageIcon(img));
             } catch (Exception ex) {
               System.out.println(ex);
@@ -61,7 +63,7 @@ public class DriverControl {
           public void mouseExited(MouseEvent e) {
             JButton c = (JButton) e.getComponent();
             try {
-              Image img = ImageIO.read(getClass().getResource("../../assets/attackbutton.png"));
+              Image img = ImageIO.read(getClass().getResource("assets/attackbutton.png"));
               c.setIcon(new ImageIcon(img));
             } catch (Exception ex) {
               System.out.println(ex);
@@ -70,11 +72,22 @@ public class DriverControl {
             attack.setBackground(new Color(0,0,0,0));
           }
         });
+
+      }
+    });
+  }
+
+  public void runGame(){
+    EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        view.updateView(model);
       }
     });
   }
 
   public static void main(String[] args) {
-    new DriverControl();
+    DriverControl ctrl = new DriverControl();
+    ctrl.runGame();
   }
 }

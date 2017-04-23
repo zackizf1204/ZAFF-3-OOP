@@ -65,4 +65,9 @@ public class PauseCommandView extends CommandView {
       }
     });
   }
+
+  @Override
+  public int getButtonType() {
+    return 3;
+  }
 }

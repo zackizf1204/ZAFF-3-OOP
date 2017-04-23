@@ -16,7 +16,7 @@ class UnitTest {
     Unit test2 = new Unit (0,1,0);
     int atk = test1.getStrength();
     int currentHp = test2.getCurrentHp();
-    test1.Attack(test2);
+    test1.attack(test2);
     boolean a;
     a = (test2.getCurrentHp() == (currentHp - 7 / 10 * atk)) || (test2.getCurrentHp() == (currentHp - 8 / 10 * atk))
         || (test2.getCurrentHp() == (currentHp - 9 / 10 * atk)) || (test2.getCurrentHp() == (currentHp - 10 / 10 * atk))

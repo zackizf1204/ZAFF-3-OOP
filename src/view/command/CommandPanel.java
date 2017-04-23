@@ -24,6 +24,7 @@ public class CommandPanel extends JPanel {
   private JLabel bijijaki = new JLabel("15");
   GridBagLayout gridbag = new GridBagLayout();
   GridBagConstraints c = new GridBagConstraints();
+  private JLabel namaPlayer;
 
   public CommandPanel() {
 
@@ -32,17 +33,21 @@ public class CommandPanel extends JPanel {
 
     c.fill = GridBagConstraints.BOTH;
     c.weightx = 1.0;
-    JLabel namaPlayer = new JLabel("Nama Player");
+    namaPlayer = new JLabel("Nama Player");
     setAndAdd(namaPlayer, gridbag, c);
     c.gridwidth = GridBagConstraints.REMAINDER; //end row
     JPanel exitpanel = new JPanel(new BorderLayout());
     exitpanel.add(new ExitCommandView(), BorderLayout.LINE_END);
     JPanel pausepanel = new JPanel(new BorderLayout());
-    pausepanel.add(new PauseCommandView(), BorderLayout.LINE_END);
+    //pausepanel.add(new PauseCommandView(), BorderLayout.LINE_END);
     exitpanel.add(pausepanel, BorderLayout.CENTER);
     setAndAdd(exitpanel, gridbag, c);
     setAndAdd(bijijaki, gridbag, c);
 
+  }
+
+  public void setNamaPlayer(String str){
+    namaPlayer.setText(str);
   }
   public void setTimerLabel(int i){
     bijijaki.setText(i + "");

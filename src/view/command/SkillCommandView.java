@@ -64,4 +64,9 @@ public class SkillCommandView extends CommandView {
       }
     });
   }
+
+  @Override
+  public int getButtonType() {
+    return 5;
+  }
 }

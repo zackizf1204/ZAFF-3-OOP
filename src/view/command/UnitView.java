@@ -1,5 +1,7 @@
 package view.command;
 
+import object.Unit;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,14 @@ import java.io.IOException;
  * FileName : UnitView.java.
  */
 public class UnitView extends JPanel {
+
+  private JLabel hp;
+  private JLabel mp;
+  private JLabel strength;
+  private JLabel intel;
+  private JLabel mov;
+  private JLabel agi;
+
   public UnitView() {
     super();
     GridBagLayout gridbag = new GridBagLayout();
@@ -30,24 +40,37 @@ public class UnitView extends JPanel {
     JLabel licon = new JLabel(new ImageIcon(img));
     gridbag.setConstraints(licon,c);
     add(licon);
-    setBackground(Color.blue);
+    setBackground(Color.CYAN);
 
     c.weighty = 1.0;                //reset to the default
     c.gridwidth = GridBagConstraints.REMAINDER; //end row
     c.gridheight = 1;               //reset to the default
-    makeLabel("HP",gridbag,c);
-    makeLabel("MP",gridbag,c);
-    makeLabel("strength",gridbag,c);
-    makeLabel("intelligence",gridbag,c);
-    makeLabel("mov",gridbag,c);
-    makeLabel("agi",gridbag,c);
+    hp = new JLabel("HP");
+    gridbag.setConstraints(hp,c);
+    add(hp);
+    mp = new JLabel("MP");
+    gridbag.setConstraints(mp,c);
+    add(mp);
+    strength = new JLabel("strength");
+    gridbag.setConstraints(strength,c);
+    add(strength);
+    intel = new JLabel("intelligence");
+    gridbag.setConstraints(intel,c);
+    add(intel);
+    mov = new JLabel("mov");
+    gridbag.setConstraints(mov,c);
+    add(mov);
+    agi = new JLabel("agi");
+    gridbag.setConstraints(agi,c);
+    add(agi);
   }
 
-  protected void makeLabel(String name,
-                           GridBagLayout gridbag,
-                           GridBagConstraints c) {
-    JLabel lbl = new JLabel(name);
-    gridbag.setConstraints(lbl,c);
-    add(lbl);
+  public void setAttribute(Unit unit) {
+    hp.setText("HP : "+unit.getCurrentHp()+"/"+unit.getMaxHp());
+    mp.setText("MP : "+unit.getCurrentMp()+"/"+unit.getMaxMp());
+    strength.setText("STR : "+unit.getStrength()+"");
+    intel.setText("INT : "+unit.getIntelligence()+"");
+    mov.setText("MOV : "+unit.getMov()+"");
+    agi.setText("AGI : "+unit.getAgi()+"");
   }
 }

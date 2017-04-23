@@ -28,15 +28,15 @@ public class DriverView {
   private SkillCommandView skill = new SkillCommandView();
   private WaitCommandView wait = new WaitCommandView();
   private PickCommandView pick = new PickCommandView();
-
+  private UnitView unit1 = new UnitView();
 
   /**
    * Konstruktor DriverView tanpa parameter.
    */
-  public DriverView(Map mp) {
+  public DriverView(DriverModel model) {
     JFrame frame = new JFrame("ZAFF");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mv = new MapViewer(mp);
+    mv = new MapViewer(model.getMap());
     try {
       mv.view();
     } catch (Exception e) {
@@ -55,10 +55,7 @@ public class DriverView {
 
     endp.add(panelcommand,BorderLayout.LINE_END);
     endp.setBackground(new Color(0,0,0,100));
-    playerPanel.add(new UnitView());
-    playerPanel.add(new UnitView());
-    playerPanel.add(new UnitView());
-    playerPanel.add(new UnitView());
+    playerPanel.add(unit1);
     playerPanel.setOpaque(false);
     endp.add(playerPanel,BorderLayout.LINE_START);
 
@@ -73,6 +70,12 @@ public class DriverView {
     frame.setVisible(true);
     timer.schedule(new UpdateUITask(), 0, 1000);
 
+  }
+  public void updateView(DriverModel model){
+    // setting nama player, ambil dari current player
+    cp.setNamaPlayer(model.getCurrentPlayer(0).getPlayerName());
+    // setting nama unit
+    unit1.setAttribute(model.getCurrentPlayer(0).getUnit(0));
   }
 
   public AttackCommandView getAttack() {
@@ -130,7 +133,7 @@ public class DriverView {
         Map m = new Map(15,20);
         m.setMapObject(0,new Recovery(0,0));
         m.setMapObject(1,new Unit(1,5,5));
-        final DriverView clock = new DriverView(m);
+        //final DriverView clock = new DriverView(m);
       }
     });
   }
