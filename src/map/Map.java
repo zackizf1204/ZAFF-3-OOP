@@ -147,7 +147,7 @@ public class Map {
   public MapObject searchObject(int x, int y) {
     int i;
     i = 0;
-    while ((i < countObject)&&((arrayObject[i].getAbsis() != x)||(arrayObject[i].getOrdinat() != y))) {
+    while ((i < countObject) && ((arrayObject[i].getAbsis() != x) || (arrayObject[i].getOrdinat() != y))) {
       i = i + 1;
     }
     return (arrayObject[i]);

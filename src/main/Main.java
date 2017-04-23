@@ -1,13 +1,5 @@
 package main;
-<<<<<<< .merge_file_a04348
 
-
-import timer.Stopwatch;
-
-public class Main {
-  public static void main(String[] args){
-    Stopwatch timer = new Stopwatch();
-=======
 import map.Map;
 import object.Unit;
 import object.item.Recovery;
@@ -24,10 +16,10 @@ public class Main {
     m.setMapObject(1,new Unit(10,10,10,10,10,10,10,10,0));
     MapView mv = new MapView();
     try {
-      mv.View(m);
+      mv.view(m);
     } catch (Exception e) {
       e.printStackTrace();
     }
->>>>>>> .merge_file_a03848
+
   }
 }
