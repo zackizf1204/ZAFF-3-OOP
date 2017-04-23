@@ -17,10 +17,10 @@ public class Player {
     countUnit = 1;
   }
 
-  public Player(String input,int type){
+  public Player(String input,int type,int x, int y){
     playerName = input;
     arrayUnit = new Unit [10];
-    arrayUnit[0] = new Unit(type);
+    arrayUnit[0] = new Unit(type,x,y);
     countUnit = 1;
   }
 
