@@ -276,47 +276,48 @@ public class Unit extends MapObject {
   }
 
   public boolean isReachable (Unit target) {
-    if (getAbsis() == target.getAbsis()) && (getOrdinat() != target.getOrdinat()) {
+    if ((getAbsis() == target.getAbsis()) && (getOrdinat() != target.getOrdinat())) {
       return (((getOrdinat() - target.getOrdinat()) == -1) || ((getOrdinat() - target.getOrdinat()) == -1));
-    } else if (getAbsis() != target.getAbsis()) && (getOrdinat() == target.getOrdinat()) {
+    } else if ((getAbsis() != target.getAbsis()) && (getOrdinat() == target.getOrdinat())) {
       return (((getAbsis() - target.getAbsis()) == -1) || ((getAbsis() - target.getAbsis()) == -1));
     }
     return false;
   }
 
-  public boolean isSkillUsabale(int i){
-    if (type == 0){
-      if (i == 1){
+  public boolean isSkillUsabale(int i) {
+    if (type == 0) {
+      if (i == 1) {
         return ((currentHp > 10) && (currentMp >= 5));
-      } else if (i == 2){
+      } else if (i == 2) {
         return ((currentHp > 30) && (currentMp >= 15));
-      } else if (i == 3){
+      } else if (i == 3) {
         return (currentMp >= 10);
       }
-    } else if (type == 1){
-      if (i == 1){
+    } else if (type == 1) {
+      if (i == 1) {
         return (currentMp >= 5);
-      } else if (i == 2){
+      } else if (i == 2) {
         return true;
-      } else if (i == 3){
+      } else if (i == 3) {
         return (currentMp >= 10);
       }
-    } else if (type == 2){
-      if (i == 1){
+    } else if (type == 2) {
+      if (i == 1) {
         return (currentMp >= 5);
-      } else if (i == 2){
+      } else if (i == 2) {
         return (currentMp >= 20);
-      } else if (i == 3){
+      } else if (i == 3) {
         return true;
       }
-    } else if (type == 3){
-      if (i == 1){
+    } else if (type == 3) {
+      if (i == 1) {
         return (currentMp >= 5);
-      } else if (i == 2){
+      } else if (i == 2) {
         return (currentMp >= 10);
-      } else if (i == 3){
+      } else if (i == 3) {
         return (currentMp >= 15);
       }
     }
+    return false;
   }
 }
