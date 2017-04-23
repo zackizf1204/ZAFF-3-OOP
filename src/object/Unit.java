@@ -23,6 +23,7 @@ public class Unit extends MapObject {
 
   public Unit() {
     super();
+    setObjectType();
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -36,6 +37,7 @@ public class Unit extends MapObject {
 
   public Unit(int type,int x,int y) {
     super(x,y);
+    setObjectType();
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
@@ -271,6 +273,10 @@ public class Unit extends MapObject {
     if (currentMp > maxMp) {
       currentMp = maxMp;
     }
+  }
+
+  public void setObjectType(){
+    objectType = "Unit";
   }
 
   public boolean isReachable (Unit target) {
