@@ -23,7 +23,6 @@ public class Unit extends MapObject {
 
   public Unit() {
     super();
-    setObjectType("Unit");
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -37,7 +36,6 @@ public class Unit extends MapObject {
 
   public Unit(int type,int x,int y) {
     super(x,y);
-    setObjectType("Unit");
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
