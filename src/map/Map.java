@@ -121,20 +121,24 @@ public class Map {
     int i;
     int absis;
     int ordinat;
-    i = 0;
-    absis = arrayObject[i].getAbsis();
-    ordinat = arrayObject[i].getOrdinat();
-    while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-      i = i + 1;
-      if (i < countObject) {
-        absis = arrayObject[i].getAbsis();
-        ordinat = arrayObject[i].getOrdinat();
+    if (countObject > 0) {
+      i = 0;
+      absis = arrayObject[i].getAbsis();
+      ordinat = arrayObject[i].getOrdinat();
+      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
+        i = i + 1;
+        if (i < countObject) {
+          absis = arrayObject[i].getAbsis();
+          ordinat = arrayObject[i].getOrdinat();
+        }
       }
-    }
-    if (i >= countObject) {
-      return (false);
+      if (i >= countObject) {
+        return (false);
+      } else {
+        return ((absis == x) && (ordinat == y));
+      }
     } else {
-      return ((absis == x) && (ordinat == y));
+      return (false);
     }
   }
   /** mencari dan mengembalikan MapObject di posisi x dan y.
