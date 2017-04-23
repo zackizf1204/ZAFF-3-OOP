@@ -1,8 +1,7 @@
 package view.map;
 
-import object.MapObject;
-
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,16 +9,16 @@ import java.io.IOException;
 /**
  * Created by Finiko on 4/20/2017.
  */
-public class DrawEmpty {
+public class EmptyDrawer extends JPanel {
   private int x;
   private int y;
   private BufferedImage image;
 
-  public DrawEmpty(int inputX, int inputY) {
+  public EmptyDrawer(int inputX, int inputY) {
     x = inputX;
     y = inputY;
     try {
-      image = ImageIO.read(getClass().getResource("../../assets/empty_tile.png"));
+      image = ImageIO.read(getClass().getResource("../../assets/tile/empty_tile.png"));
     } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());
     }

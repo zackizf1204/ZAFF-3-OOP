@@ -24,7 +24,7 @@ public class Map {
     dataTiles = new Tile[sizeY][sizeX];
     for (i = 0; i < sizeY; i++) {
       for (j = 0; j < sizeX; j++) {
-        dataTiles[j][i] = new Tile(0, 0,j,i);
+        dataTiles[i][j] = new Tile(0, 0,j,i);
       }
     }
     countObject = 0;
@@ -44,7 +44,7 @@ public class Map {
     dataTiles = new Tile[sizeY][sizeX];
     for (i = 0; i < sizeY; i++) {
       for (j = 0; j < sizeX; j++) {
-        dataTiles[j][i] = new Tile(0, 0,j,i);
+        dataTiles[i][j] = new Tile(0, 0,j,i);
       }
     }
     countObject = 0;
@@ -80,7 +80,7 @@ public class Map {
    */
 
   public Tile getTile(int i, int j) {
-    return (dataTiles[j][i]);
+    return (dataTiles[i][j]);
   }
 
   /** melakukan set pada nilai ukuran X map.
@@ -116,7 +116,7 @@ public class Map {
    */
 
   public void setDataTiles(int i, int j, Tile data) {
-    dataTiles[j][i] = data;
+    dataTiles[i][j] = data;
   }
 
   /** mencari object di posisi x dan y

@@ -11,19 +11,19 @@ import tile.Tile;
 /**
  * Created by Finiko on 4/15/2017.
  */
-public class DrawTile extends JPanel{
+public class TileDrawer extends JPanel{
   private int x;
   private int y;
   private BufferedImage image;
 
-  public DrawTile (Tile inputTile) {
+  public TileDrawer (Tile inputTile) {
     x = inputTile.getX();
     y = inputTile.getY();
     try {
       if (inputTile.getType() == 0) {
-        image = ImageIO.read(getClass().getResource("../../assets/tile_grass.jpg"));
+        image = ImageIO.read(getClass().getResource("../../assets/tile/tile_grass.jpg"));
       } else {
-        image = ImageIO.read(getClass().getResource("../../assets/tile_river.jpg"));
+        image = ImageIO.read(getClass().getResource("../../assets/tile/tile_river.jpg"));
       }
     } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());
