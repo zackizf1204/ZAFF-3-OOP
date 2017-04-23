@@ -1,22 +1,33 @@
 package view.map;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 import map.Map;
 
 /**
  * Created by Finiko on 4/15/2017.
  */
-public class MapViewer extends JPanel{
+public class MapViewer extends JPanel {
   GridBagConstraints batasan;
   JComponent contentPane;
   JLayeredPane layerPanel;
   GridBagLayout mapLayout;
   GridBagLayout objectLayout;
   Map inputMap;
+  /** constructor.
+   * @param map masukkan map
+   */
 
-  public MapViewer (Map map) {
+  public MapViewer(Map map) {
     batasan = new GridBagConstraints();
     mapLayout = new GridBagLayout();
     objectLayout = new GridBagLayout();
@@ -26,10 +37,10 @@ public class MapViewer extends JPanel{
     layerPanel.setLayout(mapLayout);
     inputMap = map;
   }
-  /**
-   *
-   * @throws Exception
+  /** menampilkan ke layar.
+   * @throws Exception jika file tidak ditemukan.
    */
+
   public void view() throws Exception {
     JFrame frame = new JFrame("Display image");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +52,10 @@ public class MapViewer extends JPanel{
     contentPane.add(layerPanel);
     frame.setVisible(true);
   }
-  public void viewTile () {
+  /** Menampilkan tile.
+   */
+
+  public void viewTile() {
     int x;
     int y;
     for (y = 0; y < inputMap.getSizeY(); y++) {
@@ -57,7 +71,10 @@ public class MapViewer extends JPanel{
       }
     }
   }
-  public void viewMapObject () {
+  /** Menampilkan Map Object.
+   */
+
+  public void viewMapObject() {
     int x;
     int y;
     for (x = 0; x < inputMap.getSizeX();x++) {
