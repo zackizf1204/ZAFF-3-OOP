@@ -1,6 +1,7 @@
 import map.Map;
 import object.Player;
 import object.Unit;
+import object.item.Item;
 
 /**
  * Created by Fathur on 23-Apr-17.
@@ -71,8 +72,20 @@ public class DriverModel {
     currentUnit = 0;
   }
 
-  public Player getCurrentPlayer(int i) {
+  public Player getPlayer(int i) {
     return listPlayer[i];
   }
 
+  public Player getCurrentPlayer() {
+    return listPlayer[currentPlayer];
+  }
+
+  public void recov() {
+    listPlayer[currentPlayer].getUnit(currentUnit).recov();
+    changePlayer();
+  }
+
+  public Map getMap() {
+    return map;
+  }
 }
