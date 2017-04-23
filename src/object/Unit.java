@@ -18,9 +18,9 @@ public class Unit extends MapObject {
   private int agi;
   private final int type;
 
-  public Unit(){
+  public Unit() {
     super();
-    setObjectType("Unit");
+    setObjectType();
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -32,9 +32,9 @@ public class Unit extends MapObject {
     type = 0;
   }
 
-  public Unit(int mhp, int mmp, int strength, int intelligence, int mov, int agi, int absis,int ordinat,int type){
+  public Unit(int mhp, int mmp, int strength, int intelligence, int mov, int agi, int absis,int ordinat,int type) {
     super(absis,ordinat);
-    setObjectType("Unit");
+    setObjectType();
     maxHp = mhp;
     maxMp = mmp;
     this.strength = strength;
@@ -44,9 +44,9 @@ public class Unit extends MapObject {
     this.type = type;
   }
 
-  public Unit(int type){
+  public Unit(int type) {
     super();
-    setObjectType("Unit");
+    setObjectType();
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
@@ -107,8 +107,8 @@ public class Unit extends MapObject {
 
   public void Attack(Unit target){
     Random rand = new Random();
-    int n = rand.nextInt(100)+1;
-    if(n <= (target.agi*2)){
+    int n = rand.nextInt(100) + 1;
+    if (n <= (target.agi * 2)) {
       //Attack Miss;
     }
     else{
@@ -211,5 +211,9 @@ public class Unit extends MapObject {
 
   public int getAgi(){
     return agi;
+  }
+
+  public void setObjectType() {
+    objectType = "Unit";
   }
 }
