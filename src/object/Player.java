@@ -25,7 +25,7 @@ public class Player {
   }
 
   public void addUnit(int type){
-    arrayUnit[countUnit] = new Unit(type);
+    arrayUnit[countUnit] = new Unit(type,0,0);
     countUnit++;
   }
 
