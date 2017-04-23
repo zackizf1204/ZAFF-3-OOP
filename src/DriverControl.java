@@ -13,7 +13,7 @@ public class DriverControl {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        view = new DriverView();
+        //view = new DriverView();
       }
     });
   }

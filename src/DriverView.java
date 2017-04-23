@@ -1,4 +1,6 @@
 
+import object.Unit;
+import object.item.Recovery;
 import view.command.*;
 
 import javax.swing.*;
@@ -6,7 +8,8 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.util.*;
 import view.command.*;
-
+import view.map.MapViewer;
+import map.Map;
 import java.awt.*;
 import java.util.TimerTask;
 import javax.swing.*;
@@ -20,13 +23,20 @@ public class DriverView {
   private JLabel timeLabel = new JLabel(" ", JLabel.CENTER);
   private CommandPanel cp = new CommandPanel();
   private JPanel playerPanel = new JPanel(new FlowLayout());
+  private MapViewer mv;
+
   /**
    * Konstruktor DriverView tanpa parameter.
    */
-  public DriverView() {
+  public DriverView(Map mp) {
     JFrame frame = new JFrame("ZAFF");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    mv = new MapViewer(mp);
+    try {
+      mv.view();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     JPanel newp = new JPanel(new BorderLayout());
     JPanel endp = new JPanel(new BorderLayout());
     JPanel panelcommand = new JPanel(new GridLayout(2,2));
@@ -48,7 +58,7 @@ public class DriverView {
 
     newp.add(cp,BorderLayout.PAGE_START);
     newp.add(endp,BorderLayout.PAGE_END);
-    newp.add(timeLabel,BorderLayout.CENTER);
+    newp.add(mv,BorderLayout.CENTER);
 
     frame.add(newp);
 
@@ -93,7 +103,10 @@ public class DriverView {
 
       @Override
       public void run() {
-        final DriverView clock = new DriverView();
+        Map m = new Map(15,20);
+        m.setMapObject(0,new Recovery(0,0));
+        m.setMapObject(1,new Unit(10,10,10,10,10,10,5,5,0));
+        final DriverView clock = new DriverView(m);
       }
     });
   }
