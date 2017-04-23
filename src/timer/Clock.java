@@ -32,7 +32,7 @@ public class Clock {
 
   private class UpdateUITask extends TimerTask {
 
-    nSeconds = 5;
+   int nSeconds = 5;
 
     @Override
     public void run() {
