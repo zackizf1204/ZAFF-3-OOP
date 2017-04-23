@@ -15,7 +15,7 @@ import javax.swing.*;
  * Tanggal 4/13/2017.
  * FileName : CommandView.java.
  */
-public class CommandView extends JButton {
+public abstract class CommandView extends JButton {
   /**
    * Konstrutktor CommandView.
    * menghasilkan sebuah button yang telah terkustomisasi.
@@ -27,6 +27,8 @@ public class CommandView extends JButton {
     setOpaque(false);
     setBackground(new Color(0,0,0,0));
   }
+
+  public abstract int getButtonType();
 
   public static void main(String[] args) {
     JFrame frame = new JFrame("FATHUR BANGSAT");

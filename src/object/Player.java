@@ -5,8 +5,6 @@ package object;
  * 13515068.
  */
 public class Player {
-<<<<<<< .merge_file_a06064
-||||||| .merge_file_a05208
   private Unit[] arrayUnit;
   private String playerName;
   int countUnit;
@@ -30,8 +28,6 @@ public class Player {
     countUnit++;
   }
 
-
-=======
   private Unit[] arrayUnit;
   private String playerName;
   int countUnit;
@@ -55,6 +51,4 @@ public class Player {
     countUnit++;
   }
 
-
->>>>>>> .merge_file_a06440
 }

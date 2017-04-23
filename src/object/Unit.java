@@ -145,7 +145,7 @@ public class Unit extends MapObject {
     if (type == 1) {
       if (i == 1){
         currentMp = currentMp -5;
-        target.currentHp = target,currentHp - (2*strength*n/10);
+        target.currentHp = target.currentHp - (2*strength*n/10);
       }
       else if (i == 2){
         addHp(currentMp*5);
@@ -164,7 +164,7 @@ public class Unit extends MapObject {
       }
       else if (i == 2){
         currentMp = currentMp - 20;
-        target.currentHp = target.currentHp - (5*intelligence*n/10)
+        target.currentHp = target.currentHp - (5*intelligence*n/10);
         addMp(5*intelligence*n/20);
       }
       else if (i == 3){
@@ -269,7 +269,7 @@ public class Unit extends MapObject {
 
   public int getMov(){
     return mov;
-  }W
+  }
 
   public int getAgi(){
     return agi;

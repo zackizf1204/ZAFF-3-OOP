@@ -21,7 +21,15 @@ public class AttackCommandView extends CommandView {
       System.out.println(e);
     }
     setBorderPainted(false);
-    setBackground(new Color(0,0,0,0));
+    setBackground(new Color(0, 0, 0, 0));
+  }
+
+  @Override
+  public int getButtonType() {
+    return 1;
+  }
+
+  public void setMouseListener() {
     addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {

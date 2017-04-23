@@ -24,6 +24,11 @@ public class DriverView {
   private CommandPanel cp = new CommandPanel();
   private JPanel playerPanel = new JPanel(new FlowLayout());
   private MapViewer mv;
+  private AttackCommandView attack = new AttackCommandView();
+  private SkillCommandView skill = new SkillCommandView();
+  private WaitCommandView wait = new WaitCommandView();
+  private PickCommandView pick = new PickCommandView();
+
 
   /**
    * Konstruktor DriverView tanpa parameter.
@@ -39,11 +44,12 @@ public class DriverView {
     }
     JPanel newp = new JPanel(new BorderLayout());
     JPanel endp = new JPanel(new BorderLayout());
+
     JPanel panelcommand = new JPanel(new GridLayout(2,2));
-    panelcommand.add(new AttackCommandView());
-    panelcommand.add(new SkillCommandView());
-    panelcommand.add(new WaitCommandView());
-    panelcommand.add(new PickCommandView());
+    panelcommand.add(attack);
+    panelcommand.add(skill);
+    panelcommand.add(wait);
+    panelcommand.add(pick);
     panelcommand.setBackground(Color.blue);
 
 
@@ -69,6 +75,21 @@ public class DriverView {
 
   }
 
+  public AttackCommandView getAttack() {
+    return attack;
+  }
+
+  public SkillCommandView getSkill() {
+    return skill;
+  }
+
+  public WaitCommandView getWait() {
+    return wait;
+  }
+
+  public PickCommandView getPick() {
+    return pick;
+  }
   /**
    * Getter command panel
    * @return Command panel dari suatu laman
@@ -108,7 +129,7 @@ public class DriverView {
       public void run() {
         Map m = new Map(15,20);
         m.setMapObject(0,new Recovery(0,0));
-        m.setMapObject(1,new Unit(10,10,10,10,10,10,5,5,0));
+        m.setMapObject(1,new Unit(1,5,5));
         final DriverView clock = new DriverView(m);
       }
     });
