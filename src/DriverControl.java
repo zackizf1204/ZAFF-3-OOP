@@ -145,8 +145,13 @@ public class DriverControl {
   private MouseListener pickListener = new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
-      //model.pick();
-      //model.changePlayer();
+      model.pick();
+      view.stopTime();
+      view.updateView(model);
+      view.startTime();
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
     }
 
     @Override
@@ -247,7 +252,7 @@ public class DriverControl {
         view.getMv().setListPlayer(model.getListPlayer());
         view.getMv().setCountPlayer(model.getCountPlayer());
         for (int i = 0; i < model.getCountPlayer(); i++) {
-          model.getMap().setMapObject(i,model.getPlayer(i).getUnit(0));
+          model.getMap().setMapObject(model.getMap().getCountObject(),model.getPlayer(i).getUnit(0));
         }
 
         view.updateView(model);

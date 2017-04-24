@@ -212,7 +212,7 @@ public class DriverModel {
   }
 
   public boolean adaPlayer(int x, int y) {
-    for (int i = 0 ; i < countPlayer;i++){
+    for (int i = 0 ; i < countPlayer;i++) {
       for (int j = 0; j < listPlayer[i].getCountUnit(); j++){
         if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
           return true;
