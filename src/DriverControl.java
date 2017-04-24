@@ -87,7 +87,7 @@ public class DriverControl {
           } else if (e.getKeyCode() == KeyEvent.VK_D) {
             model.attack(3);
           }
-          model.changePlayer();
+          view.stopTime();
           view.updateView(model);
           view.startTime();
         }
@@ -182,10 +182,11 @@ public class DriverControl {
     public void mouseClicked(MouseEvent e) {
       model.recov();
       view.stopTime();
-      view = new DriverView(model);
       view.updateView(model);
       view.startTime();
-      playAgain();
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
     }
 
     @Override
@@ -271,7 +272,6 @@ public class DriverControl {
     MapViewer mv = view.getMv();
     mv.setFocusable(true);
     mv.requestFocusInWindow();
-    System.out.println("LLLLLLLLL");
     mv.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
@@ -282,20 +282,15 @@ public class DriverControl {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
           model.move(0);
-          view.getCp().setTimerLabel(9);
           view.updateView(model);
-
         } else if (e.getKeyCode() == KeyEvent.VK_A) {
           model.move(2);
-          view.getCp().setTimerLabel(9);
           view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
           model.move(1);
-          view.getCp().setTimerLabel(9);
           view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_D) {
           model.move(3);
-          view.getCp().setTimerLabel(9);
           view.updateView(model);
         }
       }

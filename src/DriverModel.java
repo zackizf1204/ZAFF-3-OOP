@@ -74,8 +74,8 @@ public class DriverModel {
   public void attack(int i) {
     int x;
     int y;
-    x = listPlayer[i].getUnit(currentUnit).getAbsis();
-    y = listPlayer[i].getUnit(currentUnit).getOrdinat();
+    x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
+    y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     if (i == 0) {
       listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x ,y - 1));
     } else if (i == 1) {

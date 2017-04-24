@@ -134,39 +134,12 @@ public class Map {
     if (countObject > 0) {
 
       while ((!found) && (i < countObject)){
-        System.out.println(i);
-        System.out.print(arrayObject[i].getAbsis());
-        System.out.println(arrayObject[i].getOrdinat());
         if ((arrayObject[i].getAbsis() == x) && (arrayObject[i].getOrdinat() == y)) {
           found = true;
         } else {
           i++;
         }
       }
-
-      /*
-      do {
-        absis = arrayObject[i].getAbsis();
-        ordinat = arrayObject[i].getOrdinat();
-        i = i + 1;
-      } while ((i < countObject) && ((absis != x) || (ordinat != y)));
-      /*
-      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-        i = i + 1;
-        if (i < countObject) {
-          System.out.println(i);
-          absis = arrayObject[i].getAbsis();
-          ordinat = arrayObject[i].getOrdinat();
-        }
-      }
-      if (i >= countObject) {
-        return (false);
-      } else {
-        return ((absis == x) && (ordinat == y));
-      }
-    } else {
-      return (false);
-      */
     }
     return found;
   }
