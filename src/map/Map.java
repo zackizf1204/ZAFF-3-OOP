@@ -163,4 +163,8 @@ public class Map {
     }
     return (arrayObject[i]);
   }
+  public int getCountObject() {
+    return countObject;
+  }
 }
+
