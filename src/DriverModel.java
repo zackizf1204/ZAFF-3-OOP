@@ -20,9 +20,9 @@ public class DriverModel {
     listPlayer = new Player [i];
     for (int j = 0; j < i ; j++) {
       listPlayer[j] = new Player("Player" + j,j,j,j);
-    }
-    map = new Map();
-    currentPlayer = 0;
+  }
+  map = new Map();
+  currentPlayer = 0;
     currentUnit = 0;
   }
 
