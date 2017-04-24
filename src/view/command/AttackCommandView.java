@@ -1,10 +1,9 @@
 package view.command;
 
+import java.awt.Color;
+import java.awt.Image;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -12,6 +11,11 @@ import java.awt.event.MouseListener;
  * FileName : AttackCommandView.java.
  */
 public class AttackCommandView extends CommandView {
+
+  /**
+   * Konstruktor tanpa parameter.
+   * Mengimplementasi getbuttonType
+   */
   public AttackCommandView() {
     super();
     try {
