@@ -27,7 +27,9 @@ class UnitTest {
 
   @Test
   void moveTest() {
-
+    Unit test1 = new Unit (1 ,1,1);
+    test1.move(0);
+    assertEquals(test1.getOrdinat(),0);
   }
 
   @Test

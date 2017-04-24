@@ -21,10 +21,12 @@ public class Unit extends MapObject {
   private int mov;
   private int agi;
   private final int type;
+  private boolean dead;
 
   public Unit() {
     super();
     setObjectType();
+    dead = false;
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -39,6 +41,7 @@ public class Unit extends MapObject {
   public Unit(int type,int x,int y) {
     super(x,y);
     setObjectType();
+    dead = false;
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
@@ -340,4 +343,17 @@ public class Unit extends MapObject {
     }
     return false;
   }
+
+  public void checkDead() {
+    if (currentHp <= 0) {
+      dead = true;
+    }
+  }
+
+  public boolean getDead(){
+    return dead;
+  }
+
+
+
 }
