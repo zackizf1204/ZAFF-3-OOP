@@ -85,6 +85,7 @@ public class DriverModel {
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     listPlayer[currentPlayer].getUnit(currentUnit).pick(getItemAt(x,y));
+    changePlayer();
 
   }
 
