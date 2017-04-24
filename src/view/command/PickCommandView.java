@@ -1,10 +1,11 @@
 package view.command;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -12,6 +13,9 @@ import java.awt.event.MouseListener;
  * FileName : PickCommandView.java.
  */
 public class PickCommandView extends CommandView {
+  /**
+   * Konstruktor tanpa parameter.
+   */
   public PickCommandView() {
     super();
     try {
@@ -20,8 +24,6 @@ public class PickCommandView extends CommandView {
     } catch (Exception e) {
       System.out.println(e);
     }
-
-
   }
 
   @Override

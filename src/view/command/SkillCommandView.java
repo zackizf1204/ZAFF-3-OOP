@@ -1,10 +1,10 @@
 package view.command;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -12,6 +12,9 @@ import java.awt.event.MouseListener;
  * FileName : SkillCommandView.java.
  */
 public class SkillCommandView extends CommandView {
+  /**
+   * Konstruktor tanpa parameter.
+   */
   public SkillCommandView() {
     super();
     try {
@@ -22,7 +25,7 @@ public class SkillCommandView extends CommandView {
     }
   }
 
-  public void setToolTip(String str){
+  public void setToolTip(String str) {
     setToolTipText(str);
   }
 
