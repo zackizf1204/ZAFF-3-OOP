@@ -12,11 +12,16 @@ public class Map {
   private MapObject[] arrayObject;
   private Tile[][] dataTiles;
   private int countObject;
+
+  public int getCountObject() {
+    return countObject;
+  }
+
   /**Constructor map tanpa parameter.
    */
 
   public Map() {
-    sizeX = 20;
+    sizeX = 15;
     sizeY = 20;
     arrayObject = new MapObject[sizeY * sizeX];
     dataTiles = new Tile[sizeY][sizeX];
@@ -102,6 +107,9 @@ public class Map {
     arrayObject[i] = data;
     countObject = countObject + 1;
   }
+  public void moveMapObject(int i, MapObject data) {
+    arrayObject[i] = data;
+  }
   /** melakukan set pada dataTiles.
    * @param i kolom
    * @param j baris
@@ -121,25 +129,19 @@ public class Map {
     int i;
     int absis;
     int ordinat;
+    i = 0;
+    boolean found = false;
     if (countObject > 0) {
-      i = 0;
-      absis = arrayObject[i].getAbsis();
-      ordinat = arrayObject[i].getOrdinat();
-      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-        i = i + 1;
-        if (i < countObject) {
-          absis = arrayObject[i].getAbsis();
-          ordinat = arrayObject[i].getOrdinat();
+
+      while ((!found) && (i < countObject)){
+        if ((arrayObject[i].getAbsis() == x) && (arrayObject[i].getOrdinat() == y)) {
+          found = true;
+        } else {
+          i++;
         }
       }
-      if (i >= countObject) {
-        return (false);
-      } else {
-        return ((absis == x) && (ordinat == y));
-      }
-    } else {
-      return (false);
     }
+    return found;
   }
   /** mencari dan mengembalikan MapObject di posisi x dan y.
    * @param x masukkan x

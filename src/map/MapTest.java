@@ -30,7 +30,7 @@ class MapTest {
   @Test
   void getMapObject() {
     Map m = new Map(1,1);
-    MapObject dataObject = new MapObject(0,0);
+    //MapObject dataObject = new MapObject(0,0);
     //setMapObject(0, object.dataObject());
     //assertTrue(m.getMapObject(0) == dataObject);
   }
@@ -68,7 +68,7 @@ class MapTest {
   @Test
   void setMapObject() {
     Map m = new Map(1,1);
-    MapObject dataObject = new MapObject(0,0);
+    //MapObject dataObject = new MapObject(0,0);
     //setMapObject(0, object.dataObject());
     //assertTrue(m.getMapObject(0) == dataObject);
   }
@@ -84,7 +84,7 @@ class MapTest {
   @Test
   void adaObject() {
     Map m = new Map(1,1);
-    MapObject dataObject = new MapObject(0,0);
+    //MapObject dataObject = new MapObject(0,0);
     //setMapObject(0, object.dataObject());
     //assertTrue(m.adaObject(0,0));
   }
@@ -92,7 +92,7 @@ class MapTest {
   @Test
   void searchObject() {
     Map m = new Map(1,1);
-    MapObject dataObject = new MapObject(0,0);
+    //MapObject dataObject = new MapObject(0,0);
     //setMapObject(0, object.dataObject());
     //assertTrue(dataObject == m.searchObject(0,0));
   }

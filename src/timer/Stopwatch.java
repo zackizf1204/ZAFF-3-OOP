@@ -38,7 +38,7 @@ public class Stopwatch {
     return interval;
   }
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     Stopwatch stp = new Stopwatch();
     JFrame frame = new JFrame("FATHUR BANGSAT");
     JLabel lbl = new JLabel("60");

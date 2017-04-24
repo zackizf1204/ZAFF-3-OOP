@@ -40,7 +40,7 @@ public class Tile {
     type = inputType;
   }
   public boolean isPassable() {
-    return (type == 1);
+    return (type == 0);
   }
   public void setX(int inputX) {
     x = inputX;

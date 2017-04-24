@@ -2,6 +2,7 @@ package object;
 
 import java.util.Random;
 
+import object.item.Item;
 import object.item.PowerUp;
 import object.item.Recovery;
 
@@ -20,10 +21,12 @@ public class Unit extends MapObject {
   private int mov;
   private int agi;
   private final int type;
+  private boolean dead;
 
   public Unit() {
     super();
     setObjectType();
+    dead = false;
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -38,6 +41,7 @@ public class Unit extends MapObject {
   public Unit(int type,int x,int y) {
     super(x,y);
     setObjectType();
+    dead = false;
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
@@ -105,9 +109,9 @@ public class Unit extends MapObject {
 
   public void move(int i) {
     if (i == 0) { //Move up
-      setOrdinat(getOrdinat() + 1);
-    } else if (i == 1) { //Move down
       setOrdinat(getOrdinat() - 1);
+    } else if (i == 1) { //Move down
+      setOrdinat(getOrdinat() + 1);
     } else if (i == 2) { //Move left
       setAbsis(getAbsis() - 1);
     } else if (i == 3) { //Move right
@@ -197,6 +201,21 @@ public class Unit extends MapObject {
     addMp(recov.getAddMp());
   }
 
+  public void pick(Item item) {
+    if (item instanceof PowerUp) {
+      PowerUp pu = (PowerUp) item;
+      maxHp = maxHp + pu.getAddMaxHp();
+      maxMp = maxMp + pu.getAddMaxMp();
+      strength = strength + pu.getAddStrength();
+      intelligence = intelligence + pu.getAddIntelligence();
+      agi = agi + pu.getAddAgility();
+      mov = mov + pu.getAddMov();
+    } else if (item instanceof Recovery) {
+      Recovery recov = (Recovery) item;
+      addHp(recov.getAddHp());
+      addMp(recov.getAddMp());
+    }
+  }
   public void setMaxHp(int x) {
     maxHp = x;
   }
@@ -324,4 +343,17 @@ public class Unit extends MapObject {
     }
     return false;
   }
+
+  public void checkDead() {
+    if (currentHp <= 0) {
+      dead = true;
+    }
+  }
+
+  public boolean getDead(){
+    return dead;
+  }
+
+
+
 }
