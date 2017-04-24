@@ -261,13 +261,13 @@ public class DriverControl {
           skill.addMouseListener(skillListener);
           //run si jaki
           view.startTime();
-        }
+
       }
     });
   }
 
 
-  public void playAgain(){
+  public void playAgain() {
     MapViewer mv = view.getMv();
     mv.setFocusable(true);
     mv.requestFocusInWindow();
