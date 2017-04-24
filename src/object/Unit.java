@@ -105,9 +105,9 @@ public class Unit extends MapObject {
 
   public void move(int i) {
     if (i == 0) { //Move up
-      setOrdinat(getOrdinat() + 1);
-    } else if (i == 1) { //Move down
       setOrdinat(getOrdinat() - 1);
+    } else if (i == 1) { //Move down
+      setOrdinat(getOrdinat() + 1);
     } else if (i == 2) { //Move left
       setAbsis(getAbsis() - 1);
     } else if (i == 3) { //Move right

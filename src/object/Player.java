@@ -25,6 +25,7 @@ public class Player {
   }
 
   public void addUnit(int type) {
+    assert countUnit <= 10 : "Unit Full";
     arrayUnit[countUnit] = new Unit(type,0,0);
     countUnit++;
   }
@@ -35,6 +36,10 @@ public class Player {
 
   public String getPlayerName() {
     return playerName;
+  }
+
+  public int getCountUnit() {
+    return countUnit;
   }
 }
 
