@@ -1,0 +1,140 @@
+
+import object.Unit;
+import object.item.Recovery;
+import view.command.*;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.awt.*;
+import java.util.*;
+import view.command.*;
+import view.map.MapViewer;
+import map.Map;
+import java.awt.*;
+import java.util.TimerTask;
+import javax.swing.*;
+/**
+ * Created by 13515017 / Putu Arya Pradipta.
+ * Tanggal 4/17/2017.
+ * FileName : DriverView.java.
+ */
+public class DriverView {
+  private java.util.Timer timer = new java.util.Timer();
+  private JLabel timeLabel = new JLabel(" ", JLabel.CENTER);
+  private CommandPanel cp = new CommandPanel();
+  private JPanel playerPanel = new JPanel(new FlowLayout());
+  private MapViewer mv;
+  private AttackCommandView attack = new AttackCommandView();
+  private SkillCommandView skill = new SkillCommandView();
+  private WaitCommandView wait = new WaitCommandView();
+  private PickCommandView pick = new PickCommandView();
+  private UnitView unit1 = new UnitView();
+
+  /**
+   * Konstruktor DriverView tanpa parameter.
+   */
+  public DriverView(DriverModel model) {
+    JFrame frame = new JFrame("ZAFF");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mv = new MapViewer(model.getMap());
+    try {
+      mv.view();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    JPanel newp = new JPanel(new BorderLayout());
+    JPanel endp = new JPanel(new BorderLayout());
+
+    JPanel panelcommand = new JPanel(new GridLayout(2,2));
+    panelcommand.add(attack);
+    panelcommand.add(skill);
+    panelcommand.add(wait);
+    panelcommand.add(pick);
+    panelcommand.setBackground(Color.blue);
+
+
+    endp.add(panelcommand,BorderLayout.LINE_END);
+    endp.setBackground(new Color(0,0,0,100));
+    playerPanel.add(unit1);
+    playerPanel.setOpaque(false);
+    endp.add(playerPanel,BorderLayout.LINE_START);
+
+    newp.add(cp,BorderLayout.PAGE_START);
+    newp.add(endp,BorderLayout.PAGE_END);
+    newp.add(mv,BorderLayout.CENTER);
+
+    frame.add(newp);
+
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    frame.setUndecorated(true);
+    frame.setVisible(true);
+    timer.schedule(new UpdateUITask(), 0, 1000);
+
+  }
+  public void updateView(DriverModel model){
+    // setting nama player, ambil dari current player
+    cp.setNamaPlayer(model.getCurrentPlayer(0).getPlayerName());
+    // setting nama unit
+    unit1.setAttribute(model.getCurrentPlayer(0).getUnit(0));
+  }
+
+  public AttackCommandView getAttack() {
+    return attack;
+  }
+
+  public SkillCommandView getSkill() {
+    return skill;
+  }
+
+  public WaitCommandView getWait() {
+    return wait;
+  }
+
+  public PickCommandView getPick() {
+    return pick;
+  }
+  /**
+   * Getter command panel
+   * @return Command panel dari suatu laman
+   */
+  public CommandPanel getCp() {
+    return cp;
+  }
+
+  public String getTimer(){
+    return cp.getTimerLabel();
+  }
+  private class UpdateUITask extends TimerTask {
+
+    int nSeconds = 5;
+
+    @Override
+    public void run() {
+      EventQueue.invokeLater(new Runnable() {
+
+        @Override
+        public void run() {
+          if (nSeconds == 0) {
+            timer.cancel();
+          }
+          //timeLabel.setText(String.valueOf(nSeconds--));
+          cp.setTimerLabel((nSeconds--));
+        }
+      });
+    }
+  }
+
+
+  public static void main(String args[]) {
+    EventQueue.invokeLater(new Runnable() {
+
+      @Override
+      public void run() {
+        Map m = new Map(15,20);
+        m.setMapObject(0,new Recovery(0,0));
+        m.setMapObject(1,new Unit(1,5,5));
+        //final DriverView clock = new DriverView(m);
+      }
+    });
+  }
+}

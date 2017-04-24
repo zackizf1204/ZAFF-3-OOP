@@ -76,4 +76,9 @@ public class ExitCommandView extends CommandView {
     });
   }
 
+  @Override
+  public int getButtonType() {
+    return 2;
+  }
+
 }

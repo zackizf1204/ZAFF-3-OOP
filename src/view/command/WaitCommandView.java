@@ -67,4 +67,9 @@ public class WaitCommandView extends CommandView {
       }
     });
   }
+
+  @Override
+  public int getButtonType() {
+    return 6;
+  }
 }

@@ -10,6 +10,11 @@ import object.Unit;
 public class DriverModel {
   private Player[] listPlayer;
   private Map map;
+
+  public Map getMap() {
+    return map;
+  }
+
   private int currentPlayer;
   private int currentUnit;
   private final int countPlayer;
@@ -20,7 +25,7 @@ public class DriverModel {
     for (int j = 0; j < i ; j++) {
       listPlayer[j] = new Player("Player" + j,j,j,j);
     }
-    map = new Map();
+    map = new Map(15,20);
     currentPlayer = 0;
     currentUnit = 0;
   }

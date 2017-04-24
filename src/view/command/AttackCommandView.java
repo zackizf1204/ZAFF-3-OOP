@@ -21,49 +21,11 @@ public class AttackCommandView extends CommandView {
       System.out.println(e);
     }
     setBorderPainted(false);
-    setBackground(new Color(0,0,0,0));
-    addMouseListener(new MouseListener() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
+    setBackground(new Color(0, 0, 0, 0));
+  }
 
-        //attackPlayer(Player1, Player2)
-      }
-
-      @Override
-      public void mousePressed(MouseEvent e) {
-
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-        setBackground(new Color(0,0,0,0));
-      }
-
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        JButton c = (JButton) e.getComponent();
-        try {
-          Image img = ImageIO.read(getClass().getResource("../../assets/attackbuttononhover.png"));
-          c.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-          System.out.println(ex);
-        }
-        setBorderPainted(false);
-        setBackground(new Color(0,0,0,0));
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e) {
-        JButton c = (JButton) e.getComponent();
-        try {
-          Image img = ImageIO.read(getClass().getResource("../../assets/attackbutton.png"));
-          c.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-          System.out.println(ex);
-        }
-        setBorderPainted(false);
-        setBackground(new Color(0,0,0,0));
-      }
-    });
+  @Override
+  public int getButtonType() {
+    return 1;
   }
 }

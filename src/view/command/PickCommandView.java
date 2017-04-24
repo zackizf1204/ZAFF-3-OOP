@@ -61,4 +61,9 @@ public class PickCommandView extends CommandView {
       }
     });
   }
+
+  @Override
+  public int getButtonType() {
+    return 4;
+  }
 }
