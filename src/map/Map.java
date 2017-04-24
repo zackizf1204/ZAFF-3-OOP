@@ -24,12 +24,12 @@ public class Map {
     sizeX = 15;
     sizeY = 20;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -43,12 +43,12 @@ public class Map {
     sizeX = inputSizeX;
     sizeY = inputSizeY;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;

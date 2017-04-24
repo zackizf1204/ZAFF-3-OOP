@@ -230,6 +230,8 @@ public class Unit extends MapObject {
       addHp(recov.getAddHp());
       addMp(recov.getAddMp());
     }
+    item.setAbsis(-1);
+    item.setOrdinat(-1);
   }
   public void setMaxHp(int x) {
     maxHp = x;
