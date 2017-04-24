@@ -20,8 +20,8 @@ public class Recovery extends Item {
     super(inputX, inputY);
     Random ran = new Random();
     super.setItemType("Recovery");
-    setAddHp(ran.nextInt(11));
-    setAddMp(ran.nextInt(11));
+    setAddHp(ran.nextInt(41)+20);
+    setAddMp(ran.nextInt(31)+10);
   }
 
   public int getAddHp() {
