@@ -10,19 +10,23 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
 import map.Map;
+import object.Player;
+import object.Unit;
 
 /**
  * Created by Finiko on 4/15/2017.
  */
 public class MapViewer extends JPanel {
-  GridBagConstraints batasan;
-  JComponent contentPane;
-  JLayeredPane layerPanel;
-  GridBagLayout mapLayout;
-  GridBagLayout objectLayout;
-  Map inputMap;
+  private GridBagConstraints batasan;
+  private JComponent content;
+  private JLayeredPane layerPanel;
+  private GridBagLayout mapLayout;
+  private Map inputMap;
+  private Player[] listPlayer;
+  private int countPlayer;
+  private int countUnit;
+
   /** constructor.
    * @param map masukkan map
    */
@@ -30,10 +34,9 @@ public class MapViewer extends JPanel {
   public MapViewer(Map map) {
     batasan = new GridBagConstraints();
     mapLayout = new GridBagLayout();
-    objectLayout = new GridBagLayout();
     layerPanel = new JLayeredPane();
-    contentPane = new JPanel(mapLayout);
-    contentPane.setOpaque(true);
+    content = new JPanel(mapLayout);
+    content.setOpaque(true);
     layerPanel.setLayout(mapLayout);
     inputMap = map;
   }
@@ -45,12 +48,19 @@ public class MapViewer extends JPanel {
     JFrame frame = new JFrame("Display image");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    frame.setContentPane(contentPane);
+    frame.setContentPane(content);
     frame.setSize(1200,1080);
     viewTile();
     viewMapObject();
-    contentPane.add(layerPanel);
+    content.add(layerPanel);
     frame.setVisible(true);
+  }
+
+  public void setListPlayer(Player[] list) {
+    listPlayer = list;
+  }
+  public void setCountPlayer(int count) {
+    countPlayer = count;
   }
   /** Menampilkan tile.
    */
@@ -81,20 +91,79 @@ public class MapViewer extends JPanel {
       for (y = 0; y < inputMap.getSizeY();y++) {
         batasan.gridx = x;
         batasan.gridy = y;
-        if (inputMap.adaObject(x,y)) {
+        if (adaPlayer(x,y)) {
+          MapObjectDrawer gambarObject = new MapObjectDrawer(getXYUnit(x,y));
+          JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
+          mapLayout.setConstraints(objectIcon,batasan);
+          layerPanel.add(objectIcon,batasan);
+          layerPanel.setLayer(objectIcon,new Integer(1),0);
+        } else if (inputMap.adaObject(x,y)) {
           MapObjectDrawer gambarObject = new MapObjectDrawer(inputMap.searchObject(x,y));
           JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
-          objectLayout.setConstraints(objectIcon,batasan);
+          mapLayout.setConstraints(objectIcon,batasan);
           layerPanel.add(objectIcon,batasan);
           layerPanel.setLayer(objectIcon,new Integer(1),0);
         } else {
           EmptyDrawer gambarEmpty = new EmptyDrawer(x,y);
           JLabel emptyIcon = new JLabel(new ImageIcon(gambarEmpty.getImage()));
-          objectLayout.setConstraints(emptyIcon,batasan);
+          mapLayout.setConstraints(emptyIcon,batasan);
           layerPanel.add(emptyIcon,batasan);
           layerPanel.setLayer(emptyIcon,new Integer(1),0);
         }
       }
     }
+  }
+  public JComponent getContent() {
+    return (content);
+  }
+
+  public boolean adaPlayer (int x, int y) {
+    int i;
+    boolean ada;
+    ada = false;
+    i = 0;
+    do {
+      countUnit = listPlayer[i].getCountUnit();
+      int j;
+      j = 0;
+      int absis;
+      int ordinat;
+      do {
+        absis = listPlayer[i].getUnit(j).getAbsis();
+        ordinat = listPlayer[i].getUnit(j).getOrdinat();
+        j = j + 1;
+      } while ((j < countUnit) && ((absis != x) || (ordinat != y)));
+      if ((absis == x) && (ordinat == y)) {
+        ada = true;
+      }
+      i = i + 1;
+    } while ((i < countPlayer) && (!ada));
+    return (ada);
+  }
+  public Unit getXYUnit(int x, int y) {
+    int i;
+    int k;
+    i = 0;
+    boolean ada;
+    k = 0;
+    ada = false;
+    do {
+      countUnit = listPlayer[i].getCountUnit();
+      int j;
+      j = 0;
+      int absis;
+      int ordinat;
+      do {
+        absis = listPlayer[i].getUnit(j).getAbsis();
+        ordinat = listPlayer[i].getUnit(j).getOrdinat();
+        j = j + 1;
+      } while ((j < countUnit) && ((absis != x) || (ordinat != y)));
+      if ((absis == x) && (ordinat == y)) {
+        ada = true;
+        k = j;
+      }
+      i = i + 1;
+    } while ((i < countPlayer) && (!ada));
+    return (listPlayer[i].getUnit(k));
   }
 }
