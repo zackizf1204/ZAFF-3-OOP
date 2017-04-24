@@ -24,7 +24,7 @@ public class Map {
     sizeX = 15;
     sizeY = 20;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeY+1][sizeX];
     int i;
     int j;
     for (i = 0; i < sizeY; i++) {
@@ -43,7 +43,7 @@ public class Map {
     sizeX = inputSizeX;
     sizeY = inputSizeY;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeY+1][sizeX];
     int i;
     int j;
     for (i = 0; i < sizeY; i++) {
