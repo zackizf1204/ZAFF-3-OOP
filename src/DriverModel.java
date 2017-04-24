@@ -54,6 +54,15 @@ public class DriverModel {
     }
   }
 
+  public void pick(){
+    int x;
+    int y;
+    x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
+    y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
+    listPlayer[currentPlayer].getUnit(currentUnit).pick(getItemAt(x,y));
+
+  }
+
   public void attack(int i) {
     int x;
     int y;
@@ -65,7 +74,7 @@ public class DriverModel {
       listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x,y + 1));
     } else if (i == 2) {
       listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1,y));
-    } else if (i == 3){
+    } else if (i == 3) {
       listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1,y));
     }
     changePlayer();
@@ -115,7 +124,7 @@ public class DriverModel {
     for (int i = 0;i<n;i++) {
       x = rand.nextInt(map.getSizeX());
       y = rand.nextInt(map.getSizeY());
-      if (!map.adaObject(x,y)){
+      if (!map.adaObject(x,y)) {
         map.setMapObject(map.getCountObject(),new PowerUp(x,y));
       }
     }
@@ -134,14 +143,21 @@ public class DriverModel {
     }
   }
 
-    public Unit getUnitAt(int x,int y){
-      for (int i = 0; i < countPlayer;i++) {
-        for(int j = 0; j< listPlayer[i].getCountUnit(); j++) {
-          if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
-            return (listPlayer[i].getUnit(j));
-          }
+  public Unit getUnitAt(int x,int y) {
+    for (int i = 0; i < countPlayer; i++) {
+      for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
+        if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
+          return (listPlayer[i].getUnit(j));
         }
       }
-      return null;
+    }
+    return null;
+  }
+
+  public Item getItemAt(int x,int y) {
+    if (map.adaObject(x,y)) {
+      return ((Item) (map.searchObject(x,y)));
+    }
+    return null;
   }
 }
