@@ -104,6 +104,14 @@ public class DriverModel {
     return listPlayer;
   }
 
+  public int getCountPlayer() {
+    return countPlayer;
+  }
+
+  public int getCurrentUnit() {
+    return currentUnit;
+  }
+
   public Player getCurrentPlayer() {
     return listPlayer[currentPlayer];
   }
