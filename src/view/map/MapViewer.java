@@ -12,6 +12,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import map.Map;
+import object.Player;
 
 /**
  * Created by Finiko on 4/15/2017.
@@ -23,6 +24,7 @@ public class MapViewer extends JPanel {
   GridBagLayout mapLayout;
   GridBagLayout objectLayout;
   Map inputMap;
+  Player[] listPlayer;
   /** constructor.
    * @param map masukkan map
    */
@@ -39,6 +41,11 @@ public class MapViewer extends JPanel {
     inputMap = map;
     add(contentPane);
   }
+
+  public void setListPlayer(Player[] listPlayer) {
+    this.listPlayer = listPlayer;
+  }
+
   /** menampilkan ke layar.
    * @throws Exception jika file tidak ditemukan.
    */

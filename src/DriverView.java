@@ -75,9 +75,14 @@ public class DriverView {
 
   public void updateView(DriverModel model) {
     // setting nama player, ambil dari current player
-    cp.setNamaPlayer(model.getCurrentPlayer(0).getPlayerName());
+    cp.setNamaPlayer(model.getCurrentPlayer().getPlayerName());
     // setting nama unit
-    unit1.setAttribute(model.getCurrentPlayer(0).getUnit(0));
+    unit1.setAttribute(model.getCurrentPlayer().getUnit(0));
+    try {
+      mv.view();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public AttackCommandView getAttack() {

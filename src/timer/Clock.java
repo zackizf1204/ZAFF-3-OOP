@@ -17,6 +17,7 @@ public class Clock {
 
   private Timer timer = new Timer();
   private JLabel timeLabel = new JLabel(" ", JLabel.CENTER);
+  private int nSeconds;
   public Clock() {
     JFrame frame = new JFrame("Seconds");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +58,7 @@ public class Clock {
 
   private class UpdateUITask extends TimerTask {
 
-    int nSeconds = 5;
+   int nSeconds = 5;
 
     @Override
     public void run() {
@@ -85,6 +86,8 @@ public class Clock {
     });
   }
 
-
+  public int getnSeconds() {
+    return nSeconds;
+  }
 }
 
