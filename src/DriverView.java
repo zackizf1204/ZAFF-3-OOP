@@ -1,4 +1,5 @@
 
+import object.Player;
 import object.Unit;
 import object.item.Recovery;
 import view.command.*;
@@ -26,6 +27,11 @@ public class DriverView {
   private CommandPanel cp = new CommandPanel();
   private JPanel playerPanel = new JPanel(new FlowLayout());
   private MapViewer mv;
+
+  public MapViewer getMv() {
+    return mv;
+  }
+
   private AttackCommandView attack = new AttackCommandView();
   private SkillCommandView skill = new SkillCommandView();
   private WaitCommandView wait = new WaitCommandView();
@@ -70,6 +76,10 @@ public class DriverView {
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     frame.setUndecorated(true);
     frame.setVisible(true);
+
+  }
+
+  public void startTime(){
     timer.schedule(new UpdateUITask(), 0, 1000);
   }
 
@@ -78,6 +88,7 @@ public class DriverView {
     cp.setNamaPlayer(model.getCurrentPlayer().getPlayerName());
     // setting nama unit
     unit1.setAttribute(model.getCurrentPlayer().getUnit(0));
+    //mv.setListPlayer(model.getListPlayer());
     try {
       mv.view();
     } catch (Exception e) {

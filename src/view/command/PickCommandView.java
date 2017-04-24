@@ -21,45 +21,7 @@ public class PickCommandView extends CommandView {
       System.out.println(e);
     }
 
-    addMouseListener(new MouseListener() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
 
-      }
-
-      @Override
-      public void mousePressed(MouseEvent e) {
-
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-
-      }
-
-      public void mouseEntered(MouseEvent e) {
-        if (isEnabled()) {
-          JButton c = (JButton) e.getComponent();
-          try {
-            Image img = ImageIO.read(getClass().getResource("../../assets/pickbuttononhover.png"));
-            c.setIcon(new ImageIcon(img));
-          } catch (Exception ex) {
-            System.out.println(ex);
-          }
-        }
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e) {
-        JButton c = (JButton) e.getComponent();
-        try {
-          Image img = ImageIO.read(getClass().getResource("../../assets/pickbutton.png"));
-          c.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-          System.out.println(ex);
-        }
-      }
-    });
   }
 
   @Override

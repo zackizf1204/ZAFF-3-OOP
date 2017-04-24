@@ -3,11 +3,17 @@ import object.Unit;
 import object.item.Recovery;
 import timer.Clock;
 import view.command.AttackCommandView;
+import view.command.PickCommandView;
+import view.command.SkillCommandView;
+import view.command.WaitCommandView;
+import view.map.MapViewer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.*;
@@ -50,6 +56,7 @@ public class DriverControl {
           public void mouseClicked(MouseEvent e) {
             //tunggu biji
             //model.attack();
+            //model.changePlayer();
 
           }
 
@@ -88,10 +95,160 @@ public class DriverControl {
             attack.setBackground(new Color(0,0,0,0));
           }
         });
+        MapViewer mv = view.getMv();
+        mv.setFocusable(true);
+        mv.requestFocusInWindow();
+        mv.addKeyListener(new KeyListener() {
+          @Override
+          public void keyTyped(KeyEvent e) {
 
+          }
 
+          @Override
+          public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+              model.move(0);
+              view.getCp().setTimerLabel(9);
+            } else if (e.getKeyCode() == KeyEvent.VK_A) {
+              model.move(2);
+            } else if (e.getKeyCode() == KeyEvent.VK_S) {
+              model.move(1);
+            } else if (e.getKeyCode() == KeyEvent.VK_D) {
+              model.move(3);
+            }
+          }
+
+          @Override
+          public void keyReleased(KeyEvent e) {
+
+          }
+        });
+        PickCommandView pick = view.getPick();
+        pick.addMouseListener(new MouseListener() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            //model.pick();
+            //model.changePlayer();
+          }
+
+          @Override
+          public void mousePressed(MouseEvent e) {
+
+          }
+
+          @Override
+          public void mouseReleased(MouseEvent e) {
+
+          }
+
+          public void mouseEntered(MouseEvent e) {
+            if (pick.isEnabled()) {
+              JButton c = (JButton) e.getComponent();
+              try {
+                Image img = ImageIO.read(getClass().getResource("assets/pickbuttononhover.png"));
+                c.setIcon(new ImageIcon(img));
+              } catch (Exception ex) {
+                System.out.println(ex);
+              }
+            }
+          }
+
+          @Override
+          public void mouseExited(MouseEvent e) {
+            JButton c = (JButton) e.getComponent();
+            try {
+              Image img = ImageIO.read(getClass().getResource("assets/pickbutton.png"));
+              c.setIcon(new ImageIcon(img));
+            } catch (Exception ex) {
+              System.out.println(ex);
+            }
+          }
+        });
+        WaitCommandView wait = view.getWait();
+        wait.addMouseListener(new MouseListener() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+
+          }
+
+          @Override
+          public void mousePressed(MouseEvent e) {
+
+          }
+
+          @Override
+          public void mouseReleased(MouseEvent e) {
+
+          }
+
+          public void mouseEntered(MouseEvent e) {
+            if (wait.isEnabled()) {
+              JButton c = (JButton) e.getComponent();
+              try {
+                Image img = ImageIO.read(getClass().getResource("assets/waitbuttononhover.png"));
+                c.setIcon(new ImageIcon(img));
+              } catch (Exception ex) {
+                System.out.println(ex);
+              }
+              wait.setBorderPainted(false);
+              wait.setBackground(new Color(0, 0, 0, 0));
+            }
+          }
+
+          @Override
+          public void mouseExited(MouseEvent e) {
+            JButton c = (JButton) e.getComponent();
+            try {
+              Image img = ImageIO.read(getClass().getResource("assets/waitbutton.png"));
+              c.setIcon(new ImageIcon(img));
+            } catch (Exception ex) {
+              System.out.println(ex);
+            }
+            wait.setBorderPainted(false);
+            wait.setBackground(new Color(0, 0, 0, 0));
+          }
+        });
+        SkillCommandView skill = view.getSkill();
+        skill.addMouseListener(new MouseListener() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            //attackPlayer(Player1, Player2)
+          }
+
+          @Override
+          public void mousePressed(MouseEvent e) {
+
+          }
+
+          @Override
+          public void mouseReleased(MouseEvent e) {
+
+          }
+
+          @Override
+          public void mouseEntered(MouseEvent e) {
+            JButton c = (JButton) e.getComponent();
+            try {
+              Image img = ImageIO.read(getClass().getResource("assets/skillbuttononhover.png"));
+              c.setIcon(new ImageIcon(img));
+            } catch (Exception ex) {
+              System.out.println(ex);
+            }
+          }
+
+          @Override
+          public void mouseExited(MouseEvent e) {
+            JButton c = (JButton) e.getComponent();
+            try {
+              Image img = ImageIO.read(getClass().getResource("assets/skillbutton.png"));
+              c.setIcon(new ImageIcon(img));
+            } catch (Exception ex) {
+              System.out.println(ex);
+            }
+          }
+        });
         //run si jaki
-
+        view.startTime();
       }
     });
   }
