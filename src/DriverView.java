@@ -45,11 +45,11 @@ public class DriverView {
     JFrame frame = new JFrame("ZAFF");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mv = new MapViewer(model.getMap());
-    try {
+    /*try {
       mv.view();
     } catch (Exception e) {
       e.printStackTrace();
-    }
+    }*/
     JPanel newp = new JPanel(new BorderLayout());
     JPanel endp = new JPanel(new BorderLayout());
 
@@ -79,7 +79,7 @@ public class DriverView {
 
   }
 
-  public void startTime(){
+  public void startTime() {
     timer = new java.util.Timer();
     timer.schedule(new UpdateUITask(), 0, 1000);
   }
@@ -94,11 +94,12 @@ public class DriverView {
     // setting nama unit
     unit1.setAttribute(model.getCurrentPlayer().getUnit(0));
     //mv.setListPlayer(model.getListPlayer());
-    /*try {
+    //mv = new MapViewer(model.getMap());
+    try {
       mv.view();
     } catch (Exception e) {
       e.printStackTrace();
-    }*/
+    }
   }
 
   public AttackCommandView getAttack() {

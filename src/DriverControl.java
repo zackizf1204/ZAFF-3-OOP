@@ -34,8 +34,6 @@ public class DriverControl {
       @Override
       public void run() {
         view = new DriverView(model);
-
-
       }
     });
   }
@@ -45,6 +43,13 @@ public class DriverControl {
       @Override
       public void run() {
         int counter = 15;
+
+        view.getMv().setListPlayer(model.getListPlayer());
+        view.getMv().setCountPlayer(model.getCountPlayer());
+        for (int i = 0; i < model.getCountPlayer(); i++) {
+          model.getMap().setMapObject(i,model.getPlayer(i).getUnit(0));
+        }
+
         view.updateView(model);
         //while (counter > 0) {
         AttackCommandView attack = view.getAttack();
@@ -118,34 +123,7 @@ public class DriverControl {
             attack.setBackground(new Color(0,0,0,0));
           }
         });
-        MapViewer mv = view.getMv();
-        mv.setFocusable(true);
-        mv.requestFocusInWindow();
-        mv.addKeyListener(new KeyListener() {
-          @Override
-          public void keyTyped(KeyEvent e) {
-
-          }
-
-          @Override
-          public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_W) {
-              model.move(0);
-              view.getCp().setTimerLabel(9);
-            } else if (e.getKeyCode() == KeyEvent.VK_A) {
-              model.move(2);
-            } else if (e.getKeyCode() == KeyEvent.VK_S) {
-              model.move(1);
-            } else if (e.getKeyCode() == KeyEvent.VK_D) {
-              model.move(3);
-            }
-          }
-
-          @Override
-          public void keyReleased(KeyEvent e) {
-
-          }
-        });
+        playAgain();
         PickCommandView pick = view.getPick();
         pick.addMouseListener(new MouseListener() {
           @Override
@@ -196,6 +174,7 @@ public class DriverControl {
             view = new DriverView(model);
             view.updateView(model);
             view.startTime();
+            playAgain();
           }
 
           @Override
@@ -240,6 +219,8 @@ public class DriverControl {
           @Override
           public void mouseClicked(MouseEvent e) {
             //attackPlayer(Player1, Player2)
+            view.getMv().setFocusable(true);
+            view.getMv().requestFocusInWindow();
           }
 
           @Override
@@ -276,6 +257,46 @@ public class DriverControl {
         });
         //run si jaki
         view.startTime();
+      }
+    });
+  }
+
+  public void playAgain(){
+    MapViewer mv = view.getMv();
+    mv.setFocusable(true);
+    mv.requestFocusInWindow();
+    System.out.println("LLLLLLLLL");
+    mv.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+          model.move(0);
+          view.getCp().setTimerLabel(9);
+          view.updateView(model);
+
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
+          model.move(2);
+          view.getCp().setTimerLabel(9);
+          view.updateView(model);
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
+          model.move(1);
+          view.getCp().setTimerLabel(9);
+          view.updateView(model);
+        } else if (e.getKeyCode() == KeyEvent.VK_D) {
+          model.move(3);
+          view.getCp().setTimerLabel(9);
+          view.updateView(model);
+        }
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+
       }
     });
   }
