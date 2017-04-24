@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Finiko on 4/24/2017.
  */
-public class MenuViewer extends JPanel{
+public class MenuViewer extends JFrame{
   private JLayeredPane menuPanel;
   public JButton playButton;
   public JButton exitButton;
@@ -22,6 +22,7 @@ public class MenuViewer extends JPanel{
   private int inputPlayer;
 
   public MenuViewer() {
+    super();
     batasan = new GridBagConstraints();
     menuLayout = new GridBagLayout();
     menuPanel = new JLayeredPane();
@@ -32,15 +33,15 @@ public class MenuViewer extends JPanel{
     buildExitButton();
     content.setOpaque(true);
     content.add(menuPanel);
+    add(content);
   }
   public void menuShow() {
-    JFrame frame = new JFrame("ZAFF");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.add(content);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    add(content);
     //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    frame.setUndecorated(true);
-    frame.setSize(1000,100);
-    frame.setVisible(true);
+    setUndecorated(true);
+    setSize(1000,100);
+    setVisible(true);
   }
   public void buildPilihanJumlah() {
     Integer[] pilihanJumlah;

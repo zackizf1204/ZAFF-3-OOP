@@ -1,3 +1,4 @@
+package controlmenu;
 import map.Map;
 import menu.MenuViewer;
 import object.item.Recovery;
@@ -15,19 +16,18 @@ import java.awt.event.MouseListener;
  * File : MenuControl.java
  */
 public class MenuControl {
-  private MenuViewer menu;
+  public MenuViewer menu;
   private int jumlahPlayer;
+  private boolean input;
 
   public MenuControl(){
-    EventQueue.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-
         menu = new MenuViewer();
+    setInput(false);
         menu.playButton.addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
-
+            setJumlahPlayer(menu.getInputPlayer());
+            setInput(true);
             //attackPlayer(Player1, Player2)
           }
 
@@ -38,38 +38,41 @@ public class MenuControl {
 
           @Override
           public void mouseReleased(MouseEvent e) {
-            attack.setBackground(new Color(0,0,0,0));
           }
 
           @Override
           public void mouseEntered(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/attackbuttononhover.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-            attack.setBorderPainted(false);
-            attack.setBackground(new Color(0,0,0,0));
           }
 
           @Override
           public void mouseExited(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/attackbutton.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-            attack.setBorderPainted(false);
-            attack.setBackground(new Color(0,0,0,0));
           }
         });
+    menu.exitButton.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        System.exit(0);
+        //attackPlayer(Player1, Player2)
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
 
       }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+      }
     });
+
   }
 
   public int getJumlahPlayer() {
@@ -78,5 +81,16 @@ public class MenuControl {
 
   public void setJumlahPlayer(int jumlahPlayer) {
     this.jumlahPlayer = jumlahPlayer;
+  }
+  public void controlMenu(){
+    menu.menuShow();
+  }
+
+  public boolean isInput() {
+    return input;
+  }
+
+  public void setInput(boolean input) {
+    this.input = input;
   }
 }

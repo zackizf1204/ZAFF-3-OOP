@@ -1,4 +1,3 @@
-
 import object.Player;
 import object.Unit;
 import object.item.Recovery;
@@ -36,7 +35,7 @@ public class DriverView {
   private SkillCommandView skill = new SkillCommandView();
   private WaitCommandView wait = new WaitCommandView();
   private PickCommandView pick = new PickCommandView();
-  private UnitView unit1 = new UnitView();
+  private UnitView[] unit = new UnitView[4];
 
   /**
    * Konstruktor DriverView tanpa parameter.
@@ -50,6 +49,9 @@ public class DriverView {
     } catch (Exception e) {
       e.printStackTrace();
     }*/
+    for (int i = 0; i < model.getCountPlayer(); i++) {
+      unit[i] = new UnitView();
+    }
     JPanel newp = new JPanel(new BorderLayout());
     JPanel endp = new JPanel(new BorderLayout());
 
@@ -63,7 +65,9 @@ public class DriverView {
 
     endp.add(panelcommand,BorderLayout.LINE_END);
     endp.setBackground(new Color(0,0,0,100));
-    playerPanel.add(unit1);
+    for (int i = 0; i < model.getCountPlayer(); i++){
+      playerPanel.add(unit[i]);
+    }
     playerPanel.setOpaque(false);
     endp.add(playerPanel,BorderLayout.LINE_START);
 
@@ -93,7 +97,9 @@ public class DriverView {
     // setting nama player, ambil dari current player
     cp.setNamaPlayer(model.getCurrentPlayer().getPlayerName());
     // setting nama unit
-    unit1.setAttribute(model.getCurrentPlayer().getUnit(0));
+    for (int i = 0; i < model.getCountPlayer(); i++){
+      unit[i].setAttribute(model.getPlayer(i));
+    }
     //mv.setListPlayer(model.getListPlayer());
     //mv = new MapViewer(model.getMap());
     try {
