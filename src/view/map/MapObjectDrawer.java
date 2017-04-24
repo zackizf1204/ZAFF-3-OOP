@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import object.MapObject;
+import object.item.Item;
 
 /**
  * Created by Finiko on 4/19/2017.
@@ -26,7 +27,12 @@ public class MapObjectDrawer extends JPanel {
       if (inputObject.getObjectType() == "Unit") {
         image = ImageIO.read(getClass().getResource("../../assets/unit/monk_down.gif"));
       } else {
-        image = ImageIO.read(getClass().getResource("../../assets/item/item.png"));
+        Item barang = (Item) inputObject;
+        if (barang.getItemType() == "PowerUp") {
+          image = ImageIO.read(getClass().getResource("../../assets/item/pu.png"));
+        } else {
+          image = ImageIO.read(getClass().getResource("../../assets/item/item.png"));
+        }
       }
     } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());

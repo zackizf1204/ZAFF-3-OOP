@@ -32,9 +32,37 @@ public class DriverControl {
   private MouseListener skillListener = new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
-      //attackPlayer(Player1, Player2)
-      view.getMv().setFocusable(true);
-      view.getMv().requestFocusInWindow();
+      view.getSkill().setFocusable(true);
+      view.getSkill().requestFocusInWindow();
+      view.getSkill().addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+          model.skill(2,1);
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
+          model.skill(0,1);
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
+          model.skill(3,1);
+        } else if (e.getKeyCode() == KeyEvent.VK_D) {
+          model.skill(1,1);
+        }
+        view.stopTime();
+        view.updateView(model);
+        view.startTime();
+        MapViewer mv = view.getMv();
+        mv.setFocusable(true);
+        mv.requestFocusInWindow();
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+      }
+    });
+
     }
 
     @Override
