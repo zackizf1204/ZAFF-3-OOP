@@ -278,7 +278,6 @@ public class DriverControl {
                 counter = 60;
                 model.changePlayer();
                 view.stopTime();
-                view.updateView(model);
                 view.startTime();
                 MapViewer mv = view.getMv();
                 mv.setFocusable(true);

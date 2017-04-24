@@ -86,6 +86,7 @@ public class DriverView {
 
   public void startTime() {
     timer = new java.util.Timer();
+    cp.setTimerLabel(60);
     timer.schedule(new UpdateUITask(), 0, 1000);
   }
 
