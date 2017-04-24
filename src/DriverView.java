@@ -3,7 +3,9 @@ import object.Unit;
 import object.item.Recovery;
 import view.command.*;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.*;
 import java.util.*;
@@ -12,7 +14,7 @@ import view.map.MapViewer;
 import map.Map;
 import java.awt.*;
 import java.util.TimerTask;
-import javax.swing.*;
+
 /**
  * Created by 13515017 / Putu Arya Pradipta.
  * Tanggal 4/17/2017.
@@ -69,9 +71,9 @@ public class DriverView {
     frame.setUndecorated(true);
     frame.setVisible(true);
     timer.schedule(new UpdateUITask(), 0, 1000);
-
   }
-  public void updateView(DriverModel model){
+
+  public void updateView(DriverModel model) {
     // setting nama player, ambil dari current player
     cp.setNamaPlayer(model.getCurrentPlayer(0).getPlayerName());
     // setting nama unit
