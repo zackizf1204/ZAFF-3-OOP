@@ -16,7 +16,7 @@ public class Map {
    */
 
   public Map() {
-    sizeX = 20;
+    sizeX = 15;
     sizeY = 20;
     arrayObject = new MapObject[sizeY * sizeX];
     dataTiles = new Tile[sizeY][sizeX];

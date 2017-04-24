@@ -42,7 +42,7 @@ public class DriverModel {
         }
       }
     } else if (i == 1) {
-      if (y != 20) {
+      if (y != map.getSizeY()) {
         if (map.getTile(x, y + 1).isPassable()) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
@@ -54,7 +54,7 @@ public class DriverModel {
         }
       }
     } else if (i == 3) {
-      if (y != 20) {
+      if (y != map.getSizeX()) {
         if (map.getTile(x + 1, y).isPassable()) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }

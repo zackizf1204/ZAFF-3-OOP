@@ -80,7 +80,12 @@ public class DriverView {
   }
 
   public void startTime(){
+    timer = new java.util.Timer();
     timer.schedule(new UpdateUITask(), 0, 1000);
+  }
+
+  public void stopTime() {
+    timer.cancel();
   }
 
   public void updateView(DriverModel model) {
@@ -89,11 +94,11 @@ public class DriverView {
     // setting nama unit
     unit1.setAttribute(model.getCurrentPlayer().getUnit(0));
     //mv.setListPlayer(model.getListPlayer());
-    try {
+    /*try {
       mv.view();
     } catch (Exception e) {
       e.printStackTrace();
-    }
+    }*/
   }
 
   public AttackCommandView getAttack() {
@@ -124,7 +129,7 @@ public class DriverView {
   }
   private class UpdateUITask extends TimerTask {
 
-    int nSeconds = 5;
+    int nSeconds = 60;
 
     @Override
     public void run() {

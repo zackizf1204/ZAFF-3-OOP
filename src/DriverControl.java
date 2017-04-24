@@ -29,13 +29,10 @@ public class DriverControl {
   private java.util.Timer timer = new java.util.Timer();
 
   public DriverControl() {
-    model = new DriverModel(2);
+    model = new DriverModel(4);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        Map m = new Map(15,20);
-        m.setMapObject(0,new Recovery(10,10));
-        m.setMapObject(1,model.getCurrentPlayer().getUnit(0));
         view = new DriverView(model);
 
 
@@ -55,6 +52,32 @@ public class DriverControl {
           @Override
           public void mouseClicked(MouseEvent e) {
             //tunggu biji
+            attack.addKeyListener(new KeyListener() {
+              @Override
+              public void keyTyped(KeyEvent e) {
+              }
+
+              @Override
+              public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_W) {
+                  model.attack(0);
+                } else if (e.getKeyCode() == KeyEvent.VK_A) {
+                  model.attack(2);
+                } else if (e.getKeyCode() == KeyEvent.VK_S) {
+                  model.attack(1);
+                } else if (e.getKeyCode() == KeyEvent.VK_D) {
+                  model.attack(3);
+                }
+                model.changePlayer();
+                view.updateView(model);
+                view.startTime();
+              }
+
+              @Override
+              public void keyReleased(KeyEvent e) {
+
+              }
+            });
             //model.attack();
             //model.changePlayer();
 
@@ -168,7 +191,11 @@ public class DriverControl {
         wait.addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
-
+            model.recov();
+            view.stopTime();
+            view = new DriverView(model);
+            view.updateView(model);
+            view.startTime();
           }
 
           @Override
