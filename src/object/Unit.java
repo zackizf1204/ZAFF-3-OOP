@@ -225,10 +225,14 @@ public class Unit extends MapObject {
       intelligence = intelligence + pu.getAddIntelligence();
       agi = agi + pu.getAddAgility();
       mov = mov + pu.getAddMov();
+      item.setAbsis(-1);
+      item.setOrdinat(-1);
     } else if (item instanceof Recovery) {
       Recovery recov = (Recovery) item;
       addHp(recov.getAddHp());
       addMp(recov.getAddMp());
+      item.setAbsis(-1);
+      item.setOrdinat(-1);
     }
     item.setAbsis(-1);
     item.setOrdinat(-1);
@@ -364,6 +368,8 @@ public class Unit extends MapObject {
   public void checkDead() {
     if (currentHp <= 0) {
       dead = true;
+      setAbsis(-1);
+      setOrdinat(-1);
     }
   }
 
