@@ -12,8 +12,8 @@ import java.io.IOException;
 public class MenuViewer extends JPanel{
   private JLayeredPane menuPanel;
   private JLayeredPane backgroundPanel;
-  private JButton playButton;
-  private JButton exitButton;
+  public JButton playButton;
+  public JButton exitButton;
   private GridBagConstraints batasan;
   private GridBagLayout menuLayout;
   private GridBagLayout backgroundLayout;
