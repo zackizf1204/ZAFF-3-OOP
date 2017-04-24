@@ -35,19 +35,23 @@ public class DriverModel {
     int y;
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
-    if (i == 1) {
+    if (i == 0) {
+      assert y > 0  : "Cannot Move There";
       if (map.getTile(x,y - 1).isPassable()) {
         listPlayer[currentPlayer].getUnit(currentUnit).move(i);
       }
-    } else if (i == 2) {
+    } else if (i == 1) {
+      assert y < 20 : "Cannot Move There";
       if (map.getTile(x,y + 1).isPassable()) {
         listPlayer[currentPlayer].getUnit(currentUnit).move(i);
       }
-    } else if (i == 3) {
+    } else if (i == 2) {
+      assert x > 0 : "Cannot Move There";
       if (map.getTile(x - 1,y).isPassable()) {
         listPlayer[currentPlayer].getUnit(currentUnit).move(i);
       }
-    } else if (i == 4) {
+    } else if (i == 3) {
+      assert x < 20 : "Cannot Move There";
       if (map.getTile(x + 1,y).isPassable()) {
         listPlayer[currentPlayer].getUnit(currentUnit).move(i);
       }
