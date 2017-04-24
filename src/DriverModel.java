@@ -177,8 +177,6 @@ public class DriverModel {
       y = rand.nextInt(map.getSizeY()-1);
       if ((!map.adaObject(x,y)) && (!adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(),new PowerUp(x,y));
-      } else{
-        i--;
       }
     }
   }
@@ -192,8 +190,6 @@ public class DriverModel {
       y = rand.nextInt(map.getSizeY()-1);
       if ((!map.adaObject(x, y)) && (adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
-      } else {
-        i--;
       }
     }
   }
