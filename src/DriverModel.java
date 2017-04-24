@@ -114,10 +114,27 @@ public class DriverModel {
     changePlayer();
   }
 
-  public void skill(int i, Unit target) {
-    if ((listPlayer[currentPlayer].getUnit(currentUnit).isReachable(target))
-        && (listPlayer[currentPlayer].getUnit(currentUnit).isSkillUsabale(i))) {
-      listPlayer[currentPlayer].getUnit(currentUnit).skill(i,target);
+  public void skill(int i, int j) {
+    int x;
+    int y;
+    x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
+    y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
+    if (i == 0) {
+      if (y != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x, y - 1));
+      }
+    } else if (i == 1) {
+      if (y != map.getSizeY()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x, y + 1));
+      }
+    } else if (i == 2) {
+      if (x != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x - 1, y));
+      }
+    } else if (i == 3) {
+      if (x != map.getSizeX()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x + 1, y));
+      }
     }
     changePlayer();
   }
