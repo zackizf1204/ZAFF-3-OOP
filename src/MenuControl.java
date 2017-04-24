@@ -1,5 +1,4 @@
 import map.Map;
-import object.Unit;
 import object.item.Recovery;
 import view.command.AttackCommandView;
 
@@ -8,32 +7,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.TimerTask;
-import java.util.Timer;
+
 /**
- * Created by 13515017 / Putu Arya Pradipta.
- * Tanggal 4/17/2017.
- * FileName : DriverControl.java.
+ * Created by Zacki Zulfikar Fauzi on 24-Apr-17.
+ * NIM  : 13515147
+ * File : MenuControl.java
  */
-public class DriverControl {
-  private DriverView view;
-  private DriverModel model;
-  public static int counter;
-  public DriverControl() {
+public class MenuControl {
+  private MenuViewer menu;
+  private int jumlahPlayer;
 
-
-    model = new DriverModel(2);
-    counter=0;
+  public MenuControl(){
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        Map m = new Map(15,20);
-        m.setMapObject(0,new Recovery(10,10));
-        m.setMapObject(1,model.getCurrentPlayer(0).getUnit(0));
-        m.setMapObject(2,model.getCurrentPlayer(1).getUnit(0));
-        view = new DriverView(model);
-        AttackCommandView attack = view.getAttack();
-        attack.addMouseListener(new MouseListener() {
+
+        menu = new Menuviewer();
+        menu.addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
 
@@ -81,34 +71,11 @@ public class DriverControl {
     });
   }
 
-  public void runGame(){
-    EventQueue.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        view.updateView(model);
-        TimerTask timerTask = new TimerTask() {
-
-          @Override
-          public void run() {
-            if(counter>5) {
-              System.exit(0);
-            } else {
-              counter++;
-            }
-          }
-        };
-
-        Timer timer = new Timer("MyTimer");
-        timer.scheduleAtFixedRate(timerTask, 0, 1000);//this line starts the timer at the same time its executed
-        /*while(counter<60){
-
-        }*/
-      }
-    });
+  public int getJumlahPlayer() {
+    return jumlahPlayer;
   }
 
-  public static void main(String[] args) {
-    DriverControl ctrl = new DriverControl();
-      ctrl.runGame();
+  public void setJumlahPlayer(int jumlahPlayer) {
+    this.jumlahPlayer = jumlahPlayer;
   }
 }
