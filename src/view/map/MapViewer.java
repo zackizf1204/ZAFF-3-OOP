@@ -40,6 +40,7 @@ public class MapViewer extends JPanel {
     content.setOpaque(true);
     layerPanel.setLayout(mapLayout);
     inputMap = map;
+    content.add(layerPanel);
     add(content);
   }
   /** menampilkan ke layar.
@@ -50,7 +51,7 @@ public class MapViewer extends JPanel {
     //layerPanel = new JLayeredPane();
     viewTile();
     viewMapObject();
-    content.add(layerPanel);
+
   }
 
   public void setListPlayer(Player[] list) {
