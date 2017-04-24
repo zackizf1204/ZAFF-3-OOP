@@ -6,8 +6,8 @@ package object;
  * File : MapObject.java
  */
 public abstract class MapObject {
-  private int absis;
-  private int ordinat;
+  protected int absis;
+  protected int ordinat;
   protected String objectType;
 
   public MapObject() {
