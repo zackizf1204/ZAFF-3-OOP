@@ -65,13 +65,13 @@ public class DriverModel {
         }
       }
     } else if (i == 2) {
-      if (y != 0) {
+      if (x != 0) {
         if ((map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
-      if (y != map.getSizeX()) {
+      if (x != map.getSizeX()) {
         if ((map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
@@ -114,10 +114,27 @@ public class DriverModel {
     changePlayer();
   }
 
-  public void skill(int i, Unit target) {
-    if ((listPlayer[currentPlayer].getUnit(currentUnit).isReachable(target))
-        && (listPlayer[currentPlayer].getUnit(currentUnit).isSkillUsabale(i))) {
-      listPlayer[currentPlayer].getUnit(currentUnit).skill(i,target);
+  public void skill(int i, int j) {
+    int x;
+    int y;
+    x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
+    y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
+    if (i == 0) {
+      if (y != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x, y - 1));
+      }
+    } else if (i == 1) {
+      if (y != map.getSizeY()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x, y + 1));
+      }
+    } else if (i == 2) {
+      if (x != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x - 1, y));
+      }
+    } else if (i == 3) {
+      if (x != map.getSizeX()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).skill(j,getUnitAt(x + 1, y));
+      }
     }
     changePlayer();
   }
@@ -188,7 +205,7 @@ public class DriverModel {
     for (int i = 0; i < n; i++) {
       x = rand.nextInt(map.getSizeX()-1);
       y = rand.nextInt(map.getSizeY()-1);
-      if ((!map.adaObject(x, y)) && (adaPlayer(x,y))) {
+      if ((!map.adaObject(x, y)) && (!adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
       }
     }

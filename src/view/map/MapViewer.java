@@ -48,10 +48,12 @@ public class MapViewer extends JPanel {
    */
 
   public void view() throws Exception {
-    //layerPanel = new JLayeredPane();
+    content.remove(layerPanel);
+    layerPanel = new JLayeredPane();
+    layerPanel.setLayout(mapLayout);
+    content.add(layerPanel);
     viewTile();
     viewMapObject();
-
   }
 
   public void setListPlayer(Player[] list) {
@@ -88,8 +90,8 @@ public class MapViewer extends JPanel {
     EmptyDrawer gambarEmpty = new EmptyDrawer(0,0);
     for (x = 0; x < inputMap.getSizeX();x++) {
       for (y = 0; y < inputMap.getSizeY();y++) {
-        batasan.gridx = x;
-        batasan.gridy = y;
+        batasan.gridx = y;
+        batasan.gridy = x;
         /*if (adaPlayer(x,y)) {
           MapObjectDrawer gambarObject = new MapObjectDrawer(getXYUnit(x,y));
           JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
