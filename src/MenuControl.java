@@ -1,4 +1,5 @@
 import map.Map;
+import menu.MenuViewer;
 import object.item.Recovery;
 import view.command.AttackCommandView;
 
@@ -22,8 +23,8 @@ public class MenuControl {
       @Override
       public void run() {
 
-        menu = new Menuviewer();
-        menu.addMouseListener(new MouseListener() {
+        menu = new MenuViewer();
+        menu.playButton.addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
 
