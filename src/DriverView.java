@@ -37,6 +37,7 @@ public class DriverView {
   private WaitCommandView wait = new WaitCommandView();
   private PickCommandView pick = new PickCommandView();
   private UnitView[] unit = new UnitView[4];
+  private JPanel newp = new JPanel(new BorderLayout());
 
   /**
    * Konstruktor DriverView tanpa parameter.
@@ -53,8 +54,8 @@ public class DriverView {
     for (int i = 0; i < model.getCountPlayer(); i++) {
       unit[i] = new UnitView();
     }
-    JPanel newp = new JPanel(new BorderLayout());
-    JPanel endp = new JPanel(new BorderLayout());
+
+
 
     JPanel panelcommand = new JPanel(new GridLayout(2,2));
     panelcommand.add(attack);
@@ -63,14 +64,15 @@ public class DriverView {
     panelcommand.add(pick);
     panelcommand.setBackground(Color.blue);
 
-
+    JPanel endp = new JPanel(new BorderLayout());
     endp.add(panelcommand,BorderLayout.LINE_END);
     endp.setBackground(new Color(0,0,0,100));
-    for (int i = 0; i < model.getCountPlayer(); i++){
+    for (int i = 0; i < model.getCountPlayer(); i++) {
       playerPanel.add(unit[i]);
     }
     playerPanel.setOpaque(false);
     endp.add(playerPanel,BorderLayout.LINE_START);
+
 
     newp.add(cp,BorderLayout.PAGE_START);
     newp.add(endp,BorderLayout.PAGE_END);
@@ -98,11 +100,11 @@ public class DriverView {
     // setting nama player, ambil dari current player
     cp.setNamaPlayer(model.getCurrentPlayer().getPlayerName());
     // setting nama unit
-    for (int i = 0; i < model.getCountPlayer(); i++){
+    for (int i = 0; i < model.getCountPlayer(); i++) {
       unit[i].setAttribute(model.getPlayer(i));
     }
     //mv.setListPlayer(model.getListPlayer());
-    //mv = new MapViewer(model.getMap());
+
     try {
       mv.view();
     } catch (Exception e) {

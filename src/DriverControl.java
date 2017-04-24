@@ -82,13 +82,13 @@ public class DriverControl {
         @Override
         public void keyPressed(KeyEvent e) {
           if (e.getKeyCode() == KeyEvent.VK_W) {
-            model.attack(0);
-          } else if (e.getKeyCode() == KeyEvent.VK_A) {
             model.attack(2);
+          } else if (e.getKeyCode() == KeyEvent.VK_A) {
+            model.attack(0);
           } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            model.attack(1);
-          } else if (e.getKeyCode() == KeyEvent.VK_D) {
             model.attack(3);
+          } else if (e.getKeyCode() == KeyEvent.VK_D) {
+            model.attack(1);
           }
           view.stopTime();
           view.updateView(model);
@@ -310,16 +310,16 @@ public class DriverControl {
       @Override
       public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
-          model.move(0);
-          view.updateView(model);
-        } else if (e.getKeyCode() == KeyEvent.VK_A) {
           model.move(2);
           view.updateView(model);
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
+          model.move(0);
+          view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
-          model.move(1);
+          model.move(3);
           view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_D) {
-          model.move(3);
+          model.move(1);
           view.updateView(model);
         }
       }
