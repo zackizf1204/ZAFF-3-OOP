@@ -77,13 +77,21 @@ public class DriverModel {
     x = listPlayer[i].getUnit(currentUnit).getAbsis();
     y = listPlayer[i].getUnit(currentUnit).getOrdinat();
     if (i == 0) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x ,y - 1));
+      if (y != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y - 1));
+      }
     } else if (i == 1) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x,y + 1));
+      if (y != map.getSizeY()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y + 1));
+      }
     } else if (i == 2) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1,y));
+      if (x != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1, y));
+      }
     } else if (i == 3) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1,y));
+      if (x != map.getSizeX()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1, y));
+      }
     }
     changePlayer();
   }
