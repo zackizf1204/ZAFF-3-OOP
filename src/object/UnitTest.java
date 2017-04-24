@@ -18,10 +18,10 @@ class UnitTest {
     int currentHp = test2.getCurrentHp();
     test1.attack(test2);
     boolean a;
-    a = (test2.getCurrentHp() == (currentHp - 7 / 10 * atk)) || (test2.getCurrentHp() == (currentHp - 8 / 10 * atk))
-        || (test2.getCurrentHp() == (currentHp - 9 / 10 * atk)) || (test2.getCurrentHp() == (currentHp - 10 / 10 * atk))
-        || (test2.getCurrentHp() == (currentHp - 11 / 10 * atk)) || (test2.getCurrentHp() == (currentHp - 12 / 10 * atk))
-        || (currentHp == test2.getCurrentHp());
+    a = (test2.getCurrentHp() == (currentHp - 7/10*atk))||(test2.getCurrentHp()==(currentHp-8/10*atk))
+        ||(test2.getCurrentHp() == (currentHp-9/10*atk))||(test2.getCurrentHp()==(currentHp-10/10*atk))
+        ||(test2.getCurrentHp()==(currentHp-11/10*atk))||(test2.getCurrentHp()==(currentHp-12/10*atk))
+        ||(currentHp==test2.getCurrentHp());
     assertTrue(a);
   }
 

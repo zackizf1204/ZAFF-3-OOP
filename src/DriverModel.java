@@ -1,6 +1,7 @@
 import map.Map;
 import object.Player;
 import object.Unit;
+import object.item.Item;
 
 /**
  * Created by Fathur on 23-Apr-17.
@@ -24,9 +25,19 @@ public class DriverModel {
     listPlayer = new Player [i];
     for (int j = 0; j < i ; j++) {
       listPlayer[j] = new Player("Player" + j,j,j,j);
+<<<<<<< .merge_file_a04772
     }
     map = new Map(15,20);
     currentPlayer = 0;
+||||||| .merge_file_a07352
+    }
+    map = new Map();
+    currentPlayer = 0;
+=======
+  }
+  map = new Map();
+  currentPlayer = 0;
+>>>>>>> .merge_file_a04948
     currentUnit = 0;
   }
 
@@ -76,8 +87,20 @@ public class DriverModel {
     currentUnit = 0;
   }
 
-  public Player getCurrentPlayer(int i) {
+  public Player getPlayer(int i) {
     return listPlayer[i];
   }
 
+  public Player getCurrentPlayer() {
+    return listPlayer[currentPlayer];
+  }
+
+  public void recov() {
+    listPlayer[currentPlayer].getUnit(currentUnit).recov();
+    changePlayer();
+  }
+
+  public Map getMap() {
+    return map;
+  }
 }

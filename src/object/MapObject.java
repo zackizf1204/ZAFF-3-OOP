@@ -5,10 +5,10 @@ package object;
  * NIM  : 13515147
  * File : MapObject.java
  */
-public class MapObject {
+public abstract class MapObject {
   private int absis;
   private int ordinat;
-  private String objectType;
+  protected String objectType;
 
   public MapObject() {
     absis = 0;
@@ -40,7 +40,5 @@ public class MapObject {
     this.ordinat = ordinat;
   }
 
-  public void setObjectType(String objectType) {
-    this.objectType = objectType;
-  }
+  public abstract void setObjectType();
 }
