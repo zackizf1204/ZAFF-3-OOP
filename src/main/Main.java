@@ -3,7 +3,7 @@ package main;
 import map.Map;
 import object.Unit;
 import object.item.Recovery;
-import view.map.MapView;
+import view.map.MapViewer;
 
 import javax.swing.*;
 import java.awt.*;

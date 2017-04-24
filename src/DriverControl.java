@@ -8,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.util.TimerTask;
+import java.util.Timer;
 /**
  * Created by 13515017 / Putu Arya Pradipta.
  * Tanggal 4/17/2017.
@@ -17,9 +18,10 @@ import java.awt.event.MouseListener;
 public class DriverControl {
   private DriverView view;
   private DriverModel model;
-
+  public static int counter;
   public DriverControl() {
     model = new DriverModel(2);
+    counter=0;
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
@@ -82,12 +84,29 @@ public class DriverControl {
       @Override
       public void run() {
         view.updateView(model);
+        TimerTask timerTask = new TimerTask() {
+
+          @Override
+          public void run() {
+            if(counter>4) {
+              System.exit(0);
+            } else {
+              counter++;
+            }
+          }
+        };
+
+        Timer timer = new Timer("MyTimer");
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);//this line starts the timer at the same time its executed
+        /*while(counter<60){
+
+        }*/
       }
     });
   }
 
   public static void main(String[] args) {
     DriverControl ctrl = new DriverControl();
-    ctrl.runGame();
+      ctrl.runGame();
   }
 }
