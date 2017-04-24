@@ -33,16 +33,16 @@ public class DriverModel {
   }
 
   public void gameCheck() {
+    int temp = 0;
     for (int i = 0; i < countPlayer; i++) {
       listPlayer[i].checkUnit();
     }
     for (int i = 0; i < countPlayer; i++) {
-      int temp = 0;
       if (!listPlayer[i].isGameOver()) {
         temp++;
       }
-      gameEnd = temp == 1;
     }
+    gameEnd = temp == 1;
   }
 
   public void move(int i) {
@@ -123,8 +123,7 @@ public class DriverModel {
 
   public void changePlayer() {
     gameCheck();
-    System.out.println(gameEnd);
-    //if(!gameEnd) {
+    if(!gameEnd) {
       currentPlayer = currentPlayer + 1;
       if (currentPlayer == countPlayer) {
         currentPlayer = 0;
@@ -136,7 +135,7 @@ public class DriverModel {
         }
       }
       currentUnit = 0;
-    //}
+    }
   }
 
   public Player getPlayer(int i) {

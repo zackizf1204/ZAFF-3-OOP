@@ -1,10 +1,13 @@
 package view.command;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -12,6 +15,9 @@ import java.awt.event.MouseListener;
  * FileName : PauseCommandView.java.
  */
 public class PauseCommandView extends CommandView {
+  /**
+   * Konstruktor tanpa parameter.
+   */
   public PauseCommandView() {
     super();
     try {

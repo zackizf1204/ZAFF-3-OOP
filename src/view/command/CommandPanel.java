@@ -1,12 +1,16 @@
 package view.command;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.time.Duration;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import timer.Stopwatch;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.Duration;
+
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -16,53 +20,63 @@ import java.time.Duration;
 public class CommandPanel extends JPanel {
   protected void setAndAdd(Component ctr,
                             GridBagLayout gridbag,
-                            GridBagConstraints c) {
-    gridbag.setConstraints(ctr,c);
+                            GridBagConstraints gbc) {
+    gridbag.setConstraints(ctr,gbc);
     add(ctr);
   }
 
-  private JLabel bijijaki = new JLabel("15");
-  GridBagLayout gridbag = new GridBagLayout();
-  GridBagConstraints c = new GridBagConstraints();
+  private JLabel pemasa = new JLabel("15");
+  private GridBagLayout gridbag = new GridBagLayout();
+  private GridBagConstraints gbc = new GridBagConstraints();
   private JLabel namaPlayer;
 
+  /**
+   * Konstruktor tanpa parameter.
+   * Menginisialisasi panel atas dari game
+   */
   public CommandPanel() {
 
     setFont(new Font("SansSerif", Font.PLAIN, 20));
     setLayout(gridbag);
 
-    c.fill = GridBagConstraints.BOTH;
-    c.weightx = 1.0;
+    gbc.fill = GridBagConstraints.BOTH;
+    gbc.weightx = 1.0;
     namaPlayer = new JLabel("Nama Player");
-    setAndAdd(namaPlayer, gridbag, c);
-    c.gridwidth = GridBagConstraints.REMAINDER; //end row
+    setAndAdd(namaPlayer, gridbag, gbc);
+    gbc.gridwidth = GridBagConstraints.REMAINDER; //end row
     JPanel exitpanel = new JPanel(new BorderLayout());
     exitpanel.add(new ExitCommandView(), BorderLayout.LINE_END);
     JPanel pausepanel = new JPanel(new BorderLayout());
     //pausepanel.add(new PauseCommandView(), BorderLayout.LINE_END);
     exitpanel.add(pausepanel, BorderLayout.CENTER);
-    setAndAdd(exitpanel, gridbag, c);
-    setAndAdd(bijijaki, gridbag, c);
+    setAndAdd(exitpanel, gridbag, gbc);
+    setAndAdd(pemasa, gridbag, gbc);
 
   }
 
-  public void setNamaPlayer(String str){
+  /**
+   * Setter nama current player dari game untuk ditampilkan di atas.
+   * @param str string yang akan diinputkan ke label
+   */
+  public void setNamaPlayer(String str) {
     namaPlayer.setText(str);
   }
-  public void setTimerLabel(int i){
-    bijijaki.setText(i + "");
+
+  /**
+   * Setter timer label untuk menentukan sekarang waktu berapa.
+   * @param i detik sekarang
+   */
+  public void setTimerLabel(int i) {
+    pemasa.setText(i + "");
 
   }
 
+  /**
+   * Getter timer label.
+   * @return mengambil timer label dari command panel
+   */
   public String getTimerLabel() {
-    return bijijaki.getText();
-  }
-  public void runCommandPanel() {
-    Stopwatch stp = new Stopwatch();
-    //while (stp.getInterval() > 0) {
-      bijijaki.setText(4 + "");
-
-    //}
+    return pemasa.getText();
   }
 }
 

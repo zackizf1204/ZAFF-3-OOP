@@ -82,7 +82,7 @@ public class UnitView extends JPanel {
 
   /**
    * Melakukan pengesetan label yang terdapat dalam unit.
-   * @param unit unit yang akan diisikan ke dalam label
+   * @param p player yang akan diisikan ke dalam label
    */
   public void setAttribute(Player p) {
     Unit unit = p.getUnit(0);

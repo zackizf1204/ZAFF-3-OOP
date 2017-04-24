@@ -1,12 +1,8 @@
 package view.command;
 
+import java.awt.Image;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -14,6 +10,10 @@ import java.awt.event.MouseListener;
  * FileName : WaitCommandView.java.
  */
 public class WaitCommandView extends CommandView {
+
+  /**
+   * Konstruktor tanpa parameter.
+   */
   public WaitCommandView() {
     super();
     try {

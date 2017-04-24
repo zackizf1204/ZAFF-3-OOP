@@ -10,13 +10,14 @@ import view.map.MapViewer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -26,6 +27,7 @@ import java.util.*;
 public class DriverControl {
   private DriverView view;
   private DriverModel model;
+  private static int counter = 60;
   private java.util.Timer timer = new java.util.Timer();
   private MouseListener skillListener = new MouseListener() {
     @Override
@@ -70,7 +72,6 @@ public class DriverControl {
   private MouseListener attackListener = new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
-      //tunggu biji
       view.getAttack().setFocusable(true);
       view.getAttack().requestFocusInWindow();
       view.getAttack().addKeyListener(new KeyListener() {
@@ -237,11 +238,11 @@ public class DriverControl {
     });
   }
 
-  public void runGame(){
+  public void runGame() {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        int counter = 15;
+
 
         view.getMv().setListPlayer(model.getListPlayer());
         view.getMv().setCountPlayer(model.getCountPlayer());
@@ -265,7 +266,27 @@ public class DriverControl {
           SkillCommandView skill = view.getSkill();
           skill.addMouseListener(skillListener);
           //run si jaki
-          view.startTime();
+          TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+              if(counter<0) {
+                counter = 60;
+                model.changePlayer();
+                view.stopTime();
+                view.updateView(model);
+                view.startTime();
+                MapViewer mv = view.getMv();
+                mv.setFocusable(true);
+                mv.requestFocusInWindow();
+              } else {
+                counter--;
+              }
+            }
+          };
+        Timer timer = new Timer("MyTimer");
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);
+        //this line starts the timer at the same time its executed.
+        view.startTime();
 
       }
     });
