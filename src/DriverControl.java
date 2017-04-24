@@ -88,7 +88,7 @@ public class DriverControl {
 
           @Override
           public void run() {
-            if(counter>4) {
+            if(counter>5) {
               System.exit(0);
             } else {
               counter++;
