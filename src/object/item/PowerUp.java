@@ -22,21 +22,10 @@ public class PowerUp extends Item {
     setItemType("PowerUp");
     setAddMaxHp(ran.nextInt(11));
     setAddMaxMp(ran.nextInt(11));
-<<<<<<< .merge_file_a06132
-    setAddIntelligence(ran.nextInt(2));
-    setAddStrength(ran.nextInt(2));
-    setAddAgility(ran.nextInt(2));
-||||||| .merge_file_a05124
-    setAddIntelligence(ran.nextInt(2));
-    setAddStrength(ran.nextInt(2));
-    setAddAgility(ran.nextInt(2));
-    setAddMov(ran.nextInt(10) / 10);
-=======
     setAddIntelligence(ran.nextInt(3));
     setAddStrength(ran.nextInt(3));
     setAddAgility(ran.nextInt(3));
     setAddMov(ran.nextInt(40) / 40);
->>>>>>> .merge_file_a06604
   }
 
   public PowerUp(int inputX, int inputY) {

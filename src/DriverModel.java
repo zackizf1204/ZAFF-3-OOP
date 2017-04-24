@@ -11,11 +11,6 @@ import object.item.Item;
 public class DriverModel {
   private Player[] listPlayer;
   private Map map;
-
-  public Map getMap() {
-    return map;
-  }
-
   private int currentPlayer;
   private int currentUnit;
   private final int countPlayer;
@@ -25,19 +20,9 @@ public class DriverModel {
     listPlayer = new Player [i];
     for (int j = 0; j < i ; j++) {
       listPlayer[j] = new Player("Player" + j,j,j,j);
-<<<<<<< .merge_file_a04772
-    }
-    map = new Map(15,20);
-    currentPlayer = 0;
-||||||| .merge_file_a07352
-    }
-    map = new Map();
-    currentPlayer = 0;
-=======
   }
   map = new Map();
   currentPlayer = 0;
->>>>>>> .merge_file_a04948
     currentUnit = 0;
   }
 
