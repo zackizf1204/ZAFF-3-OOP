@@ -22,7 +22,22 @@ public class Unit extends MapObject {
   private int agi;
   private final int type;
   private boolean dead;
+  private static String[] description = new String [12];
+  static {
+    description[0] = new String("Cost 10 HP + 5 MP. Deal 3x Physical Damage to target");
+    description[1] = new String("Cost 30 HP + 15 MP. Deal 5x Physical Damage to target");
+    description[2] = new String("Cost 10 MP. Deal 3x Physical Damage to target and heal yourself");
+    description[3] = new String("Cost 5 MP. Deal 2x Physical Damage to target");
+    description[4] = new String("Cost all your current MP. Heal yourself");
+    description[5] = new String("Cost 10 MP. Deal 2x Physical Damage to target and heal yourself");
+    description[6] = new String("Cost 5 MP. Deal 5x Magic Damage to target");
+    description[7] = new String("Cost 10 MP. Deal 5x Magic Damage to target and recover your MP");
+    description[8] = new String("Cost half your current HP. Restore MP");
+    description[9] = new String("Cost 5 MP. Deal 2.5x Physical Damage to target");
+    description[10] = new String("Cost 10 MP. Deal 2x Physical Damage to target and heal yourself");
+    description[11] = new String("Cost 15 MP. Deal 2x Physical Damage to target. Chance instant-kill");
 
+  }
   public Unit() {
     super();
     setObjectType();
@@ -350,10 +365,12 @@ public class Unit extends MapObject {
     }
   }
 
-  public boolean getDead(){
+  public boolean getDead() {
     return dead;
   }
 
-
+  public String getSkillDescription(int i) {
+    return description[type*3+(i-1)];
+  }
 
 }

@@ -29,6 +29,8 @@ public class DriverModel {
     map = new Map();
     currentPlayer = 0;
     currentUnit = 0;
+    setPowerUp(5);
+    setRecovery(5);
     gameEnd = false;
   }
 
@@ -52,27 +54,25 @@ public class DriverModel {
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     if (i == 0) {
       if (y != 0) {
-        if (map.getTile(x, y - 1).isPassable()) {
+        if ((map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x,y - 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 1) {
-      if (y != 20) {
-        if (map.getTile(x, y + 1).isPassable()) {
+      if (y != map.getSizeY()) {
+        if ((map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 2) {
       if (y != 0) {
-        if (map.getTile(x - 1, y).isPassable()) {
+        if ((map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
-      if (y != 20) {
-        System.out.println(map.getTile(x + 1,y).isPassable());
-        if (map.getTile(x + 1, y).isPassable()) {
-          System.out.println("JEDAR");
+      if (y != map.getSizeX()) {
+        if ((map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
@@ -174,7 +174,7 @@ public class DriverModel {
     for (int i = 0;i<n;i++) {
       x = rand.nextInt(map.getSizeX());
       y = rand.nextInt(map.getSizeY());
-      if (!map.adaObject(x,y)) {
+      if ((!map.adaObject(x,y)) && (!adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(),new PowerUp(x,y));
       }
     }
@@ -187,7 +187,7 @@ public class DriverModel {
     for (int i = 0; i < n; i++) {
       x = rand.nextInt(map.getSizeX());
       y = rand.nextInt(map.getSizeY());
-      if (!map.adaObject(x, y)) {
+      if ((!map.adaObject(x, y)) && (adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
       }
     }
@@ -211,5 +211,14 @@ public class DriverModel {
     return null;
   }
 
-
+  public boolean adaPlayer(int x, int y) {
+    for (int i = 0 ; i < countPlayer;i++){
+      for (int j = 0; j < listPlayer[i].getCountUnit(); j++){
+        if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }
