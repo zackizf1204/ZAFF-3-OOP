@@ -85,6 +85,7 @@ public class DriverModel {
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     listPlayer[currentPlayer].getUnit(currentUnit).pick(getItemAt(x,y));
+    changePlayer();
 
   }
 
@@ -172,10 +173,12 @@ public class DriverModel {
     int y;
     Random rand = new Random();
     for (int i = 0;i<n;i++) {
-      x = rand.nextInt(map.getSizeX());
-      y = rand.nextInt(map.getSizeY());
+      x = rand.nextInt(map.getSizeX()-1);
+      y = rand.nextInt(map.getSizeY()-1);
       if ((!map.adaObject(x,y)) && (!adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(),new PowerUp(x,y));
+      } else{
+        i--;
       }
     }
   }
@@ -185,10 +188,12 @@ public class DriverModel {
     int y;
     Random rand = new Random();
     for (int i = 0; i < n; i++) {
-      x = rand.nextInt(map.getSizeX());
-      y = rand.nextInt(map.getSizeY());
+      x = rand.nextInt(map.getSizeX()-1);
+      y = rand.nextInt(map.getSizeY()-1);
       if ((!map.adaObject(x, y)) && (adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
+      } else {
+        i--;
       }
     }
   }
