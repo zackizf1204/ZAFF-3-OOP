@@ -20,8 +20,10 @@ public class SkillCommandView extends CommandView {
     } catch (Exception e) {
       System.out.println(e);
     }
-    setToolTipText("BIJI NAGA JAKI");
+  }
 
+  public void setToolTip(String str){
+    setToolTipText(str);
   }
 
   @Override

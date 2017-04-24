@@ -71,6 +71,8 @@ public class DriverControl {
     @Override
     public void mouseClicked(MouseEvent e) {
       //tunggu biji
+      view.getAttack().setFocusable(true);
+      view.getAttack().requestFocusInWindow();
       view.getAttack().addKeyListener(new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -90,14 +92,16 @@ public class DriverControl {
           view.stopTime();
           view.updateView(model);
           view.startTime();
+          MapViewer mv = view.getMv();
+          mv.setFocusable(true);
+          mv.requestFocusInWindow();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
         }
       });
-      //model.attack();
-      //model.changePlayer();
+
     }
 
     @Override

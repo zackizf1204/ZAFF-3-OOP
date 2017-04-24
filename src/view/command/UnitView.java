@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import object.Player;
 import object.Unit;
 
 /**
@@ -25,6 +27,7 @@ public class UnitView extends JPanel {
   private JLabel intel;
   private JLabel mov;
   private JLabel agi;
+  private JLabel playername;
 
   /**
    * Konstruktor tanpa parameter.
@@ -37,7 +40,7 @@ public class UnitView extends JPanel {
     setFont(new Font("SansSerif", Font.PLAIN, 14));
     setLayout(gridbag);
     c.gridwidth = 1;                //reset to the default
-    c.gridheight = 6;
+    c.gridheight = 7;
     c.weighty = 1.0;
 
     Image img = null;
@@ -72,13 +75,18 @@ public class UnitView extends JPanel {
     agi = new JLabel("agi");
     gridbag.setConstraints(agi,c);
     add(agi);
+    playername = new JLabel("player");
+    gridbag.setConstraints(playername,c);
+    add(playername);
   }
 
   /**
    * Melakukan pengesetan label yang terdapat dalam unit.
    * @param unit unit yang akan diisikan ke dalam label
    */
-  public void setAttribute(Unit unit) {
+  public void setAttribute(Player p) {
+    Unit unit = p.getUnit(0);
+    playername.setText(p.getPlayerName());
     hp.setText("HP : " + unit.getCurrentHp() + "/" + unit.getMaxHp());
     mp.setText("MP : " + unit.getCurrentMp() + "/" + unit.getMaxMp());
     strength.setText("STR : " + unit.getStrength() + "");

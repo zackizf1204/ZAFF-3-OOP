@@ -17,7 +17,8 @@ public class DriverModel {
   private Map map;
   private int currentPlayer;
   private int currentUnit;
-  private final int countPlayer;
+  private int countPlayer;
+  private boolean gameEnd;
 
   DriverModel(int i) {
     countPlayer = i;
@@ -28,6 +29,20 @@ public class DriverModel {
     map = new Map();
     currentPlayer = 0;
     currentUnit = 0;
+    gameEnd = false;
+  }
+
+  public void gameCheck() {
+    for (int i = 0; i < countPlayer; i++) {
+      listPlayer[i].checkUnit();
+    }
+    for (int i = 0; i < countPlayer; i++) {
+      int temp = 0;
+      if (!listPlayer[i].isGameOver()) {
+        temp++;
+      }
+      gameEnd = temp == 1;
+    }
   }
 
   public void move(int i) {
@@ -42,7 +57,7 @@ public class DriverModel {
         }
       }
     } else if (i == 1) {
-      if (y != map.getSizeY()) {
+      if (y != 20) {
         if (map.getTile(x, y + 1).isPassable()) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
@@ -54,8 +69,10 @@ public class DriverModel {
         }
       }
     } else if (i == 3) {
-      if (y != map.getSizeX()) {
+      if (y != 20) {
+        System.out.println(map.getTile(x + 1,y).isPassable());
         if (map.getTile(x + 1, y).isPassable()) {
+          System.out.println("JEDAR");
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
@@ -77,13 +94,21 @@ public class DriverModel {
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     if (i == 0) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x ,y - 1));
+      if (y != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y - 1));
+      }
     } else if (i == 1) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x,y + 1));
+      if (y != map.getSizeY()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y + 1));
+      }
     } else if (i == 2) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1,y));
+      if (x != 0) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1, y));
+      }
     } else if (i == 3) {
-      listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1,y));
+      if (x != map.getSizeX()-1) {
+        listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1, y));
+      }
     }
     changePlayer();
   }
@@ -97,11 +122,21 @@ public class DriverModel {
   }
 
   public void changePlayer() {
-    currentPlayer = currentPlayer + 1;
-    if (currentPlayer == countPlayer) {
-      currentPlayer = 0;
-    }
-    currentUnit = 0;
+    gameCheck();
+    System.out.println(gameEnd);
+    //if(!gameEnd) {
+      currentPlayer = currentPlayer + 1;
+      if (currentPlayer == countPlayer) {
+        currentPlayer = 0;
+      }
+      while (listPlayer[currentPlayer].isGameOver() == true) {
+        currentPlayer++;
+        if (currentPlayer == countPlayer) {
+          currentPlayer = 0;
+        }
+      }
+      currentUnit = 0;
+    //}
   }
 
   public Player getPlayer(int i) {
@@ -176,4 +211,6 @@ public class DriverModel {
     }
     return null;
   }
+
+
 }
