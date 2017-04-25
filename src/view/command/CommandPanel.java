@@ -8,9 +8,6 @@ import java.awt.GridBagLayout;
 import java.time.Duration;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import timer.Stopwatch;
-
-
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -47,11 +44,9 @@ public class CommandPanel extends JPanel {
     JPanel exitpanel = new JPanel(new BorderLayout());
     exitpanel.add(new ExitCommandView(), BorderLayout.LINE_END);
     JPanel pausepanel = new JPanel(new BorderLayout());
-    //pausepanel.add(new PauseCommandView(), BorderLayout.LINE_END);
     exitpanel.add(pausepanel, BorderLayout.CENTER);
     setAndAdd(exitpanel, gridbag, gbc);
     setAndAdd(pemasa, gridbag, gbc);
-
   }
 
   /**

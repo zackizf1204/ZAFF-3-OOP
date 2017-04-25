@@ -11,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import map.Map;
+import object.MapObject;
 import object.Player;
 import object.Unit;
+import object.item.Item;
 
 /**
  * Created by Finiko on 4/15/2017.
@@ -101,19 +103,38 @@ public class MapViewer extends JPanel {
     int x;
     int y;
     EmptyDrawer gambarEmpty = new EmptyDrawer(0,0);
+    MapObjectDrawer pu = new MapObjectDrawer(-1);
+    MapObjectDrawer rec = new MapObjectDrawer(-2);
+    MapObjectDrawer ty0 = new MapObjectDrawer(0);
+    MapObjectDrawer ty1 = new MapObjectDrawer(1);
+    MapObjectDrawer ty2 = new MapObjectDrawer(2);
+    MapObjectDrawer ty3 = new MapObjectDrawer(3);
+
     for (x = 0; x < inputMap.getSizeX();x++) {
       for (y = 0; y < inputMap.getSizeY();y++) {
+        JLabel objectIcon;
         batasan.gridx = y;
         batasan.gridy = x;
-        /*if (adaPlayer(x,y)) {
-          MapObjectDrawer gambarObject = new MapObjectDrawer(getXYUnit(x,y));
-          JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
-          mapLayout.setConstraints(objectIcon,batasan);
-          layerPanel.add(objectIcon,batasan);
-          layerPanel.setLayer(objectIcon,new Integer(1),0);
-        } else */if (inputMap.adaObject(x,y)) {
-          MapObjectDrawer gambarObject = new MapObjectDrawer(inputMap.searchObject(x,y));
-          JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
+        if (inputMap.adaObject(x,y)) {
+          if (inputMap.searchObject(x,y).getObjectType() == "Unit") {
+            Unit unit = (Unit) inputMap.searchObject(x,y);
+            if (unit.getType() == 0) {
+              objectIcon = new JLabel(new ImageIcon(ty0.getImage()));
+            } else if (unit.getType() == 1) {
+              objectIcon = new JLabel(new ImageIcon(ty1.getImage()));
+            } else if (unit.getType() == 2) {
+              objectIcon = new JLabel(new ImageIcon(ty2.getImage()));
+            } else {
+              objectIcon = new JLabel(new ImageIcon(ty3.getImage()));
+            }
+          } else {
+            Item item = (Item) inputMap.searchObject(x,y);
+            if (item.getItemType() == "PowerUp") {
+              objectIcon = new JLabel(new ImageIcon(pu.getImage()));
+            } else {
+              objectIcon = new JLabel(new ImageIcon(rec.getImage()));
+            }
+          }
           mapLayout.setConstraints(objectIcon,batasan);
           layerPanel.add(objectIcon,batasan);
           layerPanel.setLayer(objectIcon,new Integer(1),0);
@@ -130,6 +151,12 @@ public class MapViewer extends JPanel {
     return (content);
   }
 
+  /**
+   * Mengecek apakah ada player di x dan y.
+   * @param x parameter x
+   * @param y parameter y
+   * @return true jika ada player di point x dan y
+   */
   public boolean adaPlayer (int x, int y) {
     int i;
     boolean ada;
@@ -153,6 +180,7 @@ public class MapViewer extends JPanel {
     } while ((i < countPlayer) && (!ada));
     return (ada);
   }
+
   public Unit getXYUnit(int x, int y) {
     int i;
     int k;

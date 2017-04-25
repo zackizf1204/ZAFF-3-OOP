@@ -23,7 +23,7 @@ public class MenuControl {
   public MenuControl(){
         menu = new MenuViewer();
     setInput(false);
-        menu.playButton.addMouseListener(new MouseListener() {
+        menu.getPlayButton().addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
             setJumlahPlayer(menu.getInputPlayer());
@@ -48,7 +48,7 @@ public class MenuControl {
           public void mouseExited(MouseEvent e) {
           }
         });
-    menu.exitButton.addMouseListener(new MouseListener() {
+    menu.getExitButton().addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
         System.exit(0);
