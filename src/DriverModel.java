@@ -21,19 +21,19 @@ public class DriverModel {
   private int countPlayer;
   private boolean gameEnd;
 
-  DriverModel(int i) {
+  DriverModel(int i, int nomorMap) {
     countPlayer = i;
     listPlayer = new Player [i];
     listPlayer[0] = new Player("Player 1",0,0,0);
     listPlayer[1] = new Player("Player 2",1,14,19);
     if (i > 2) {
-      listPlayer[2] = new Player("Player 3",1,0,19);
+      listPlayer[2] = new Player("Player 3",2,0,19);
     }
     if (i > 3) {
-      listPlayer[3] = new Player("Player 4",1,14,0);
+      listPlayer[3] = new Player("Player 4",3,14,0);
     }
     try {
-      map = new Map();
+      map = new Map(nomorMap);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }

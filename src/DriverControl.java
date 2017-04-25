@@ -262,8 +262,8 @@ public class DriverControl {
   };
   private boolean interrupted = false;
 
-  public DriverControl(int a) {
-    model = new DriverModel(a);
+  public DriverControl(int a, int nomorMap) {
+    model = new DriverModel(a, nomorMap);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
@@ -362,7 +362,7 @@ public class DriverControl {
     while(mv.isInput()==false) {
       sleep(10);
     }
-    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer());
+    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer(),mv.getMap());
     ctrl.runGame();
   }
 }
