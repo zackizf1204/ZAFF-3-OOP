@@ -119,12 +119,16 @@ public class Unit extends MapObject {
 
   public void attack(Unit target) {
     Random rand = new Random();
-    int n = rand.nextInt(100) + 1;
-    if (n <= (target.agi * 2)) {
-      //Attack Miss;
-    } else {
-      n = rand.nextInt(5) + 7;
-      target.minusHp(strength * n / 10);
+    try {
+      int n = rand.nextInt(100) + 1;
+      if (n <= (target.agi * 2)) {
+        //Attack Miss;
+      } else {
+        n = rand.nextInt(5) + 7;
+        target.minusHp(strength * n / 10);
+      }
+    }catch(NullPointerException a){
+      System.out.println("Tidak ada target");
     }
   }
 
@@ -134,7 +138,7 @@ public class Unit extends MapObject {
 
   public void move(int i) {
     assert remainingMov < 0 : "Cannot Move";
-    if (remainingMov > 0) {
+    if(remainingMov>0) {
       if (i == 0) { //Move up
         setOrdinat(getOrdinat() - 1);
         remainingMov--;
@@ -153,64 +157,68 @@ public class Unit extends MapObject {
 
   public void skill(int i,Unit target) {
     Random rand = new Random();
-    int n = rand.nextInt(5) + 7;
-    if (type == 0) {
-      if (i == 1) {
-        currentMp = currentMp - 5;
-        currentHp = currentHp - 10;
-        target.minusHp(3 * strength * n / 10);
-      } else if (i == 2) {
-        currentMp = currentMp - 15;
-        currentHp = currentHp - 30;
-        target.minusHp(5 * strength * n / 10);
-      } else if (i == 3) {
-        currentMp = currentMp - 10;
-        target.minusHp(3 * strength * n / 10);
-        addHp(3 * strength * n / 5);
-      }
-    }
-    if (type == 1) {
-      if (i == 1) {
-        currentMp = currentMp - 5;
-        target.minusHp(2 * strength * n / 10);
-      } else if (i == 2) {
-        addHp(currentMp * 5);
-        currentMp = 0;
-      } else if (i == 3) {
-        currentMp = currentMp - 10;
-        target.minusHp(2 * strength * n / 10);
-        addHp(2 * strength * n / 5);
-      }
-    }
-    if (type == 2) {
-      if (i == 1) {
-        currentMp = currentMp - 5;
-        target.minusHp(5 * intelligence * n / 10);
-      } else if (i == 2) {
-        currentMp = currentMp - 20;
-        target.minusHp(5 * intelligence * n / 10);
-        addMp(5 * intelligence * n / 20);
-      } else if (i == 3) {
-        addMp(currentHp);
-        currentHp = currentHp / 2;
-      }
-    }
-    if (type == 3) {
-      if (i == 1) {
-        currentMp = currentMp - 5;
-        target.minusHp(5 * strength * n / 20);
-      } else if (i == 2) {
-        currentMp = currentMp - 10;
-        target.minusHp(2 * strength * n / 10);
-        addHp(2 * strength * n / 20);
-      } else if (i == 3) {
-        currentMp = currentMp - 15;
-        target.minusHp(2 * strength * n / 10);
-        n = rand.nextInt(100);
-        if (n < 5) {
-          target.currentHp = 0;
+    try {
+      int n = rand.nextInt(5) + 7;
+      if (type == 0) {
+        if (i == 1) {
+          currentMp = currentMp - 5;
+          currentHp = currentHp - 10;
+          target.minusHp(3 * strength * n / 10);
+        } else if (i == 2) {
+          currentMp = currentMp - 15;
+          currentHp = currentHp - 30;
+          target.minusHp(5 * strength * n / 10);
+        } else if (i == 3) {
+          currentMp = currentMp - 10;
+          target.minusHp(3 * strength * n / 10);
+          addHp(3 * strength * n / 5);
         }
       }
+      if (type == 1) {
+        if (i == 1) {
+          currentMp = currentMp - 5;
+          target.minusHp(2 * strength * n / 10);
+        } else if (i == 2) {
+          addHp(currentMp * 5);
+          currentMp = 0;
+        } else if (i == 3) {
+          currentMp = currentMp - 10;
+          target.minusHp(2 * strength * n / 10);
+          addHp(2 * strength * n / 5);
+        }
+      }
+      if (type == 2) {
+        if (i == 1) {
+          currentMp = currentMp - 5;
+          target.minusHp(5 * intelligence * n / 10);
+        } else if (i == 2) {
+          currentMp = currentMp - 20;
+          target.minusHp(5 * intelligence * n / 10);
+          addMp(5 * intelligence * n / 20);
+        } else if (i == 3) {
+          addMp(currentHp);
+          currentHp = currentHp / 2;
+        }
+      }
+      if (type == 3) {
+        if (i == 1) {
+          currentMp = currentMp - 5;
+          target.minusHp(5 * strength * n / 20);
+        } else if (i == 2) {
+          currentMp = currentMp - 10;
+          target.minusHp(2 * strength * n / 10);
+          addHp(2 * strength * n / 20);
+        } else if (i == 3) {
+          currentMp = currentMp - 15;
+          target.minusHp(2 * strength * n / 10);
+          n = rand.nextInt(100);
+          if (n < 5) {
+            target.currentHp = 0;
+          }
+        }
+      }
+    }catch(NullPointerException a){
+      System.out.println("Tidak ada target");
     }
   }
 

@@ -8,7 +8,7 @@ import object.MapObject;
  * File : Item.java
  */
 public class Item extends MapObject {
-  private String itemType;
+  protected String itemType;
 
   public Item() {
     super();

@@ -1,3 +1,4 @@
+import controlmenu.MenuControl;
 import map.Map;
 import object.Unit;
 import object.item.Recovery;
@@ -18,6 +19,8 @@ import java.awt.event.MouseListener;
 import java.util.*;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -259,8 +262,8 @@ public class DriverControl {
   };
   private boolean interrupted = false;
 
-  public DriverControl() {
-    model = new DriverModel(4);
+  public DriverControl(int a) {
+    model = new DriverModel(a);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
@@ -353,8 +356,13 @@ public class DriverControl {
     });
   }
 
-  public static void main(String[] args) {
-    DriverControl ctrl = new DriverControl();
+  public static void main(String[] args) throws InterruptedException {
+    MenuControl mv = new MenuControl();
+    mv.controlMenu();
+    while(mv.isInput()==false) {
+      sleep(10);
+    }
+    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer());
     ctrl.runGame();
   }
 }

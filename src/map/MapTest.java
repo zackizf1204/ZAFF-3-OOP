@@ -26,7 +26,7 @@ class MapTest {
     Map m = new Map(20,20);
     assertTrue(m.getSizeY() == y);
   }
-
+/*
   @Test
   void getMapObject() {
     Map m = new Map(1,1);
@@ -96,5 +96,5 @@ class MapTest {
     //setMapObject(0, object.dataObject());
     //assertTrue(dataObject == m.searchObject(0,0));
   }
-
+*/
 }
