@@ -3,6 +3,10 @@ package map;
 import object.MapObject;
 import tile.Tile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Created by Finiko on 4/13/2017.
  */
@@ -20,18 +24,38 @@ public class Map {
   /**Constructor map tanpa parameter.
    */
 
-  public Map() {
+  public Map() throws FileNotFoundException {
     sizeX = 15;
     sizeY = 20;
+    java.lang.String[] data = new java.lang.String[15];
     arrayObject = new MapObject[sizeY * sizeX];
     dataTiles = new Tile[sizeX][sizeY];
+    File inp = new File("src/map1.txt");
+    Scanner input = new Scanner(inp);
+    int ite = 0;
+    while (ite < 15) {
+      String y = (input.nextLine());
+      for (int j = 0; j < sizeY; j++) {
+        int x = Character.getNumericValue(y.charAt(j));
+        int inputType = 0;
+        if (x == 0) {
+          inputType = 1;
+        }
+        System.out.print(inputType);
+        dataTiles[ite][j] = new Tile(x,inputType,ite,j);
+      }
+      //System.out.println(y);
+      ite++;
+    }
+    input.close();
+
     int i;
     int j;
-    for (i = 0; i < sizeX; i++) {
+/*    for (i = 0; i < sizeX; i++) {
       for (j = 0; j < sizeY; j++) {
         dataTiles[i][j] = new Tile(0, 0,i,j);
       }
-    }
+    }*/
     countObject = 0;
   }
   /**Constructor map dengan parameter.

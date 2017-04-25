@@ -68,12 +68,25 @@ public class MapViewer extends JPanel {
   public void viewTile() {
     int x;
     int y;
-    TileDrawer gambar = new TileDrawer(inputMap.getTile(0,0));
+    TileDrawer gambarDarat = new TileDrawer(2);
+    TileDrawer gambarLaut = new TileDrawer(0);
+    TileDrawer gambarPantai = new TileDrawer(1);
+    TileDrawer gambarSalju = new TileDrawer(3);
     for (y = 0; y < inputMap.getSizeY(); y++) {
       for (x = 0; x < inputMap.getSizeX(); x++) {
         batasan.gridx = y;
         batasan.gridy = x;
-        JLabel mapIcon = new JLabel(new ImageIcon(gambar.getImage()));
+        JLabel mapIcon;
+        if (inputMap.getTile(x,y).getHeight() == 0) {
+          mapIcon = new JLabel(new ImageIcon(gambarLaut.getImage()));
+        } else if (inputMap.getTile(x,y).getHeight() == 1) {
+          mapIcon = new JLabel(new ImageIcon(gambarPantai.getImage()));
+        } else if (inputMap.getTile(x,y).getHeight() == 2) {
+          mapIcon = new JLabel(new ImageIcon(gambarDarat.getImage()));
+        } else {
+          mapIcon = new JLabel(new ImageIcon(gambarSalju.getImage()));
+        }
+
         mapLayout.setConstraints(mapIcon,batasan);
         layerPanel.add(mapIcon);
         layerPanel.setLayer(mapIcon,new Integer(0),0);
