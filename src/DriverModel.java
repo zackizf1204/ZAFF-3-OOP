@@ -23,15 +23,28 @@ public class DriverModel {
   DriverModel(int i) {
     countPlayer = i;
     listPlayer = new Player [i];
-    for (int j = 0; j < i ; j++) {
-      listPlayer[j] = new Player("Player" + j,j,j,j);
+    listPlayer[0] = new Player("Player 1",0,0,0);
+    listPlayer[1] = new Player("Player 2",1,14,19);
+    if (i > 2) {
+      listPlayer[2] = new Player("Player 3",1,0,19);
+    }
+    if (i > 3) {
+      listPlayer[3] = new Player("Player 4",1,14,0);
     }
     map = new Map();
+    setPlayer(listPlayer);
+
     currentPlayer = 0;
     currentUnit = 0;
     setPowerUp(5);
     setRecovery(5);
     gameEnd = false;
+  }
+
+  private void setPlayer(Player[] listPlayer) {
+    for (int i = 0; i < countPlayer; i++) {
+      map.setMapObject(map.getCountObject(),listPlayer[i].getUnit(0));
+    }
   }
 
   public void gameCheck() {
@@ -50,32 +63,42 @@ public class DriverModel {
   public void move(int i) {
     int x;
     int y;
+    int height;
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
+    height = map.getTile(x,y).getHeight();
     if (i == 0) {
       if (y != 0) {
-        if ((map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x,y - 1))) {
+        if (((map.getTile(x,y - 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x,y - 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 1) {
-      if (y != map.getSizeY()-1) {
-        if ((map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
+      if (y != map.getSizeY()) {
+        if (((map.getTile(x,y + 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 2) {
       if (x != 0) {
-        if ((map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
+        if (((map.getTile(x - 1,y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
-      if (x != map.getSizeX()-1) {
-        if ((map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
+      if (x != map.getSizeX()) {
+        if (((map.getTile(x + 1,y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
+    }
+    int currentHeight;
+    currentHeight = map.getTile(listPlayer[currentPlayer].getUnit(currentUnit).getAbsis(), listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat()).getHeight();
+    if (height - currentHeight > listPlayer[currentPlayer].getUnit(currentUnit).getJump()) {
+      Random rand = new Random();
+      int n = rand.nextInt(5) + 7;
+      listPlayer[currentPlayer].getUnit(currentUnit).minusHp(n * (height - currentHeight));
+      changePlayer();
     }
   }
 
@@ -96,11 +119,10 @@ public class DriverModel {
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
     if (i == 0) {
       if (y != 0) {
-        //System.out.println(x + " " + y);
         listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y - 1));
       }
     } else if (i == 1) {
-      if (y != map.getSizeY() - 1) {
+      if (y != map.getSizeY()-1) {
         listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x, y + 1));
       }
     } else if (i == 2) {
@@ -108,7 +130,7 @@ public class DriverModel {
         listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x - 1, y));
       }
     } else if (i == 3) {
-      if (x != map.getSizeX() - 1) {
+      if (x != map.getSizeX()-1) {
         listPlayer[currentPlayer].getUnit(currentUnit).attack(getUnitAt(x + 1, y));
       }
     }
@@ -141,6 +163,11 @@ public class DriverModel {
   }
 
   public void changePlayer() {
+    for (int i = 0; i < countPlayer; i++) {
+      for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
+        listPlayer[i].getUnit(j).setRemainingMov();
+      }
+    }
     gameCheck();
     if(!gameEnd) {
       currentPlayer = currentPlayer + 1;
@@ -206,7 +233,7 @@ public class DriverModel {
     for (int i = 0; i < n; i++) {
       x = rand.nextInt(map.getSizeX()-1);
       y = rand.nextInt(map.getSizeY()-1);
-      if ((!map.adaObject(x, y)) && (!adaPlayer(x,y))) {
+      if ((!map.adaObject(x, y)) && (adaPlayer(x,y))) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
       }
     }
@@ -216,7 +243,6 @@ public class DriverModel {
     for (int i = 0; i < countPlayer; i++) {
       for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
         if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
-          System.out.println(listPlayer[i].getUnit(j).getCurrentMp());
           return (listPlayer[i].getUnit(j));
         }
       }
@@ -232,7 +258,7 @@ public class DriverModel {
   }
 
   public boolean adaPlayer(int x, int y) {
-    for (int i = 0 ; i < countPlayer;i++) {
+    for (int i = 0 ; i < countPlayer;i++){
       for (int j = 0; j < listPlayer[i].getCountUnit(); j++){
         if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
           return true;
