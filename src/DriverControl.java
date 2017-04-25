@@ -107,35 +107,6 @@ public class DriverControl {
       MapViewer mv = view.getMv();
       mv.setFocusable(true);
       mv.requestFocusInWindow();
-      /*view.getAttack().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-          System.out.println("EXEC");
-          if (e.getKeyCode() == KeyEvent.VK_W) {
-            model.attack(2);
-          } else if (e.getKeyCode() == KeyEvent.VK_A) {
-            model.attack(0);
-          } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            model.attack(3);
-          } else if (e.getKeyCode() == KeyEvent.VK_D) {
-            model.attack(1);
-          }
-          view.updateView(model);
-          interrupted = true;
-          MapViewer mv = view.getMv();
-          mv.setFocusable(true);
-          mv.requestFocusInWindow();
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-      });
-*/
     }
 
     @Override
@@ -262,8 +233,8 @@ public class DriverControl {
   };
   private boolean interrupted = false;
 
-  public DriverControl(int a) {
-    model = new DriverModel(a);
+  public DriverControl(int jumlahPlayer) {
+    model = new DriverModel(jumlahPlayer);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {

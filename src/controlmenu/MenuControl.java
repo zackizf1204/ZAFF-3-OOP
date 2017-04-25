@@ -19,6 +19,7 @@ public class MenuControl {
   public MenuViewer menu;
   private int jumlahPlayer;
   private boolean input;
+  private int map;
 
   public MenuControl(){
         menu = new MenuViewer();
@@ -28,6 +29,7 @@ public class MenuControl {
           public void mouseClicked(MouseEvent e) {
             setJumlahPlayer(menu.getInputPlayer());
             setInput(true);
+            setMap(menu.getMap());
             //attackPlayer(Player1, Player2)
           }
 
@@ -92,5 +94,13 @@ public class MenuControl {
 
   public void setInput(boolean input) {
     this.input = input;
+  }
+
+  public int getMap() {
+    return map;
+  }
+
+  public void setMap(int map) {
+    this.map = map;
   }
 }
