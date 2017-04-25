@@ -226,7 +226,7 @@ public class DriverModel {
     for (int i = 0;i<n;i++) {
       x = rand.nextInt(map.getSizeX()-1);
       y = rand.nextInt(map.getSizeY()-1);
-      if ((!map.adaObject(x,y)) && (!adaPlayer(x,y))) {
+      if ((!map.adaObject(x,y)) && (!adaPlayer(x,y)) && (map.getTile(x,y).getHeight()!=0)) {
         map.setMapObject(map.getCountObject(),new PowerUp(x,y));
       }
     }
@@ -239,7 +239,7 @@ public class DriverModel {
     for (int i = 0; i < n; i++) {
       x = rand.nextInt(map.getSizeX()-1);
       y = rand.nextInt(map.getSizeY()-1);
-      if ((!map.adaObject(x, y)) && (!adaPlayer(x,y))) {
+      if ((!map.adaObject(x, y)) && (!adaPlayer(x,y))&& (map.getTile(x,y).getHeight()!=0)) {
         map.setMapObject(map.getCountObject(), new Recovery(x, y));
       }
     }
@@ -261,7 +261,7 @@ public class DriverModel {
     if (map.adaObject(x,y)) {
       try {
         return (
-            (Item) (map.searchObject(x, y)));
+            (Item) (map.searchItem(x, y)));
       }catch (ClassCastException a) {
         System.out.println("Tidak ada item");
       }
