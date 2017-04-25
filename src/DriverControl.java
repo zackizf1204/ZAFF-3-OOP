@@ -36,7 +36,7 @@ public class DriverControl {
     public void mouseClicked(MouseEvent e) {
       view.getSkill().setFocusable(true);
       view.getSkill().requestFocusInWindow();
-      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah", "Aing" };
+      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah", "Self" };
       Icon blueIcon = new ImageIcon("assets/item/item.png");
       int i =       JOptionPane.showOptionDialog(view.getMv(), "Pilih arah serangan", "Select an Option",
           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
@@ -48,6 +48,13 @@ public class DriverControl {
           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, string2,
           string2[0]);
       model.skill(i,j+1);
+      if (model.isGameEnd()){
+        Object stringArray2[] = {"EXIT"};
+        int x = JOptionPane.showOptionDialog(view.getMv(), "Game telah usai. Tekan tombol EXIT untuk keluar", "Select an Option",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray2,
+            stringArray2[0]);
+        System.exit(0);
+      }
       view.updateView(model);
       interrupted = true;
       MapViewer mv = view.getMv();
@@ -101,40 +108,18 @@ public class DriverControl {
           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
           stringArray[0]);
       model.attack(i);
+      if (model.isGameEnd()) {
+        Object stringArray2[] = {"EXIT"};
+        int x = JOptionPane.showOptionDialog(view.getMv(), "Game telah usai. Tekan tombol EXIT untuk keluar", "Select an Option",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray2,
+            stringArray2[0]);
+        System.exit(0);
+      }
       view.updateView(model);
       interrupted = true;
       MapViewer mv = view.getMv();
       mv.setFocusable(true);
       mv.requestFocusInWindow();
-      /*view.getAttack().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-          System.out.println("EXEC");
-          if (e.getKeyCode() == KeyEvent.VK_W) {
-            model.attack(2);
-          } else if (e.getKeyCode() == KeyEvent.VK_A) {
-            model.attack(0);
-          } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            model.attack(3);
-          } else if (e.getKeyCode() == KeyEvent.VK_D) {
-            model.attack(1);
-          }
-          view.updateView(model);
-          interrupted = true;
-          MapViewer mv = view.getMv();
-          mv.setFocusable(true);
-          mv.requestFocusInWindow();
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-      });
-*/
     }
 
     @Override

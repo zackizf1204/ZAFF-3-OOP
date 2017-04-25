@@ -168,6 +168,10 @@ public class DriverModel {
     changePlayer();
   }
 
+  public boolean isGameEnd() {
+    return gameEnd;
+  }
+
   public void changePlayer() {
     for (int i = 0; i < countPlayer; i++) {
       for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
@@ -181,6 +185,7 @@ public class DriverModel {
         currentPlayer = 0;
       }
       while (listPlayer[currentPlayer].isGameOver() == true) {
+
         currentPlayer++;
         if (currentPlayer == countPlayer) {
           currentPlayer = 0;
