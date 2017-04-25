@@ -362,7 +362,7 @@ public class DriverControl {
     while(mv.isInput()==false) {
       sleep(10);
     }
-    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer(),1);
+    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer(),mv.getMap());
     ctrl.runGame();
   }
 }
