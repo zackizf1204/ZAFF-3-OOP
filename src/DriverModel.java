@@ -254,7 +254,6 @@ public class DriverModel {
     for (int i = 0; i < countPlayer; i++) {
       for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
         if ((listPlayer[i].getUnit(j).getAbsis() == x) && (listPlayer[i].getUnit(j).getOrdinat() == y)) {
-          System.out.println(listPlayer[i].getUnit(j).getCurrentMp());
           return (listPlayer[i].getUnit(j));
         }
       }
