@@ -5,6 +5,7 @@ import object.item.Item;
 import object.item.PowerUp;
 import object.item.Recovery;
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 /**
@@ -31,7 +32,11 @@ public class DriverModel {
     if (i > 3) {
       listPlayer[3] = new Player("Player 4",1,14,0);
     }
-    map = new Map();
+    try {
+      map = new Map();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
     setPlayer(listPlayer);
 
     currentPlayer = 0;

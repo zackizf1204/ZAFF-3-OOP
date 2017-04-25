@@ -19,14 +19,18 @@ public class TileDrawer extends JPanel {
    * @param inputTile masukkan tile
    */
 
-  public TileDrawer(Tile inputTile) {
-    absis = inputTile.getX();
-    ordinat = inputTile.getY();
+  public TileDrawer(int type) {
+    absis = 0;
+    ordinat = 0;
     try {
-      if (inputTile.getType() == 0) {
+      if (type == 2) {
         image = ImageIO.read(getClass().getResource("../../assets/tile/tile_grass.jpg"));
-      } else {
+      } else if (type == 0) {
         image = ImageIO.read(getClass().getResource("../../assets/tile/tile_river.jpg"));
+      } else if (type == 1) {
+        image = ImageIO.read(getClass().getResource("../../assets/tile/tile_beach.jpg"));
+      } else {
+        image = ImageIO.read(getClass().getResource("../../assets/tile/tile_snow.jpg"));
       }
     } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());
