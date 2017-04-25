@@ -61,7 +61,7 @@ public class DriverModel {
         }
       }
     } else if (i == 1) {
-      if (y != map.getSizeY()) {
+      if (y != map.getSizeY()-1) {
         if (((map.getTile(x,y + 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
@@ -73,7 +73,7 @@ public class DriverModel {
         }
       }
     } else if (i == 3) {
-      if (x != map.getSizeX()) {
+      if (x != map.getSizeX()-1) {
         if (((map.getTile(x + 1,y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
