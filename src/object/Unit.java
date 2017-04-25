@@ -23,6 +23,8 @@ public class Unit extends MapObject {
   private final int type;
   private boolean dead;
   private static String[] description = new String [12];
+  private int remainingMov;
+
   static {
     description[0] = new String("Cost 10 HP + 5 MP. Deal 3x Physical Damage to target");
     description[1] = new String("Cost 30 HP + 15 MP. Deal 5x Physical Damage to target");
@@ -108,7 +110,7 @@ public class Unit extends MapObject {
       agi = 10;
       this.type = 4;
     }
-
+    remainingMov = mov;
   }
 
   public void attack(Unit target) {
@@ -118,19 +120,24 @@ public class Unit extends MapObject {
       //Attack Miss;
     } else {
       n = rand.nextInt(5) + 7;
-      target.currentHp = target.currentHp - (strength * n / 10);
+      target.minusHp(strength * n / 10);
     }
   }
 
   public void move(int i) {
+    assert mov > 0 : "Cannot Move";
     if (i == 0) { //Move up
       setOrdinat(getOrdinat() - 1);
+      remainingMov--;
     } else if (i == 1) { //Move down
       setOrdinat(getOrdinat() + 1);
+      remainingMov--;
     } else if (i == 2) { //Move left
+      remainingMov--;
       setAbsis(getAbsis() - 1);
     } else if (i == 3) { //Move right
       setAbsis(getAbsis() + 1);
+      remainingMov--;
     }
   }
 
@@ -141,37 +148,37 @@ public class Unit extends MapObject {
       if (i == 1) {
         currentMp = currentMp - 5;
         currentHp = currentHp - 10;
-        target.currentHp = target.currentHp - (3 * strength * n / 10);
+        target.minusHp(3 * strength * n / 10);
       } else if (i == 2) {
         currentMp = currentMp - 15;
         currentHp = currentHp - 30;
-        target.currentMp = target.currentHp - (5 * strength * n / 10);
+        target.minusHp(5 * strength * n / 10);
       } else if (i == 3) {
         currentMp = currentMp - 10;
-        target.currentHp = target.currentHp - (3 * strength * n / 10);
+        target.minusHp(3 * strength * n / 10);
         addHp(3 * strength * n / 5);
       }
     }
     if (type == 1) {
       if (i == 1) {
         currentMp = currentMp - 5;
-        target.currentHp = target.currentHp - (2 * strength * n / 10);
+        target.minusHp(2 * strength * n / 10);
       } else if (i == 2) {
         addHp(currentMp * 5);
         currentMp = 0;
       } else if (i == 3) {
         currentMp = currentMp - 10;
-        target.currentHp = target.currentMp - (2 * strength * n / 10);
+        target.minusHp(2 * strength * n / 10);
         addHp(2 * strength * n / 5);
       }
     }
     if (type == 2) {
       if (i == 1) {
         currentMp = currentMp - 5;
-        target.currentHp = target.currentHp - (5 * intelligence * n / 10);
+        target.minusHp(5 * intelligence * n / 10);
       } else if (i == 2) {
         currentMp = currentMp - 20;
-        target.currentHp = target.currentHp - (5 * intelligence * n / 10);
+        target.minusHp(5 * intelligence * n / 10);
         addMp(5 * intelligence * n / 20);
       } else if (i == 3) {
         addMp(currentHp);
@@ -181,14 +188,14 @@ public class Unit extends MapObject {
     if (type == 3) {
       if (i == 1) {
         currentMp = currentMp - 5;
-        target.currentHp = target.currentHp - (5 * strength * n / 20);
+        target.minusHp(5 * strength * n / 20);
       } else if (i == 2) {
         currentMp = currentMp - 10;
-        target.currentHp = target.currentHp - (2 * strength * n / 10);
+        target.minusHp(2 * strength * n / 10);
         addHp(2 * strength * n / 20);
       } else if (i == 3) {
         currentMp = currentMp - 15;
-        target.currentHp = target.currentHp - (2 * strength * n / 10);
+        target.minusHp(2 * strength * n / 10);
         n = rand.nextInt(100);
         if (n < 5) {
           target.currentHp = 0;
@@ -376,7 +383,17 @@ public class Unit extends MapObject {
   }
 
   public String getSkillDescription(int i) {
-    return description[type*3+(i-1)];
+    return description[type * 3 + (i - 1)];
   }
 
+  public void minusHp(int i) {
+    currentHp = currentHp - i;
+    if (currentHp < 0) {
+      currentHp = 0;
+    }
+  }
+
+  public void setRemainingMov() {
+    remainingMov = mov;
+  }
 }

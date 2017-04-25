@@ -65,13 +65,13 @@ public class DriverModel {
         }
       }
     } else if (i == 2) {
-      if (y != 0) {
+      if (x != 0) {
         if ((map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
-      if (y != map.getSizeX()) {
+      if (x != map.getSizeX()) {
         if ((map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
@@ -140,6 +140,11 @@ public class DriverModel {
   }
 
   public void changePlayer() {
+    for (int i = 0; i < countPlayer; i++) {
+      for (int j = 0; j < listPlayer[i].getCountUnit(); j++) {
+        listPlayer[i].getUnit(j).setRemainingMov();
+      }
+    }
     gameCheck();
     if(!gameEnd) {
       currentPlayer = currentPlayer + 1;
