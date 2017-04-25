@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="309.0" y="519.0">DriverControl</node>
+    <node x="0.0" y="132.0">DriverView</node>
+    <node x="390.0" y="0.0">DriverModel</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="DriverControl" target="DriverView">
+      <point x="-24.0" y="-47.5" />
+      <point x="381.0" y="489.0" />
+      <point x="277.5" y="489.0" />
+      <point x="92.5" y="102.5" />
+    </edge>
+    <edge source="DriverControl" target="DriverModel">
+      <point x="24.0" y="-47.5" />
+      <point x="429.0" y="489.0" />
+      <point x="532.5" y="489.0" />
+      <point x="-142.5" y="234.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.3000000000000003" x="225.3846153846153" y="158.99999999999994" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
