@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import object.MapObject;
+import object.Unit;
 import object.item.Item;
 
 /**
@@ -17,22 +18,25 @@ public class MapObjectDrawer extends JPanel {
   private BufferedImage image;
 
   /** constructor.
-   * @param inputObject masukkan object input.
+   * @param type masukkan object input.
    */
 
-  public MapObjectDrawer(MapObject inputObject) {
-    absis = inputObject.getAbsis();
-    ordinat = inputObject.getOrdinat();
+  public MapObjectDrawer(int type) {
+    absis = 0;
+    ordinat = 0;
     try {
-      if (inputObject.getObjectType() == "Unit") {
-        image = ImageIO.read(getClass().getResource("../../assets/unit/monk_down.gif"));
+      if (type == 0) {
+        image = ImageIO.read(getClass().getResource("../../assets/unit/monk_down.png"));
+      } else if (type == 1) {
+        image = ImageIO.read(getClass().getResource("../../assets/unit/agi_1_down.png"));
+      } else if (type == 2) {
+        image = ImageIO.read(getClass().getResource("../../assets/unit/int_1_down.png"));
+      } else if (type == 3) {
+        image = ImageIO.read(getClass().getResource("../../assets/unit/spd_down.png"));
+      } else if (type == -1) {
+        image = ImageIO.read(getClass().getResource("../../assets/item/pu.png"));
       } else {
-        Item barang = (Item) inputObject;
-        if (barang.getItemType() == "PowerUp") {
-          image = ImageIO.read(getClass().getResource("../../assets/item/pu.png"));
-        } else {
-          image = ImageIO.read(getClass().getResource("../../assets/item/item.png"));
-        }
+        image = ImageIO.read(getClass().getResource("../../assets/item/item.png"));
       }
     } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());

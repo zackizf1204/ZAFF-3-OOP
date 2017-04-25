@@ -33,7 +33,7 @@ public class UnitView extends JPanel {
    * Konstruktor tanpa parameter.
    * Menginisialisasi unit view dengan tulisan templates dan sprites.
    */
-  public UnitView() {
+  public UnitView(int i) {
     super();
     GridBagLayout gridbag = new GridBagLayout();
     GridBagConstraints c = new GridBagConstraints();
@@ -44,8 +44,18 @@ public class UnitView extends JPanel {
     c.weighty = 1.0;
 
     Image img = null;
+    String str;
+    if (i == 0) {
+      str = new String("../../assets/unit/str_face.jpg");
+    } else if (i == 1) {
+      str = new String("../../assets/unit/agi_face.jpg");
+    } else if (i == 2) {
+      str = new String("../../assets/unit/int_face.jpg");
+    } else {
+      str = new String("../../assets/unit/spd_face.jpg");
+    }
     try {
-      img = ImageIO.read(getClass().getResource("../../assets/boldandbrash.jpg"));
+      img = ImageIO.read(getClass().getResource(str));
     } catch (IOException e) {
       e.printStackTrace();
     }

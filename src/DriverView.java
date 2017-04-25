@@ -1,20 +1,25 @@
 
-import object.Player;
-import object.Unit;
-import object.item.Recovery;
-import view.command.*;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.*;
-import java.util.*;
-import view.command.*;
-import view.map.MapViewer;
 import map.Map;
-import java.awt.*;
-import java.util.TimerTask;
+import object.Player;
+import object.Unit;
+import object.item.Recovery;
+import view.command.AttackCommandView;
+import view.command.CommandPanel;
+import view.command.PickCommandView;
+import view.command.SkillCommandView;
+import view.command.UnitView;
+import view.command.WaitCommandView;
+import view.map.MapViewer;
+
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -27,11 +32,6 @@ public class DriverView {
   private CommandPanel cp = new CommandPanel();
   private JPanel playerPanel = new JPanel(new FlowLayout());
   private MapViewer mv;
-
-  public MapViewer getMv() {
-    return mv;
-  }
-
   private AttackCommandView attack = new AttackCommandView();
   private SkillCommandView skill = new SkillCommandView();
   private WaitCommandView wait = new WaitCommandView();
@@ -46,24 +46,15 @@ public class DriverView {
     JFrame frame = new JFrame("ZAFF");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mv = new MapViewer(model.getMap());
-    /*try {
-      mv.view();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }*/
     for (int i = 0; i < model.getCountPlayer(); i++) {
-      unit[i] = new UnitView();
+      unit[i] = new UnitView(i);
     }
-
-
-
     JPanel panelcommand = new JPanel(new GridLayout(2,2));
     panelcommand.add(attack);
     panelcommand.add(skill);
     panelcommand.add(wait);
     panelcommand.add(pick);
     panelcommand.setBackground(Color.blue);
-
     JPanel endp = new JPanel(new BorderLayout());
     endp.add(panelcommand,BorderLayout.LINE_END);
     endp.setBackground(new Color(0,0,0,100));
@@ -73,20 +64,19 @@ public class DriverView {
     playerPanel.setOpaque(false);
     endp.add(playerPanel,BorderLayout.LINE_START);
     endp.setBackground(Color.blue);
-
     newp.add(cp,BorderLayout.PAGE_START);
     newp.add(endp,BorderLayout.PAGE_END);
     newp.add(mv,BorderLayout.CENTER);
-
     frame.add(newp);
-
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     frame.setUndecorated(true);
     frame.setVisible(true);
-
   }
 
-
+  /**
+   * Melakukan perubahan pada view.
+   * @param model model yang dijadikan acuan
+   */
   public void updateView(DriverModel model) {
     // setting nama player, ambil dari current player
     cp.setNamaPlayer(model.getCurrentPlayer().getPlayerName());
@@ -94,8 +84,6 @@ public class DriverView {
     for (int i = 0; i < model.getCountPlayer(); i++) {
       unit[i].setAttribute(model.getPlayer(i));
     }
-    //mv.setListPlayer(model.getListPlayer());
-
     try {
       mv.view();
     } catch (Exception e) {
@@ -118,49 +106,21 @@ public class DriverView {
   public PickCommandView getPick() {
     return pick;
   }
+
+  public MapViewer getMv() {
+    return mv;
+  }
+
   /**
-   * Getter command panel
+   * Getter command panel.
    * @return Command panel dari suatu laman
    */
+
   public CommandPanel getCp() {
     return cp;
   }
 
-  public String getTimer(){
+  public String getTimer() {
     return cp.getTimerLabel();
   }
-
-/*  private class UpdateUITask extends TimerTask {
-
-    int nSeconds = 60;
-
-    @Override
-    public void run() {
-      EventQueue.invokeLater(new Runnable() {
-
-        @Override
-        public void run() {
-          if (nSeconds == 0) {
-            timer.cancel();
-          }
-          //timeLabel.setText(String.valueOf(nSeconds--));
-          //cp.setTimerLabel((nSeconds--));
-        }
-      });
-    }
-  }
-
-
-  public static void main(String args[]) {
-    EventQueue.invokeLater(new Runnable() {
-
-      @Override
-      public void run() {
-        Map m = new Map(15,20);
-        m.setMapObject(0,new Recovery(0,0));
-        m.setMapObject(1,new Unit(1,5,5));
-        //final DriverView clock = new DriverView(m);
-      }
-    });
-  }*/
 }
