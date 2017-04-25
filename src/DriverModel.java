@@ -239,7 +239,12 @@ public class DriverModel {
 
   public Item getItemAt(int x,int y) {
     if (map.adaObject(x,y)) {
-      return ((Item) (map.searchObject(x,y)));
+      try {
+        return (
+            (Item) (map.searchObject(x, y)));
+      }catch (ClassCastException a) {
+        System.out.println("Tidak ada item");
+      }
     }
     return null;
   }

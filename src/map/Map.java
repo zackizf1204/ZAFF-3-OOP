@@ -134,9 +134,6 @@ public class Map {
     if (countObject > 0) {
 
       while ((!found) && (i < countObject)){
-        System.out.println(i);
-        System.out.print(arrayObject[i].getAbsis());
-        System.out.println(arrayObject[i].getOrdinat());
         if ((arrayObject[i].getAbsis() == x) && (arrayObject[i].getOrdinat() == y)) {
           found = true;
         } else {
