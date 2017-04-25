@@ -24,13 +24,14 @@ public class Map {
   /**Constructor map tanpa parameter.
    */
 
-  public Map() throws FileNotFoundException {
+  public Map(int nomorMap) throws FileNotFoundException {
     sizeX = 15;
     sizeY = 20;
     java.lang.String[] data = new java.lang.String[15];
     arrayObject = new MapObject[sizeY * sizeX];
     dataTiles = new Tile[sizeX][sizeY];
-    File inp = new File("src/map1.txt");
+    String fileLoc = new String("src/map"+nomorMap+".txt");
+    File inp = new File(fileLoc);
     Scanner input = new Scanner(inp);
     int ite = 0;
     while (ite < 15) {
