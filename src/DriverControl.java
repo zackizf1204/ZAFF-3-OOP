@@ -276,9 +276,6 @@ public class DriverControl {
       public void run() {
         view.getMv().setListPlayer(model.getListPlayer());
         view.getMv().setCountPlayer(model.getCountPlayer());
-        for (int i = 0; i < model.getCountPlayer(); i++) {
-          model.getMap().setMapObject(model.getMap().getCountObject(),model.getPlayer(i).getUnit(0));
-        }
 
         view.updateView(model);
           // remove semua actionlistener
