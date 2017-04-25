@@ -50,32 +50,42 @@ public class DriverModel {
   public void move(int i) {
     int x;
     int y;
+    int height;
     x = listPlayer[currentPlayer].getUnit(currentUnit).getAbsis();
     y = listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat();
+    height = map.getTile(x,y).getHeight();
     if (i == 0) {
       if (y != 0) {
-        if ((map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x,y - 1))) {
+        if (((map.getTile(x,y - 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x,y - 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 1) {
       if (y != map.getSizeY()) {
-        if ((map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
+        if (((map.getTile(x,y + 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x,y + 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 2) {
       if (x != 0) {
-        if ((map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
+        if (((map.getTile(x - 1,y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
       if (x != map.getSizeX()) {
-        if ((map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
+        if (((map.getTile(x + 1,y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1,y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
+    }
+    int currentHeight;
+    currentHeight = map.getTile(listPlayer[currentPlayer].getUnit(currentUnit).getAbsis(), listPlayer[currentPlayer].getUnit(currentUnit).getOrdinat()).getHeight();
+    if (height - currentHeight > listPlayer[currentPlayer].getUnit(currentUnit).getJump()) {
+      Random rand = new Random();
+      int n = rand.nextInt(5) + 7;
+      listPlayer[currentPlayer].getUnit(currentUnit).minusHp(n * (height - currentHeight));
+      changePlayer();
     }
   }
 

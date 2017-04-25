@@ -24,6 +24,7 @@ public class Unit extends MapObject {
   private boolean dead;
   private static String[] description = new String [12];
   private int remainingMov;
+  private int jump;
 
   static {
     description[0] = new String("Cost 10 HP + 5 MP. Deal 3x Physical Damage to target");
@@ -53,6 +54,8 @@ public class Unit extends MapObject {
     mov = 5;
     agi = 10;
     type = 4;
+    remainingMov = mov;
+    jump = 1;
   }
 
   public Unit(int type,int x,int y) {
@@ -111,6 +114,7 @@ public class Unit extends MapObject {
       this.type = 4;
     }
     remainingMov = mov;
+    jump = 1;
   }
 
   public void attack(Unit target) {
@@ -304,6 +308,10 @@ public class Unit extends MapObject {
 
   public int getAgi() {
     return agi;
+  }
+
+  public int getJump() {
+    return jump;
   }
 
   public void addHp(int x) {
