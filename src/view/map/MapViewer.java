@@ -6,29 +6,52 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import map.Map;
-import object.MapObject;
 import object.Player;
 import object.Unit;
 import object.item.Item;
 
 /**
  * Created by Finiko on 4/15/2017.
+ * NIM : 13515029.
+ * File : MapViewer.java
  */
 public class MapViewer extends JPanel {
-  private GridBagConstraints batasan;
-  private JComponent content;
-  private JLayeredPane layerPanel;
-  private GridBagLayout mapLayout;
-  private Map inputMap;
-  private Player[] listPlayer;
-  private int countPlayer;
-  private int countUnit;
+  /** batasan layout.
+   */
 
+  private GridBagConstraints batasan;
+  /** content dari component.
+   */
+
+  private JComponent content;
+  /** panel layer.
+   */
+
+  private JLayeredPane layerPanel;
+  /** layout map.
+   */
+
+  private GridBagLayout mapLayout;
+  /** masukkan map.
+   */
+
+  private Map inputMap;
+  /** list dari Player pada map.
+   */
+
+  private Player[] listPlayer;
+  /** jumlah Player.
+   */
+
+  private int countPlayer;
+  /** Jumlah Unit.
+   */
+
+  private int countUnit;
   /** constructor.
    * @param map masukkan map
    */
@@ -57,10 +80,17 @@ public class MapViewer extends JPanel {
     viewTile();
     viewMapObject();
   }
+  /** Setter pada list Player.
+   * @param list masukkan list Player.
+   */
 
   public void setListPlayer(Player[] list) {
     listPlayer = list;
   }
+  /** Setter jumlah Player.
+   * @param count masukkan jumlah Player.
+   */
+
   public void setCountPlayer(int count) {
     countPlayer = count;
   }
@@ -88,7 +118,6 @@ public class MapViewer extends JPanel {
         } else {
           mapIcon = new JLabel(new ImageIcon(gambarSalju.getImage()));
         }
-
         mapLayout.setConstraints(mapIcon,batasan);
         layerPanel.add(mapIcon);
         layerPanel.setLayer(mapIcon,new Integer(0),0);
@@ -109,7 +138,6 @@ public class MapViewer extends JPanel {
     MapObjectDrawer ty1 = new MapObjectDrawer(1);
     MapObjectDrawer ty2 = new MapObjectDrawer(2);
     MapObjectDrawer ty3 = new MapObjectDrawer(3);
-
     for (x = 0; x < inputMap.getSizeX();x++) {
       for (y = 0; y < inputMap.getSizeY();y++) {
         JLabel objectIcon;
@@ -147,6 +175,10 @@ public class MapViewer extends JPanel {
       }
     }
   }
+
+  /** getter untuk content.
+   * @return Content pada map viewer.
+   */
   public JComponent getContent() {
     return (content);
   }
@@ -157,7 +189,7 @@ public class MapViewer extends JPanel {
    * @param y parameter y
    * @return true jika ada player di point x dan y
    */
-  public boolean adaPlayer (int x, int y) {
+  public boolean adaPlayer(int x, int y) {
     int i;
     boolean ada;
     ada = false;
@@ -180,8 +212,13 @@ public class MapViewer extends JPanel {
     } while ((i < countPlayer) && (!ada));
     return (ada);
   }
+  /** getter unit di posisi X dan Y.
+   * @param x posisi x.
+   * @param y posisi y.
+   * @return unit di posisi x dan y.
+   */
 
-  public Unit getXYUnit(int x, int y) {
+  public Unit getAbsisOrdinatUnit(int x, int y) {
     int i;
     int k;
     i = 0;

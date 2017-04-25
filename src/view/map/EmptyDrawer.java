@@ -8,16 +8,21 @@ import javax.swing.JPanel;
 
 /**
  * Created by Finiko on 4/20/2017.
+ * NIM : 13515029.
+ * File : EmptyDrawer.java
  */
 public class EmptyDrawer extends JPanel {
   /** posisi X.
    */
+
   private int absis;
   /** posisi Y.
    */
+
   private int ordinat;
   /** gambar di layar.
    */
+
   private BufferedImage image;
   /** constructor.
    * @param inputX masukkan X

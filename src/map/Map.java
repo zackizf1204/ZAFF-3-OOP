@@ -1,11 +1,10 @@
 package map;
 
-import object.MapObject;
-import tile.Tile;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import object.MapObject;
+import tile.Tile;
 
 /**
  * Created by Finiko on 4/13/2017.
@@ -30,7 +29,7 @@ public class Map {
     java.lang.String[] data = new java.lang.String[15];
     arrayObject = new MapObject[sizeY * sizeX];
     dataTiles = new Tile[sizeX][sizeY];
-    String fileLoc = new String("src/map"+nomorMap+".txt");
+    String fileLoc = new String("src/map" + nomorMap + ".txt");
     File inp = new File(fileLoc);
     Scanner input = new Scanner(inp);
     int ite = 0;
@@ -44,18 +43,9 @@ public class Map {
         }
         dataTiles[ite][j] = new Tile(x,inputType,ite,j);
       }
-      //System.out.println(y);
       ite++;
     }
     input.close();
-
-    int i;
-    int j;
-/*    for (i = 0; i < sizeX; i++) {
-      for (j = 0; j < sizeY; j++) {
-        dataTiles[i][j] = new Tile(0, 0,i,j);
-      }
-    }*/
     countObject = 0;
   }
   /**Constructor map dengan parameter.
@@ -131,6 +121,11 @@ public class Map {
     arrayObject[i] = data;
     countObject = countObject + 1;
   }
+  /** menggerakan map Object.
+   * @param i masukkan urutan arrayObject.
+   * @param data data mapObject yang diubah.
+   */
+
   public void moveMapObject(int i, MapObject data) {
     arrayObject[i] = data;
   }
@@ -156,8 +151,7 @@ public class Map {
     i = 0;
     boolean found = false;
     if (countObject > 0) {
-
-      while ((!found) && (i < countObject)){
+      while ((!found) && (i < countObject)) {
         if ((arrayObject[i].getAbsis() == x) && (arrayObject[i].getOrdinat() == y)) {
           found = true;
         } else {
@@ -189,19 +183,27 @@ public class Map {
     }
     return (arrayObject[i]);
   }
+  /** mencari Item di posisi x dan y.
+   * @param x posisi x.
+   * @param y posisi y.
+   * @return mapObject yang berupa item.
+   */
 
   public MapObject searchItem(int x, int y) {
     int i;
-    int absis;
-    int ordinat;
     i = 0;
+    int absis;
     absis = arrayObject[i].getAbsis();
+    int ordinat;
     ordinat = arrayObject[i].getOrdinat();
-    while ((i < countObject) && ((absis != x) || (ordinat != y) || (arrayObject[i].getObjectType() != "Item"))) {
+    String objectType;
+    objectType = arrayObject[i].getObjectType();
+    while ((i < countObject) && ((absis != x) || (ordinat != y) || (objectType != "Item"))) {
       i = i + 1;
       if (i < countObject) {
         absis = arrayObject[i].getAbsis();
         ordinat = arrayObject[i].getOrdinat();
+        objectType = arrayObject[i].getObjectType();
       }
     }
     return (arrayObject[i]);

@@ -27,5 +27,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="java-json" level="project" />
+    <orderEntry type="library" exported="" name="json_simple" level="project" />
   </component>
 </module>

@@ -5,18 +5,25 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import object.MapObject;
-import object.Unit;
-import object.item.Item;
 
 /**
  * Created by Finiko on 4/19/2017.
+ * NIM : 13515029.
+ * File : MapObjectDrawer.java
  */
 public class MapObjectDrawer extends JPanel {
-  private int absis;
-  private int ordinat;
-  private BufferedImage image;
+  /** posisi X.
+   */
 
+  private int absis;
+  /** posisi Y.
+   */
+
+  private int ordinat;
+  /** image dari object.
+   */
+
+  private BufferedImage image;
   /** constructor.
    * @param type masukkan object input.
    */
@@ -42,7 +49,6 @@ public class MapObjectDrawer extends JPanel {
       System.out.println("Error:" + ie.getMessage());
     }
   }
-
   /** menggambar graphics g.
    * @param g masukkan graphics.
    */
@@ -50,7 +56,6 @@ public class MapObjectDrawer extends JPanel {
   public void paint(Graphics g) {
     g.drawImage(image, absis, ordinat, null);
   }
-
   /** getter image.
    * @return image
    */

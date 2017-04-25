@@ -1,31 +1,86 @@
 package menu;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 /**
  * Created by Finiko on 4/24/2017.
+ * NIM : 13515029.
+ * File : MenuViewer.java
  */
-public class MenuViewer extends JPanel{
-  private JLayeredPane menuPanel;
-  private JLayeredPane backgroundPanel;
-  private JButton playButton;
-  private JButton exitButton;
-  private GridBagConstraints batasan;
-  private GridBagLayout menuLayout;
-  private GridBagLayout backgroundLayout;
-  private JLayeredPane content;
-  private JComboBox playerBox;
-  private JLabel background;
-  private int inputPlayer;
-  private int map;
-  private JComboBox mapBox;
-  private BufferedImage image;
+public class MenuViewer extends JPanel {
+  /** Layer Panel untuk menu.
+   */
 
-  public MenuViewer () {
+  private JLayeredPane menuPanel;
+  /** Layer panel untuk background.
+   */
+
+  private JLayeredPane backgroundPanel;
+  /** Button untuk tombol play.
+   */
+
+  private JButton playButton;
+  /** Button untuk tombol exit.
+   */
+
+  private JButton exitButton;
+  /** batasan untuk layout.
+   */
+
+  private GridBagConstraints batasan;
+  /** layout untuk menu.
+   */
+
+  private GridBagLayout menuLayout;
+  /** layout untuk background.
+   */
+
+  private GridBagLayout backgroundLayout;
+  /** layeredPanel untuk content.
+   */
+
+  private JLayeredPane content;
+  /** comboBox untuk player.
+   */
+
+  private JComboBox playerBox;
+  /** label untuk background.
+   */
+
+  private JLabel background;
+  /** input masukkan player dari playerBox.
+   */
+
+  private int inputPlayer;
+  /** input masukkan map dari mapBox.
+   */
+
+  private int map;
+  /** combo box untuk pilihan map.
+   */
+
+  private JComboBox mapBox;
+  /** image untuk background.
+   */
+
+  private BufferedImage image;
+  /** Constructor tanpa parameter.
+   */
+
+  public MenuViewer() {
     batasan = new GridBagConstraints();
     menuLayout = new GridBagLayout();
     backgroundLayout = new GridBagLayout();
@@ -50,15 +105,19 @@ public class MenuViewer extends JPanel{
     backgroundLayout.setConstraints(menuPanel,batasan);
     content.setLayer(menuPanel,new Integer(1),0);
   }
+  /** Menampilkan pada frame.
+   */
+
   public void menuShow() {
     JFrame frame = new JFrame("ZAFF");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(content);
-    //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    //frame.setUndecorated(true);
     frame.pack();
     frame.setVisible(true);
   }
+  /** melakukan build pada pilihan jumlah player.
+   */
+
   public void buildPilihanJumlah() {
     JLabel playerLabel;
     playerLabel = new JLabel("PLAYERS : ");
@@ -81,6 +140,9 @@ public class MenuViewer extends JPanel{
     menuPanel.add(playerBox);
     menuPanel.setLayer(playerBox,new Integer(1),0);
   }
+  /** melakukan build pada pilihan map.
+   */
+
   public void buildPilihanMap() {
     JLabel mapLabel;
     mapLabel = new JLabel("MAP :");
@@ -102,6 +164,9 @@ public class MenuViewer extends JPanel{
     menuPanel.add(mapBox);
     menuPanel.setLayer(mapBox,new Integer(1),0);
   }
+  /** melakukan build pada playButton.
+   */
+
   public void buildPlayButton() {
     playButton = new JButton("PLAY");
     playButton.setFont(new Font("Arial",Font.PLAIN,30));
@@ -112,6 +177,9 @@ public class MenuViewer extends JPanel{
     menuPanel.add(playButton);
     menuPanel.setLayer(playButton,new Integer(1),0);
   }
+  /** melakukan build pada exitButton.
+   */
+
   public void buildExitButton() {
     exitButton = new JButton("EXIT");
     exitButton.setFont(new Font("Arial",Font.PLAIN,30));
@@ -122,6 +190,9 @@ public class MenuViewer extends JPanel{
     menuPanel.add(exitButton);
     menuPanel.setLayer(exitButton,new Integer(1),0);
   }
+  /** melakukan build pada background.
+   */
+
   public void buildBackground() {
     try {
       batasan.gridx = 0;
@@ -131,22 +202,34 @@ public class MenuViewer extends JPanel{
       backgroundLayout.setConstraints(background,batasan);
       backgroundPanel.add(background);
       backgroundPanel.setLayer(background,new Integer(0),0);
-    } catch (IOException ie){
+    } catch (IOException ie) {
       System.out.println("Error:" + ie.getMessage());
     }
   }
+  /** getter untuk inputPlayer.
+   */
+
   public int getInputPlayer() {
     inputPlayer = (int) playerBox.getSelectedItem();
     return (inputPlayer);
   }
+  /** getter untuk map.
+   */
+
   public int getMap() {
     map = (int) mapBox.getSelectedItem();
     return (map);
   }
+  /** getter untuk playButton.
+   */
+
   public JButton getPlayButton() {
-    return(playButton);
+    return (playButton);
   }
+  /** getter untuk exitButton.
+   */
+
   public JButton getExitButton() {
-    return(exitButton);
+    return (exitButton);
   }
 }

@@ -6,17 +6,26 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import tile.Tile;
-
 /**
  * Created by Finiko on 4/15/2017.
+ * NIM : 13515029.
+ * File : TileDrawer.java
  */
 public class TileDrawer extends JPanel {
+  /** posisi X.
+   */
+
   private int absis;
+  /** posisi Y.
+   */
+
   private int ordinat;
+  /** image dari object.
+   */
+
   private BufferedImage image;
   /** constructor.
-   * @param inputTile masukkan tile
+   * @param type masukkan tipe
    */
 
   public TileDrawer(int type) {
@@ -36,7 +45,6 @@ public class TileDrawer extends JPanel {
       System.out.println("Error:" + ie.getMessage());
     }
   }
-
   /** menggambar tile.
    * @param g masukkan graphics
    */
