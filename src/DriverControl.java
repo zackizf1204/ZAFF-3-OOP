@@ -2,7 +2,6 @@ import controlmenu.MenuControl;
 import map.Map;
 import object.Unit;
 import object.item.Recovery;
-import timer.Clock;
 import view.command.AttackCommandView;
 import view.command.PickCommandView;
 import view.command.SkillCommandView;
