@@ -10,6 +10,9 @@ public abstract class MapObject {
   protected int ordinat;
   protected String objectType;
 
+  /**
+   * Konstuktor kelas MapObject.
+   */
   public MapObject() {
     absis = 0;
     ordinat = 0;
