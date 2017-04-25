@@ -133,19 +133,21 @@ public class Unit extends MapObject {
   }
 
   public void move(int i) {
-    assert mov > 0 : "Cannot Move";
-    if (i == 0) { //Move up
-      setOrdinat(getOrdinat() - 1);
-      remainingMov--;
-    } else if (i == 1) { //Move down
-      setOrdinat(getOrdinat() + 1);
-      remainingMov--;
-    } else if (i == 2) { //Move left
-      remainingMov--;
-      setAbsis(getAbsis() - 1);
-    } else if (i == 3) { //Move right
-      setAbsis(getAbsis() + 1);
-      remainingMov--;
+    assert remainingMov < 0 : "Cannot Move";
+    if(remainingMov>0) {
+      if (i == 0) { //Move up
+        setOrdinat(getOrdinat() - 1);
+        remainingMov--;
+      } else if (i == 1) { //Move down
+        setOrdinat(getOrdinat() + 1);
+        remainingMov--;
+      } else if (i == 2) { //Move left
+        remainingMov--;
+        setAbsis(getAbsis() - 1);
+      } else if (i == 3) { //Move right
+        setAbsis(getAbsis() + 1);
+        remainingMov--;
+      }
     }
   }
 

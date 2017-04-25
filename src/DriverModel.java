@@ -69,29 +69,26 @@ public class DriverModel {
     height = map.getTile(x, y).getHeight();
     if (i == 0) {
       if (y != 0) {
-        if (((map.getTile(x, y - 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x, y - 1))) {
+        if (((map.getTile(x, y - 1).getHeight() - height) <= listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y - 1).isPassable()) && (!adaPlayer(x, y - 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 1) {
       if (y != map.getSizeY() - 1) {
-        if (((map.getTile(x, y + 1).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x, y + 1))) {
+        if (((map.getTile(x, y + 1).getHeight() - height) <= listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x, y + 1).isPassable()) && (!adaPlayer(x, y + 1))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 2) {
       if (x != 0) {
-        if (((map.getTile(x - 1, y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1, y))) {
+        if (((map.getTile(x - 1, y).getHeight() - height) <= listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x - 1, y).isPassable()) && (!adaPlayer(x - 1, y))) {
           listPlayer[currentPlayer].getUnit(currentUnit).move(i);
         }
       }
     } else if (i == 3) {
       if (x != map.getSizeX() - 1) {
-        if (((map.getTile(x + 1, y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1, y))) {
-          if (x != map.getSizeX()) {
-            if (((map.getTile(x + 1, y).getHeight() - height) < listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1, y))) {
+        if (((map.getTile(x + 1, y).getHeight() - height) <= listPlayer[currentPlayer].getUnit(currentUnit).getJump()) && (map.getTile(x + 1, y).isPassable()) && (!adaPlayer(x + 1, y))) {
               listPlayer[currentPlayer].getUnit(currentUnit).move(i);
-            }
           }
         }
         int currentHeight;
@@ -104,7 +101,7 @@ public class DriverModel {
         }
       }
     }
-  }
+
   public void pick() {
     int x;
     int y;
