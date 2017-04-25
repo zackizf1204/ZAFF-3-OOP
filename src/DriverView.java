@@ -1,3 +1,4 @@
+
 import object.Player;
 import object.Unit;
 import object.item.Recovery;
@@ -71,7 +72,7 @@ public class DriverView {
     }
     playerPanel.setOpaque(false);
     endp.add(playerPanel,BorderLayout.LINE_START);
-
+    endp.setBackground(Color.blue);
 
     newp.add(cp,BorderLayout.PAGE_START);
     newp.add(endp,BorderLayout.PAGE_END);
@@ -85,15 +86,6 @@ public class DriverView {
 
   }
 
-  public void startTime() {
-    timer = new java.util.Timer();
-    cp.setTimerLabel(60);
-    timer.schedule(new UpdateUITask(), 0, 1000);
-  }
-
-  public void stopTime() {
-    timer.cancel();
-  }
 
   public void updateView(DriverModel model) {
     // setting nama player, ambil dari current player
@@ -137,7 +129,8 @@ public class DriverView {
   public String getTimer(){
     return cp.getTimerLabel();
   }
-  private class UpdateUITask extends TimerTask {
+
+/*  private class UpdateUITask extends TimerTask {
 
     int nSeconds = 60;
 
@@ -151,7 +144,7 @@ public class DriverView {
             timer.cancel();
           }
           //timeLabel.setText(String.valueOf(nSeconds--));
-          cp.setTimerLabel((nSeconds--));
+          //cp.setTimerLabel((nSeconds--));
         }
       });
     }
@@ -169,5 +162,5 @@ public class DriverView {
         //final DriverView clock = new DriverView(m);
       }
     });
-  }
+  }*/
 }

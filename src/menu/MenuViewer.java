@@ -65,7 +65,7 @@ public class MenuViewer extends JPanel{
     pilihanJumlah[0] = 2;
     pilihanJumlah[1] = 3;
     pilihanJumlah[2] = 4;
-    pilihanLabel = new JLabel("Jumlah Player : ");
+    pilihanLabel = new JLabel("<html><font color='yellow'>Jumlah Player : </font></html>");
     pilihanBox = new JComboBox(pilihanJumlah);
     batasan.gridx = 1;
     batasan.gridy = 0;

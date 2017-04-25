@@ -24,12 +24,12 @@ public class Map {
     sizeX = 15;
     sizeY = 20;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -43,12 +43,12 @@ public class Map {
     sizeX = inputSizeX;
     sizeY = inputSizeY;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -140,30 +140,6 @@ public class Map {
           i++;
         }
       }
-
-      /*
-      do {
-        absis = arrayObject[i].getAbsis();
-        ordinat = arrayObject[i].getOrdinat();
-        i = i + 1;
-      } while ((i < countObject) && ((absis != x) || (ordinat != y)));
-      /*
-      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-        i = i + 1;
-        if (i < countObject) {
-          System.out.println(i);
-          absis = arrayObject[i].getAbsis();
-          ordinat = arrayObject[i].getOrdinat();
-        }
-      }
-      if (i >= countObject) {
-        return (false);
-      } else {
-        return ((absis == x) && (ordinat == y));
-      }
-    } else {
-      return (false);
-      */
     }
     return found;
   }
