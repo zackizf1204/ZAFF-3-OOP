@@ -19,7 +19,7 @@ public class AttackCommandView extends CommandView {
   public AttackCommandView() {
     super();
     try {
-      Image img = ImageIO.read(getClass().getResource("../../assets/attackbutton.png"));
+      Image img = ImageIO.read(getClass().getResource("../../assets/attackbutton_2.png"));
       setIcon(new ImageIcon(img));
     } catch (Exception e) {
       System.out.println(e);

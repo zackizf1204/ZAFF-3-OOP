@@ -17,7 +17,7 @@ public class WaitCommandView extends CommandView {
   public WaitCommandView() {
     super();
     try {
-      Image img = ImageIO.read(getClass().getResource("../../assets/waitbutton.png"));
+      Image img = ImageIO.read(getClass().getResource("../../assets/waitbutton_2.png"));
       setIcon(new ImageIcon(img));
     } catch (Exception e) {
       System.out.println(e);

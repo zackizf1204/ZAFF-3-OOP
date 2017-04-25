@@ -19,7 +19,7 @@ public class PickCommandView extends CommandView {
   public PickCommandView() {
     super();
     try {
-      Image img = ImageIO.read(getClass().getResource("../../assets/pickbutton.png"));
+      Image img = ImageIO.read(getClass().getResource("../../assets/pickbutton_2.png"));
       setIcon(new ImageIcon(img));
     } catch (Exception e) {
       System.out.println(e);

@@ -82,24 +82,11 @@ public class DriverControl {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/skillbuttononhover.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/skillbutton.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
     }
   };
   private MouseListener attackListener = new MouseListener() {
@@ -139,24 +126,12 @@ public class DriverControl {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/attackbuttononhover.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/attackbutton.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
+
     }
   };
   private MouseListener pickListener = new MouseListener() {
@@ -181,26 +156,12 @@ public class DriverControl {
     }
 
     public void mouseEntered(MouseEvent e) {
-      if (view.getPick().isEnabled()) {
-        JButton c = (JButton) e.getComponent();
-        try {
-          Image img = ImageIO.read(getClass().getResource("assets/pickbuttononhover.png"));
-          c.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-          System.out.println(ex);
-        }
-      }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/pickbutton.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
+
     }
   };
   private MouseListener waitListener = new MouseListener() {
@@ -225,26 +186,12 @@ public class DriverControl {
     }
 
     public void mouseEntered(MouseEvent e) {
-      if (view.getWait().isEnabled()) {
-        JButton c = (JButton) e.getComponent();
-        try {
-          Image img = ImageIO.read(getClass().getResource("assets/waitbuttononhover.png"));
-          c.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-          System.out.println(ex);
-        }
-      }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-      JButton c = (JButton) e.getComponent();
-      try {
-        Image img = ImageIO.read(getClass().getResource("assets/waitbutton.png"));
-        c.setIcon(new ImageIcon(img));
-      } catch (Exception ex) {
-        System.out.println(ex);
-      }
+
     }
   };
 
