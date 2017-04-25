@@ -41,7 +41,6 @@ public class Map {
         if (x == 0) {
           inputType = 1;
         }
-        System.out.print(inputType);
         dataTiles[ite][j] = new Tile(x,inputType,ite,j);
       }
       //System.out.println(y);

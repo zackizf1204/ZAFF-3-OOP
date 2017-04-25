@@ -40,7 +40,9 @@ public class DriverControl {
           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
           stringArray[0]);
       Object string2[] = {"Skill 1", "Skill 2", "Skill 3"};
-      int j =       JOptionPane.showOptionDialog(view.getMv(), "Pilih nomor skill", "Select an Option",
+      String str = new String ("Skill 1 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(1) + "\nSkill 2 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(2) + "\nSkill 3 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(3));
+
+      int j =       JOptionPane.showOptionDialog(view.getMv(), str, "Select an Option",
           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, string2,
           string2[0]);
       model.skill(i,j+1);

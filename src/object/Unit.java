@@ -128,6 +128,10 @@ public class Unit extends MapObject {
     }
   }
 
+  public int getType() {
+    return type;
+  }
+
   public void move(int i) {
     assert remainingMov < 0 : "Cannot Move";
     if (remainingMov > 0) {
