@@ -114,11 +114,12 @@ public class Unit extends MapObject {
   public void attack(Unit target) {
     Random rand = new Random();
     int n = rand.nextInt(100) + 1;
-    if (n <= (target.agi * 2)) {
-      //Attack Miss;
-    } else {
-      n = rand.nextInt(5) + 7;
-      target.currentHp = target.currentHp - (strength * n / 10);
+      //System.out.println("KKKK");
+      if (n <= (target.agi * 2)) {
+        //Attack Miss;
+      } else {
+        n = rand.nextInt(5) + 7;
+        target.currentHp = target.currentHp - (strength * n / 10);
     }
   }
 

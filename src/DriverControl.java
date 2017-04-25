@@ -34,34 +34,22 @@ public class DriverControl {
     public void mouseClicked(MouseEvent e) {
       view.getSkill().setFocusable(true);
       view.getSkill().requestFocusInWindow();
-      view.getSkill().addKeyListener(new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-      }
+      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah", "Aing" };
+      Icon blueIcon = new ImageIcon("assets/item/item.png");
+      int i =       JOptionPane.showOptionDialog(view.getMv(), "Pilih arah serangan", "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
+          stringArray[0]);
+      Object string2[] = {"Skill 1", "Skill 2", "Skill 3"};
+      int j =       JOptionPane.showOptionDialog(view.getMv(), "Pilih nomor skill", "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, string2,
+          string2[0]);
+      model.skill(i,j+1);
+      view.updateView(model);
+      interrupted = true;
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
 
-      @Override
-      public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-          model.skill(2,1);
-        } else if (e.getKeyCode() == KeyEvent.VK_A) {
-          model.skill(0,1);
-        } else if (e.getKeyCode() == KeyEvent.VK_S) {
-          model.skill(3,1);
-        } else if (e.getKeyCode() == KeyEvent.VK_D) {
-          model.skill(1,1);
-        }
-        view.stopTime();
-        view.updateView(model);
-        view.startTime();
-        MapViewer mv = view.getMv();
-        mv.setFocusable(true);
-        mv.requestFocusInWindow();
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-      }
-    });
 
     }
 
@@ -100,15 +88,28 @@ public class DriverControl {
   private MouseListener attackListener = new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
+
       view.getAttack().setFocusable(true);
       view.getAttack().requestFocusInWindow();
-      view.getAttack().addKeyListener(new KeyListener() {
+      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah" };
+      Icon blueIcon = new ImageIcon("assets/item/item.png");
+      int i =       JOptionPane.showOptionDialog(view.getMv(), "Pilih arah serangan", "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
+          stringArray[0]);
+      model.attack(i);
+      view.updateView(model);
+      interrupted = true;
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
+      /*view.getAttack().addKeyListener(new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
+          System.out.println("EXEC");
           if (e.getKeyCode() == KeyEvent.VK_W) {
             model.attack(2);
           } else if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -118,9 +119,8 @@ public class DriverControl {
           } else if (e.getKeyCode() == KeyEvent.VK_D) {
             model.attack(1);
           }
-          view.stopTime();
           view.updateView(model);
-          view.startTime();
+          interrupted = true;
           MapViewer mv = view.getMv();
           mv.setFocusable(true);
           mv.requestFocusInWindow();
@@ -130,7 +130,7 @@ public class DriverControl {
         public void keyReleased(KeyEvent e) {
         }
       });
-
+*/
     }
 
     @Override
@@ -142,6 +142,7 @@ public class DriverControl {
       view.getAttack().setBackground(new Color(0, 0, 0, 0));
     }
 
+
     @Override
     public void mouseEntered(MouseEvent e) {
       JButton c = (JButton) e.getComponent();
@@ -151,8 +152,6 @@ public class DriverControl {
       } catch (Exception ex) {
         System.out.println(ex);
       }
-      view.getAttack().setBorderPainted(false);
-      view.getAttack().setBackground(new Color(0, 0, 0, 0));
     }
 
     @Override
@@ -164,8 +163,6 @@ public class DriverControl {
       } catch (Exception ex) {
         System.out.println(ex);
       }
-      view.getAttack().setBorderPainted(false);
-      view.getAttack().setBackground(new Color(0, 0, 0, 0));
     }
 
     ;
@@ -174,9 +171,8 @@ public class DriverControl {
     @Override
     public void mouseClicked(MouseEvent e) {
       model.pick();
-      view.stopTime();
+      interrupted = true;
       view.updateView(model);
-      view.startTime();
       MapViewer mv = view.getMv();
       mv.setFocusable(true);
       mv.requestFocusInWindow();
@@ -219,9 +215,8 @@ public class DriverControl {
     @Override
     public void mouseClicked(MouseEvent e) {
       model.recov();
-      view.stopTime();
+      interrupted = true;
       view.updateView(model);
-      view.startTime();
       MapViewer mv = view.getMv();
       mv.setFocusable(true);
       mv.requestFocusInWindow();
@@ -260,6 +255,7 @@ public class DriverControl {
       }
     }
   };
+  private boolean interrupted = false;
 
   public DriverControl() {
     model = new DriverModel(4);
@@ -275,8 +271,6 @@ public class DriverControl {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-
-
         view.getMv().setListPlayer(model.getListPlayer());
         view.getMv().setCountPlayer(model.getCountPlayer());
         for (int i = 0; i < model.getCountPlayer(); i++) {
@@ -302,28 +296,29 @@ public class DriverControl {
           TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+
+              if (interrupted) {
+                interrupted = false;
+                counter = 60;
+              }
               if(counter<0) {
                 counter = 60;
                 model.changePlayer();
-                view.stopTime();
-                view.startTime();
                 MapViewer mv = view.getMv();
                 mv.setFocusable(true);
                 mv.requestFocusInWindow();
               } else {
                 counter--;
               }
+              view.getCp().setTimerLabel(counter);
             }
           };
         Timer timer = new Timer("MyTimer");
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
         //this line starts the timer at the same time its executed.
-        view.startTime();
-
       }
     });
   }
-
 
   public void playAgain() {
     MapViewer mv = view.getMv();
