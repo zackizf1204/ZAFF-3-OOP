@@ -189,4 +189,21 @@ public class Map {
     }
     return (arrayObject[i]);
   }
+
+  public MapObject searchItem(int x, int y) {
+    int i;
+    int absis;
+    int ordinat;
+    i = 0;
+    absis = arrayObject[i].getAbsis();
+    ordinat = arrayObject[i].getOrdinat();
+    while ((i < countObject) && ((absis != x) || (ordinat != y) || (arrayObject[i].getObjectType() != "Item"))) {
+      i = i + 1;
+      if (i < countObject) {
+        absis = arrayObject[i].getAbsis();
+        ordinat = arrayObject[i].getOrdinat();
+      }
+    }
+    return (arrayObject[i]);
+  }
 }

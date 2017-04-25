@@ -261,7 +261,7 @@ public class DriverModel {
     if (map.adaObject(x,y)) {
       try {
         return (
-            (Item) (map.searchObject(x, y)));
+            (Item) (map.searchItem(x, y)));
       }catch (ClassCastException a) {
         System.out.println("Tidak ada item");
       }
