@@ -18,10 +18,19 @@ public abstract class MapObject {
     ordinat = 0;
   }
 
+  /**
+   * Konstuktor kelas MapObject dengan parameter.
+   */
+
   public MapObject(int absis, int ordinat) {
     this.absis = absis;
     this.ordinat = ordinat;
   }
+
+  /**
+   * Getter objectType.
+   * @return objectType Tipe objek.
+   */
 
   public String getObjectType() {
     return objectType;
