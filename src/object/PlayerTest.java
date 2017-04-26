@@ -1,8 +1,8 @@
 package object;
 
-import org.junit.jupiter.api.Test;
+import static junit.framework.TestCase.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by user on 26-Apr-17.
@@ -16,7 +16,7 @@ class PlayerTest {
   }
 
   @Test
-  void checkAddUnit(){
+  void checkAddUnit() {
     test.addUnit(1);
     assertTrue(true);
   }

@@ -162,6 +162,10 @@ public class Unit extends MapObject {
     }
   }
 
+  public int getType() {
+    return type;
+  }
+
   /**
    * menggunakan skill ke-i dengan target sebuah unit.
    * @param i skill yang ingin digunakan.

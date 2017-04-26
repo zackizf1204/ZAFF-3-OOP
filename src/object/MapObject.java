@@ -19,7 +19,9 @@ public abstract class MapObject {
   }
 
   /**
-   * Konstuktor kelas MapObject dengan parameter.
+   * Konstruktor kelas MapObject dengan parameter.
+   * @param absis x
+   * @param ordinat y
    */
 
   public MapObject(int absis, int ordinat) {
