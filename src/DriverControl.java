@@ -1,3 +1,4 @@
+import controlmenu.MenuControl;
 import map.Map;
 import object.Unit;
 import object.item.Recovery;
@@ -10,13 +11,16 @@ import view.map.MapViewer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -26,10 +30,240 @@ import java.util.*;
 public class DriverControl {
   private DriverView view;
   private DriverModel model;
+  private static int counter = 60;
   private java.util.Timer timer = new java.util.Timer();
+  private MouseListener skillListener = new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      view.getSkill().setFocusable(true);
+      view.getSkill().requestFocusInWindow();
+      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah", "Aing" };
+      Icon blueIcon = new ImageIcon("assets/item/item.png");
+      int i =       JOptionPane.showOptionDialog(view.getMv(), "Pilih arah serangan", "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
+          stringArray[0]);
+      Object string2[] = {"Skill 1", "Skill 2", "Skill 3"};
+      String str = new String ("Skill 1 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(1) + "\nSkill 2 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(2) + "\nSkill 3 : " + model.getCurrentPlayer().getUnit(0).getSkillDescription(3));
 
-  public DriverControl() {
-    model = new DriverModel(4);
+      int j =       JOptionPane.showOptionDialog(view.getMv(), str, "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, string2,
+          string2[0]);
+      model.skill(i,j+1);
+      view.updateView(model);
+      interrupted = true;
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
+
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/skillhover_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/skillbutton_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+  };
+  private MouseListener attackListener = new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+      view.getAttack().setFocusable(true);
+      view.getAttack().requestFocusInWindow();
+      Object stringArray[] = { "Kiri", "Kanan","Atas","Bawah" };
+      Icon blueIcon = new ImageIcon("assets/item/item.png");
+      int i =       JOptionPane.showOptionDialog(view.getMv(), "Pilih arah serangan", "Select an Option",
+          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, blueIcon, stringArray,
+          stringArray[0]);
+      model.attack(i);
+      view.updateView(model);
+      interrupted = true;
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
+      /*view.getAttack().addKeyListener(new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+          System.out.println("EXEC");
+          if (e.getKeyCode() == KeyEvent.VK_W) {
+            model.attack(2);
+          } else if (e.getKeyCode() == KeyEvent.VK_A) {
+            model.attack(0);
+          } else if (e.getKeyCode() == KeyEvent.VK_S) {
+            model.attack(3);
+          } else if (e.getKeyCode() == KeyEvent.VK_D) {
+            model.attack(1);
+          }
+          view.updateView(model);
+          interrupted = true;
+          MapViewer mv = view.getMv();
+          mv.setFocusable(true);
+          mv.requestFocusInWindow();
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        }
+      });
+*/
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+      view.getAttack().setBackground(new Color(0, 0, 0, 0));
+    }
+
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/attackhover_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/attackbutton_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+
+    ;
+  };
+  private MouseListener pickListener = new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      model.pick();
+      interrupted = true;
+      view.updateView(model);
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+      if (view.getPick().isEnabled()) {
+        JButton c = (JButton) e.getComponent();
+        try {
+          Image img = ImageIO.read(getClass().getResource("assets/pickhover_2.png"));
+          c.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+          System.out.println(ex);
+        }
+      }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/pickbutton_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+  };
+  private MouseListener waitListener = new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      model.recov();
+      interrupted = true;
+      view.updateView(model);
+      MapViewer mv = view.getMv();
+      mv.setFocusable(true);
+      mv.requestFocusInWindow();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+      if (view.getWait().isEnabled()) {
+        JButton c = (JButton) e.getComponent();
+        try {
+          Image img = ImageIO.read(getClass().getResource("assets/waithover_2.png"));
+          c.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+          System.out.println(ex);
+        }
+      }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+      JButton c = (JButton) e.getComponent();
+      try {
+        Image img = ImageIO.read(getClass().getResource("assets/waitbutton_2.png"));
+        c.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+        System.out.println(ex);
+      }
+    }
+  };
+  private boolean interrupted = false;
+
+  public DriverControl(int a, int nomorMap) {
+    model = new DriverModel(a, nomorMap);
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
@@ -38,234 +272,60 @@ public class DriverControl {
     });
   }
 
-  public void runGame(){
+  public void runGame() {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        int counter = 15;
-
         view.getMv().setListPlayer(model.getListPlayer());
         view.getMv().setCountPlayer(model.getCountPlayer());
-        for (int i = 0; i < model.getCountPlayer(); i++) {
-          model.getMap().setMapObject(i,model.getPlayer(i).getUnit(0));
-        }
 
         view.updateView(model);
-        //while (counter > 0) {
-        AttackCommandView attack = view.getAttack();
-        attack.addMouseListener(new MouseListener() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
-            //tunggu biji
-            attack.addKeyListener(new KeyListener() {
-              @Override
-              public void keyTyped(KeyEvent e) {
-              }
+          // remove semua actionlistener
+          view.getAttack().removeMouseListener(attackListener);
+          view.getPick().removeMouseListener(pickListener);
+          view.getWait().removeMouseListener(waitListener);
+          view.getSkill().removeMouseListener(skillListener);
+          AttackCommandView attack = view.getAttack();
+          attack.addMouseListener(attackListener);
+          playAgain();
+          PickCommandView pick = view.getPick();
+          pick.addMouseListener(pickListener);
+          WaitCommandView wait = view.getWait();
+          wait.addMouseListener(waitListener);
+          SkillCommandView skill = view.getSkill();
+          skill.addMouseListener(skillListener);
+          //run si jaki
+          TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
 
-              @Override
-              public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_W) {
-                  model.attack(0);
-                } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                  model.attack(2);
-                } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                  model.attack(1);
-                } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                  model.attack(3);
-                }
+              if (interrupted) {
+                interrupted = false;
+                counter = 60;
+              }
+              if(counter<0) {
+                counter = 60;
                 model.changePlayer();
-                view.updateView(model);
-                view.startTime();
+                MapViewer mv = view.getMv();
+                mv.setFocusable(true);
+                mv.requestFocusInWindow();
+              } else {
+                counter--;
               }
-
-              @Override
-              public void keyReleased(KeyEvent e) {
-
-              }
-            });
-            //model.attack();
-            //model.changePlayer();
-
-          }
-
-          @Override
-          public void mousePressed(MouseEvent e) {
-          }
-
-          @Override
-          public void mouseReleased(MouseEvent e) {
-            attack.setBackground(new Color(0,0,0,0));
-          }
-
-          @Override
-          public void mouseEntered(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/attackbuttononhover.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
+              view.getCp().setTimerLabel(counter);
             }
-            attack.setBorderPainted(false);
-            attack.setBackground(new Color(0,0,0,0));
-          }
-
-          @Override
-          public void mouseExited(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/attackbutton.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-            attack.setBorderPainted(false);
-            attack.setBackground(new Color(0,0,0,0));
-          }
-        });
-        playAgain();
-        PickCommandView pick = view.getPick();
-        pick.addMouseListener(new MouseListener() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
-            //model.pick();
-            //model.changePlayer();
-          }
-
-          @Override
-          public void mousePressed(MouseEvent e) {
-
-          }
-
-          @Override
-          public void mouseReleased(MouseEvent e) {
-
-          }
-
-          public void mouseEntered(MouseEvent e) {
-            if (pick.isEnabled()) {
-              JButton c = (JButton) e.getComponent();
-              try {
-                Image img = ImageIO.read(getClass().getResource("assets/pickbuttononhover.png"));
-                c.setIcon(new ImageIcon(img));
-              } catch (Exception ex) {
-                System.out.println(ex);
-              }
-            }
-          }
-
-          @Override
-          public void mouseExited(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/pickbutton.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-          }
-        });
-        WaitCommandView wait = view.getWait();
-        wait.addMouseListener(new MouseListener() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
-            model.recov();
-            view.stopTime();
-            view = new DriverView(model);
-            view.updateView(model);
-            view.startTime();
-            playAgain();
-          }
-
-          @Override
-          public void mousePressed(MouseEvent e) {
-
-          }
-
-          @Override
-          public void mouseReleased(MouseEvent e) {
-
-          }
-
-          public void mouseEntered(MouseEvent e) {
-            if (wait.isEnabled()) {
-              JButton c = (JButton) e.getComponent();
-              try {
-                Image img = ImageIO.read(getClass().getResource("assets/waitbuttononhover.png"));
-                c.setIcon(new ImageIcon(img));
-              } catch (Exception ex) {
-                System.out.println(ex);
-              }
-              wait.setBorderPainted(false);
-              wait.setBackground(new Color(0, 0, 0, 0));
-            }
-          }
-
-          @Override
-          public void mouseExited(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/waitbutton.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-            wait.setBorderPainted(false);
-            wait.setBackground(new Color(0, 0, 0, 0));
-          }
-        });
-        SkillCommandView skill = view.getSkill();
-        skill.addMouseListener(new MouseListener() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
-            //attackPlayer(Player1, Player2)
-            view.getMv().setFocusable(true);
-            view.getMv().requestFocusInWindow();
-          }
-
-          @Override
-          public void mousePressed(MouseEvent e) {
-
-          }
-
-          @Override
-          public void mouseReleased(MouseEvent e) {
-
-          }
-
-          @Override
-          public void mouseEntered(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/skillbuttononhover.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-          }
-
-          @Override
-          public void mouseExited(MouseEvent e) {
-            JButton c = (JButton) e.getComponent();
-            try {
-              Image img = ImageIO.read(getClass().getResource("assets/skillbutton.png"));
-              c.setIcon(new ImageIcon(img));
-            } catch (Exception ex) {
-              System.out.println(ex);
-            }
-          }
-        });
-        //run si jaki
-        view.startTime();
+          };
+        Timer timer = new Timer("MyTimer");
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);
+        //this line starts the timer at the same time its executed.
       }
     });
   }
 
-  public void playAgain(){
+  public void playAgain() {
     MapViewer mv = view.getMv();
     mv.setFocusable(true);
     mv.requestFocusInWindow();
-    System.out.println("LLLLLLLLL");
     mv.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
@@ -275,21 +335,16 @@ public class DriverControl {
       @Override
       public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
-          model.move(0);
-          view.getCp().setTimerLabel(9);
-          view.updateView(model);
-
-        } else if (e.getKeyCode() == KeyEvent.VK_A) {
           model.move(2);
-          view.getCp().setTimerLabel(9);
+          view.updateView(model);
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
+          model.move(0);
           view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
-          model.move(1);
-          view.getCp().setTimerLabel(9);
+          model.move(3);
           view.updateView(model);
         } else if (e.getKeyCode() == KeyEvent.VK_D) {
-          model.move(3);
-          view.getCp().setTimerLabel(9);
+          model.move(1);
           view.updateView(model);
         }
       }
@@ -301,8 +356,13 @@ public class DriverControl {
     });
   }
 
-  public static void main(String[] args) {
-    DriverControl ctrl = new DriverControl();
+  public static void main(String[] args) throws InterruptedException {
+    MenuControl mv = new MenuControl();
+    mv.controlMenu();
+    while(mv.isInput()==false) {
+      sleep(10);
+    }
+    DriverControl ctrl = new DriverControl(mv.getJumlahPlayer(),mv.getMap());
     ctrl.runGame();
   }
 }
