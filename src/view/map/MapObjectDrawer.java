@@ -24,7 +24,7 @@ public class MapObjectDrawer extends JPanel {
     ordinat = inputObject.getOrdinat();
     try {
       if (inputObject.getObjectType() == "Unit") {
-        image = ImageIO.read(getClass().getResource("../../assets/unit/monk_down.gif"));
+        image = ImageIO.read(getClass().getResource("../../assets/unit/monk_down_walking.gif"));
       } else {
         image = ImageIO.read(getClass().getResource("../../assets/item/item.png"));
       }

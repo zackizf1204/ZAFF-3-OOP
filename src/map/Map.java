@@ -2,6 +2,11 @@ package map;
 
 import object.MapObject;
 import tile.Tile;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
 
 /**
  * Created by Finiko on 4/13/2017.
@@ -24,7 +29,7 @@ public class Map {
     int j;
     for (i = 0; i < sizeY; i++) {
       for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -43,7 +48,7 @@ public class Map {
     int j;
     for (i = 0; i < sizeY; i++) {
       for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -122,19 +127,23 @@ public class Map {
     int absis;
     int ordinat;
     i = 0;
-    absis = arrayObject[i].getAbsis();
-    ordinat = arrayObject[i].getOrdinat();
-    while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-      i = i + 1;
-      if (i < countObject) {
-        absis = arrayObject[i].getAbsis();
-        ordinat = arrayObject[i].getOrdinat();
+    if (countObject > 0) {
+      absis = arrayObject[i].getAbsis();
+      ordinat = arrayObject[i].getOrdinat();
+      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
+        i = i + 1;
+        if (i < countObject) {
+          absis = arrayObject[i].getAbsis();
+          ordinat = arrayObject[i].getOrdinat();
+        }
       }
-    }
-    if (i >= countObject) {
-      return (false);
+      if (i >= countObject) {
+        return (false);
+      } else {
+        return ((absis == x) && (ordinat == y));
+      }
     } else {
-      return ((absis == x) && (ordinat == y));
+      return (false);
     }
   }
   /** mencari dan mengembalikan MapObject di posisi x dan y.
@@ -158,5 +167,20 @@ public class Map {
       }
     }
     return (arrayObject[i]);
+  }
+
+  public void loadMap() {
+    JSONParser parser = new JSONParser();
+    try {
+      JSONObject object = (JSONObject) parser.parse(new FileReader("../../json/map_1.json"));
+      sizeX = (int) object.get("sizeX");
+      sizeY = (int) object.get("sizeY");
+      dataTiles = (Tile[][]) object.get("mapTile");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  public int getCountObject () {
+    return (countObject);
   }
 }

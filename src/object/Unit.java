@@ -2,6 +2,10 @@ package object;
 
 import java.util.Random;
 
+import object.item.Item;
+import object.item.PowerUp;
+import object.item.Recovery;
+
 /**
  * Created by Fathur on 13-Apr-17.
  * NIM : 13515068
@@ -18,9 +22,9 @@ public class Unit extends MapObject {
   private int agi;
   private final int type;
 
-  public Unit(){
+  public Unit() {
     super();
-    setObjectType("Unit");
+    setObjectType();
     maxHp = 100;
     maxMp = 50;
     currentHp = 100;
@@ -29,24 +33,12 @@ public class Unit extends MapObject {
     intelligence = 10;
     mov = 5;
     agi = 10;
-    type = 0;
+    type = 4;
   }
 
-  public Unit(int mhp, int mmp, int strength, int intelligence, int mov, int agi, int absis,int ordinat,int type){
-    super(absis,ordinat);
-    setObjectType("Unit");
-    maxHp = mhp;
-    maxMp = mmp;
-    this.strength = strength;
-    this.intelligence = intelligence;
-    this.mov = mov;
-    this.agi = agi;
-    this.type = type;
-  }
-
-  public Unit(int type){
-    super();
-    setObjectType("Unit");
+  public Unit(int type,int x,int y) {
+    super(x,y);
+    setObjectType();
     if (type == 0) { //Type Attacker ?
       maxHp = 100;
       maxMp = 25;
@@ -57,8 +49,7 @@ public class Unit extends MapObject {
       mov = 5;
       agi = 7;
       this.type = 0;
-    }
-    else if (type == 1) { //Type Tank ?
+    } else if (type == 1) { //Type Tank ?
       maxHp = 200;
       maxMp = 40;
       currentHp = 200;
@@ -68,8 +59,7 @@ public class Unit extends MapObject {
       mov = 5;
       agi = 5;
       this.type = 1;
-    }
-    else if (type == 2) { //Type caster ?
+    } else if (type == 2) { //Type caster ?
       maxHp = 100;
       maxMp = 100;
       currentHp = 100;
@@ -79,8 +69,7 @@ public class Unit extends MapObject {
       mov = 5;
       agi = 3;
       this.type = 2;
-    }
-    else if (type == 3) { //Type runner ?
+    } else if (type == 3) { //Type runner ?
       maxHp = 150;
       maxMp = 30;
       currentHp = 150;
@@ -90,8 +79,7 @@ public class Unit extends MapObject {
       mov = 7;
       agi = 10;
       this.type = 3;
-    }
-    else{
+    } else { //default type
       maxHp = 100;
       maxMp = 50;
       currentHp = 100;
@@ -100,116 +88,256 @@ public class Unit extends MapObject {
       intelligence = 10;
       mov = 5;
       agi = 10;
-      this.type = 0;
+      this.type = 4;
     }
 
   }
 
-  public void Attack(Unit target){
+  public void attack(Unit target) {
     Random rand = new Random();
-    int n = rand.nextInt(100)+1;
-    if(n <= (target.agi*2)){
+    int n = rand.nextInt(100) + 1;
+    if (n <= (target.agi * 2)) {
       //Attack Miss;
-    }
-    else{
+    } else {
       n = rand.nextInt(5) + 7;
-      target.currentHp = target.currentHp - (strength*n/10);
+      target.currentHp = target.currentHp - (strength * n / 10);
     }
   }
 
-  public void Move(int i){
-    if(i == 0) { //Move up
-      super.setOrdinat(super.getOrdinat()+1);
-    }
-    else if (i == 1) { //Move down
-      super.setOrdinat(super.getOrdinat()-1);
-    }
-    else if (i == 2) { //Move left
-      super.setAbsis(super.getAbsis()+1);
-    }
-    else if (i == 3){ //Move left
-      super.setAbsis(super.getAbsis()-1);
+  public void move(int i) {
+    if (i == 0) { //Move up
+      setOrdinat(getOrdinat() - 1);
+    } else if (i == 1) { //Move down
+      setOrdinat(getOrdinat() + 1);
+    } else if (i == 2) { //Move left
+      setAbsis(getAbsis() - 1);
+    } else if (i == 3) { //Move right
+      setAbsis(getAbsis() + 1);
     }
   }
 
-  public void Skill(int i){
-    //Belum di pikir
+  public void skill(int i,Unit target) {
+    Random rand = new Random();
+    int n = rand.nextInt(5) + 7;
+    if (type == 0) {
+      if (i == 1) {
+        currentMp = currentMp - 5;
+        currentHp = currentHp - 10;
+        target.currentHp = target.currentHp - (3 * strength * n / 10);
+      } else if (i == 2) {
+        currentMp = currentMp - 15;
+        currentHp = currentHp - 30;
+        target.currentMp = target.currentHp - (5 * strength * n / 10);
+      } else if (i == 3) {
+        currentMp = currentMp - 10;
+        target.currentHp = target.currentHp - (3 * strength * n / 10);
+        addHp(3 * strength * n / 5);
+      }
+    }
+    if (type == 1) {
+      if (i == 1) {
+        currentMp = currentMp - 5;
+        target.currentHp = target.currentHp - (2 * strength * n / 10);
+      } else if (i == 2) {
+        addHp(currentMp * 5);
+        currentMp = 0;
+      } else if (i == 3) {
+        currentMp = currentMp - 10;
+        target.currentHp = target.currentMp - (2 * strength * n / 10);
+        addHp(2 * strength * n / 5);
+      }
+    }
+    if (type == 2) {
+      if (i == 1) {
+        currentMp = currentMp - 5;
+        target.currentHp = target.currentHp - (5 * intelligence * n / 10);
+      } else if (i == 2) {
+        currentMp = currentMp - 20;
+        target.currentHp = target.currentHp - (5 * intelligence * n / 10);
+        addMp(5 * intelligence * n / 20);
+      } else if (i == 3) {
+        addMp(currentHp);
+        currentHp = currentHp / 2;
+      }
+    }
+    if (type == 3) {
+      if (i == 1) {
+        currentMp = currentMp - 5;
+        target.currentHp = target.currentHp - (5 * strength * n / 20);
+      } else if (i == 2) {
+        currentMp = currentMp - 10;
+        target.currentHp = target.currentHp - (2 * strength * n / 10);
+        addHp(2 * strength * n / 20);
+      } else if (i == 3) {
+        currentMp = currentMp - 15;
+        target.currentHp = target.currentHp - (2 * strength * n / 10);
+        n = rand.nextInt(100);
+        if (n < 5) {
+          target.currentHp = 0;
+        }
+      }
+    }
   }
 
-  public void Wait(){
-    currentHp = currentHp + 20;
-    currentMp = currentMp + 10;
-    if (currentHp > maxHp)
-      currentHp = maxHp;
-    if (currentMp > maxMp)
-      currentMp = maxMp;
+  public void recov() {
+    addHp(20);
+    addMp(10);
   }
 
-  public void Pick(){
-    //Belum di pikir
+  public void pick(PowerUp pu) {
+    maxHp = maxHp + pu.getAddMaxHp();
+    maxMp = maxMp + pu.getAddMaxMp();
+    strength = strength + pu.getAddStrength();
+    intelligence = intelligence + pu.getAddIntelligence();
+    agi = agi + pu.getAddAgility();
+    mov = mov + pu.getAddMov();
   }
 
-  public void setMaxHp(int x){
+  public void pick(Recovery recov) {
+    addHp(recov.getAddHp());
+    addMp(recov.getAddMp());
+  }
+
+  public void pick(Item item) {
+    if (item instanceof PowerUp) {
+      PowerUp pu = (PowerUp) item;
+      maxHp = maxHp + pu.getAddMaxHp();
+      maxMp = maxMp + pu.getAddMaxMp();
+      strength = strength + pu.getAddStrength();
+      intelligence = intelligence + pu.getAddIntelligence();
+      agi = agi + pu.getAddAgility();
+      mov = mov + pu.getAddMov();
+    } else if (item instanceof Recovery) {
+      Recovery recov = (Recovery) item;
+      addHp(recov.getAddHp());
+      addMp(recov.getAddMp());
+    }
+  }
+  public void setMaxHp(int x) {
     maxHp = x;
   }
 
-  public void setMaxMp(int x){
+  public void setMaxMp(int x) {
     maxMp = x;
   }
 
-  public void setCurrentHp(int x){
+  public void setCurrentHp(int x) {
     currentHp = x;
   }
 
-  public void setCurrentMp(int x){
+  public void setCurrentMp(int x) {
     currentMp = x;
   }
 
-  public void setStrength(int x){
+  public void setStrength(int x) {
     strength = x;
   }
 
-  public void setIntelligence(int x){
+  public void setIntelligence(int x) {
     intelligence = x;
   }
 
-  public void setMov(int x){
+  public void setMov(int x) {
     mov = x;
   }
 
-  public void setAgi(int x){
+  public void setAgi(int x) {
     agi = x;
   }
 
-  public int getMaxHp(){
+  public int getMaxHp() {
     return maxHp;
   }
 
-  public int getMaxMp(){
+  public int getMaxMp() {
     return maxMp;
   }
 
-  public int getCurrentHp(){
+  public int getCurrentHp() {
     return currentHp;
   }
 
-  public int getCurrentMp(){
+  public int getCurrentMp() {
     return currentMp;
   }
 
-  public int getStrength(){
+  public int getStrength() {
     return strength;
   }
 
-  public int getIntelligence(){
+  public int getIntelligence() {
     return intelligence;
   }
 
-  public int getMov(){
+  public int getMov() {
     return mov;
   }
 
-  public int getAgi(){
+  public int getAgi() {
     return agi;
+  }
+
+  public void addHp(int x) {
+    currentHp = currentHp + x;
+    if (currentHp > maxHp) {
+      currentHp = maxHp;
+    }
+  }
+
+  public void addMp(int x) {
+    currentMp = currentMp + x;
+    if (currentMp > maxMp) {
+      currentMp = maxMp;
+    }
+  }
+
+  public void setObjectType(){
+    objectType = "Unit";
+  }
+
+  public boolean isReachable (Unit target) {
+    if ((getAbsis() == target.getAbsis()) && (getOrdinat() != target.getOrdinat())) {
+      return (((getOrdinat() - target.getOrdinat()) == -1) || ((getOrdinat() - target.getOrdinat()) == -1));
+    } else if ((getAbsis() != target.getAbsis()) && (getOrdinat() == target.getOrdinat())) {
+      return (((getAbsis() - target.getAbsis()) == -1) || ((getAbsis() - target.getAbsis()) == -1));
+    }
+    return false;
+  }
+
+  public boolean isSkillUsabale(int i) {
+    if (type == 0) {
+      if (i == 1) {
+        return ((currentHp > 10) && (currentMp >= 5));
+      } else if (i == 2) {
+        return ((currentHp > 30) && (currentMp >= 15));
+      } else if (i == 3) {
+        return (currentMp >= 10);
+      }
+    } else if (type == 1) {
+      if (i == 1) {
+        return (currentMp >= 5);
+      } else if (i == 2) {
+        return true;
+      } else if (i == 3) {
+        return (currentMp >= 10);
+      }
+    } else if (type == 2) {
+      if (i == 1) {
+        return (currentMp >= 5);
+      } else if (i == 2) {
+        return (currentMp >= 20);
+      } else if (i == 3) {
+        return true;
+      }
+    } else if (type == 3) {
+      if (i == 1) {
+        return (currentMp >= 5);
+      } else if (i == 2) {
+        return (currentMp >= 10);
+      } else if (i == 3) {
+        return (currentMp >= 15);
+      }
+    }
+    return false;
   }
 }

@@ -12,12 +12,12 @@ public class Item extends MapObject {
 
   public Item() {
     super();
-    super.setObjectType("Item");
+    setObjectType();
   }
 
   public Item(int inputX, int inputY) {
     super(inputX, inputY);
-    super.setObjectType("Item");
+    setObjectType();
   }
 
   public String getItemType() {
@@ -26,5 +26,9 @@ public class Item extends MapObject {
 
   public void setItemType(String itemType) {
     this.itemType = itemType;
+  }
+
+  public void setObjectType() {
+    objectType = "Item";
   }
 }

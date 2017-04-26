@@ -10,25 +10,36 @@ public class Player {
   private String playerName;
   int countUnit;
 
-  public Player(String input){
+  public Player(String input) {
     playerName = input;
     arrayUnit = new Unit [10];
     arrayUnit[0] = new Unit();
     countUnit = 1;
   }
 
-  public Player(String input,int type){
+  public Player(String input,int type,int x, int y) {
     playerName = input;
     arrayUnit = new Unit [10];
-    arrayUnit[0] = new Unit(type);
+    arrayUnit[0] = new Unit(type,x,y);
     countUnit = 1;
   }
 
-  public void addUnit(int type){
-    arrayUnit[countUnit] = new Unit(type);
+  public void addUnit(int type) {
+    assert countUnit <= 10 : "Unit Full";
+    arrayUnit[countUnit] = new Unit(type,0,0);
     countUnit++;
   }
 
+  public Unit getUnit(int i) {
+    return arrayUnit[i];
+  }
 
+  public String getPlayerName() {
+    return playerName;
+  }
+
+  public int getCountUnit() {
+    return countUnit;
+  }
 }
 
