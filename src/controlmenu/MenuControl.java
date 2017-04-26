@@ -1,14 +1,8 @@
 package controlmenu;
-import map.Map;
-import menu.MenuViewer;
-import object.item.Recovery;
-import view.command.AttackCommandView;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import menu.MenuViewer;
 
 /**
  * Created by Zacki Zulfikar Fauzi on 24-Apr-17.
@@ -21,10 +15,12 @@ public class MenuControl {
   private boolean input;
   private int map;
 
-  public MenuControl(){
-        menu = new MenuViewer();
+  /** constructor.
+   */
+  public MenuControl() {
+    menu = new MenuViewer();
     setInput(false);
-        menu.getPlayButton().addMouseListener(new MouseListener() {
+    menu.getPlayButton().addMouseListener(new MouseListener() {
           @Override
           public void mouseClicked(MouseEvent e) {
             setJumlahPlayer(menu.getInputPlayer());
@@ -84,7 +80,8 @@ public class MenuControl {
   public void setJumlahPlayer(int jumlahPlayer) {
     this.jumlahPlayer = jumlahPlayer;
   }
-  public void controlMenu(){
+
+  public void controlMenu() {
     menu.menuShow();
   }
 

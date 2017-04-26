@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Created by Finiko on 4/24/2017.
+ * NIM : 13515029.
+ * File : MapViewerTest.java
  */
 public class MapViewerTest {
   @Test
