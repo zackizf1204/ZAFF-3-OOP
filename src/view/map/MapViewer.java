@@ -242,6 +242,6 @@ public class MapViewer extends JPanel {
       }
       i = i + 1;
     } while ((i < countPlayer) && (!ada));
-    return (listPlayer[i].getUnit(k));
+    return (listPlayer[i - 1].getUnit(k - 1));
   }
 }

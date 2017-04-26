@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Created by user on 26-Apr-17.
+ * NIM : 13515068.
+ * File : PlayerTest.java
  */
 class PlayerTest {
   Player test = new Player("test");
