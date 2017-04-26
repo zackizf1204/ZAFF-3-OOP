@@ -3,6 +3,10 @@ package map;
 import object.MapObject;
 import tile.Tile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Created by Finiko on 4/13/2017.
  */
@@ -20,18 +24,45 @@ public class Map {
   /**Constructor map tanpa parameter.
    */
 
-  public Map() {
+  public Map(int nomorMap) throws FileNotFoundException {
     sizeX = 15;
     sizeY = 20;
+    java.lang.String[] data = new java.lang.String[15];
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY+1][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
+    //String fileLoc;
+    /*if (nomorMap == 1) {
+      fileLoc = new String("src/map1.txt");
+    } else {
+      fileLoc = new String("src/map2.txt");
+    }*/
+    //System.out.print(fileLoc);
+    String fileLoc = new String("src/map"+nomorMap+".txt");
+    File inp = new File(fileLoc);
+    Scanner input = new Scanner(inp);
+    int ite = 0;
+    while (ite < 15) {
+      String y = (input.nextLine());
+      for (int j = 0; j < sizeY; j++) {
+        int x = Character.getNumericValue(y.charAt(j));
+        int inputType = 0;
+        if (x == 0) {
+          inputType = 1;
+        }
+        dataTiles[ite][j] = new Tile(x,inputType,ite,j);
+      }
+      //System.out.println(y);
+      ite++;
+    }
+    input.close();
+
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+/*    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
-    }
+    }*/
     countObject = 0;
   }
   /**Constructor map dengan parameter.
@@ -43,12 +74,12 @@ public class Map {
     sizeX = inputSizeX;
     sizeY = inputSizeY;
     arrayObject = new MapObject[sizeY * sizeX];
-    dataTiles = new Tile[sizeY+1][sizeX];
+    dataTiles = new Tile[sizeX][sizeY];
     int i;
     int j;
-    for (i = 0; i < sizeY; i++) {
-      for (j = 0; j < sizeX; j++) {
-        dataTiles[i][j] = new Tile(0, 0,j,i);
+    for (i = 0; i < sizeX; i++) {
+      for (j = 0; j < sizeY; j++) {
+        dataTiles[i][j] = new Tile(0, 0,i,j);
       }
     }
     countObject = 0;
@@ -134,39 +165,12 @@ public class Map {
     if (countObject > 0) {
 
       while ((!found) && (i < countObject)){
-        System.out.println(i);
-        System.out.print(arrayObject[i].getAbsis());
-        System.out.println(arrayObject[i].getOrdinat());
         if ((arrayObject[i].getAbsis() == x) && (arrayObject[i].getOrdinat() == y)) {
           found = true;
         } else {
           i++;
         }
       }
-
-      /*
-      do {
-        absis = arrayObject[i].getAbsis();
-        ordinat = arrayObject[i].getOrdinat();
-        i = i + 1;
-      } while ((i < countObject) && ((absis != x) || (ordinat != y)));
-      /*
-      while ((i < countObject) && ((absis != x) || (ordinat != y))) {
-        i = i + 1;
-        if (i < countObject) {
-          System.out.println(i);
-          absis = arrayObject[i].getAbsis();
-          ordinat = arrayObject[i].getOrdinat();
-        }
-      }
-      if (i >= countObject) {
-        return (false);
-      } else {
-        return ((absis == x) && (ordinat == y));
-      }
-    } else {
-      return (false);
-      */
     }
     return found;
   }
