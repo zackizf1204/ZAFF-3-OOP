@@ -2,6 +2,7 @@ package view.map;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
 import map.Map;
 import object.Player;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,8 @@ import org.junit.jupiter.api.Test;
  */
 public class MapViewerTest {
   @Test
-  public void adaPlayer (int x, int y) {
-    Map map = new Map();
+  public void adaPlayer(int x, int y) throws FileNotFoundException {
+    Map map = new Map(1);
     Player[] list = new Player[1];
     list[0] = new Player("Player0");
     list[0].addUnit(0);
@@ -21,15 +22,16 @@ public class MapViewerTest {
     mv.setCountPlayer(1);
     assertTrue(mv.adaPlayer(0,0));
   }
+
   @Test
-  public void getXYUnit(int x, int y) {
-    Map map = new Map();
+  public void getAbsisOrdinatUnit(int x, int y) throws FileNotFoundException {
+    Map map = new Map(1);
     Player[] list = new Player[1];
     list[0] = new Player("Player0");
     list[0].addUnit(0);
     MapViewer mv = new MapViewer(map);
     mv.setListPlayer(list);
     mv.setCountPlayer(1);
-    assertTrue(mv.getXYUnit(0,0) == list[0].getUnit(0));
+    assertTrue(mv.getAbsisOrdinatUnit(0,0) == list[0].getUnit(0));
   }
 }

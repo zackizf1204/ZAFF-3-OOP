@@ -6,32 +6,58 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import map.Map;
 import object.Player;
 import object.Unit;
+import object.item.Item;
 
 /**
  * Created by Finiko on 4/15/2017.
+ * NIM : 13515029.
+ * File : MapViewer.java
  */
 public class MapViewer extends JPanel {
-  private GridBagConstraints batasan;
-  private JComponent content;
-  private JLayeredPane layerPanel;
-  private GridBagLayout mapLayout;
-  private Map inputMap;
-  private Player[] listPlayer;
-  private int countPlayer;
-  private int countUnit;
+  /** batasan layout.
+   */
 
+  private GridBagConstraints batasan;
+  /** content dari component.
+   */
+
+  private JComponent content;
+  /** panel layer.
+   */
+
+  private JLayeredPane layerPanel;
+  /** layout map.
+   */
+
+  private GridBagLayout mapLayout;
+  /** masukkan map.
+   */
+
+  private Map inputMap;
+  /** list dari Player pada map.
+   */
+
+  private Player[] listPlayer;
+  /** jumlah Player.
+   */
+
+  private int countPlayer;
+  /** Jumlah Unit.
+   */
+
+  private int countUnit;
   /** constructor.
    * @param map masukkan map
    */
 
   public MapViewer(Map map) {
+    super();
     batasan = new GridBagConstraints();
     mapLayout = new GridBagLayout();
     layerPanel = new JLayeredPane();
@@ -39,26 +65,32 @@ public class MapViewer extends JPanel {
     content.setOpaque(true);
     layerPanel.setLayout(mapLayout);
     inputMap = map;
+    content.add(layerPanel);
+    add(content);
   }
   /** menampilkan ke layar.
    * @throws Exception jika file tidak ditemukan.
    */
 
   public void view() throws Exception {
-    JFrame frame = new JFrame("Display image");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    frame.setContentPane(content);
-    frame.setSize(1200,1080);
+    content.remove(layerPanel);
+    layerPanel = new JLayeredPane();
+    layerPanel.setLayout(mapLayout);
+    content.add(layerPanel);
     viewTile();
     viewMapObject();
-    content.add(layerPanel);
-    frame.setVisible(true);
   }
+  /** Setter pada list Player.
+   * @param list masukkan list Player.
+   */
 
   public void setListPlayer(Player[] list) {
     listPlayer = list;
   }
+  /** Setter jumlah Player.
+   * @param count masukkan jumlah Player.
+   */
+
   public void setCountPlayer(int count) {
     countPlayer = count;
   }
@@ -68,12 +100,24 @@ public class MapViewer extends JPanel {
   public void viewTile() {
     int x;
     int y;
+    TileDrawer gambarDarat = new TileDrawer(2);
+    TileDrawer gambarLaut = new TileDrawer(0);
+    TileDrawer gambarPantai = new TileDrawer(1);
+    TileDrawer gambarSalju = new TileDrawer(3);
     for (y = 0; y < inputMap.getSizeY(); y++) {
       for (x = 0; x < inputMap.getSizeX(); x++) {
         batasan.gridx = y;
         batasan.gridy = x;
-        TileDrawer gambar = new TileDrawer(inputMap.getTile(x,y));
-        JLabel mapIcon = new JLabel(new ImageIcon(gambar.getImage()));
+        JLabel mapIcon;
+        if (inputMap.getTile(x,y).getHeight() == 0) {
+          mapIcon = new JLabel(new ImageIcon(gambarLaut.getImage()));
+        } else if (inputMap.getTile(x,y).getHeight() == 1) {
+          mapIcon = new JLabel(new ImageIcon(gambarPantai.getImage()));
+        } else if (inputMap.getTile(x,y).getHeight() == 2) {
+          mapIcon = new JLabel(new ImageIcon(gambarDarat.getImage()));
+        } else {
+          mapIcon = new JLabel(new ImageIcon(gambarSalju.getImage()));
+        }
         mapLayout.setConstraints(mapIcon,batasan);
         layerPanel.add(mapIcon);
         layerPanel.setLayer(mapIcon,new Integer(0),0);
@@ -87,24 +131,42 @@ public class MapViewer extends JPanel {
   public void viewMapObject() {
     int x;
     int y;
+    EmptyDrawer gambarEmpty = new EmptyDrawer(0,0);
+    MapObjectDrawer pu = new MapObjectDrawer(-1);
+    MapObjectDrawer rec = new MapObjectDrawer(-2);
+    MapObjectDrawer ty0 = new MapObjectDrawer(0);
+    MapObjectDrawer ty1 = new MapObjectDrawer(1);
+    MapObjectDrawer ty2 = new MapObjectDrawer(2);
+    MapObjectDrawer ty3 = new MapObjectDrawer(3);
     for (x = 0; x < inputMap.getSizeX();x++) {
       for (y = 0; y < inputMap.getSizeY();y++) {
-        batasan.gridx = x;
-        batasan.gridy = y;
-        if (adaPlayer(x,y)) {
-          MapObjectDrawer gambarObject = new MapObjectDrawer(getXYUnit(x,y));
-          JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
-          mapLayout.setConstraints(objectIcon,batasan);
-          layerPanel.add(objectIcon,batasan);
-          layerPanel.setLayer(objectIcon,new Integer(1),0);
-        } else if (inputMap.adaObject(x,y)) {
-          MapObjectDrawer gambarObject = new MapObjectDrawer(inputMap.searchObject(x,y));
-          JLabel objectIcon = new JLabel(new ImageIcon(gambarObject.getImage()));
+        JLabel objectIcon;
+        batasan.gridx = y;
+        batasan.gridy = x;
+        if (inputMap.adaObject(x,y)) {
+          if (inputMap.searchObject(x,y).getObjectType() == "Unit") {
+            Unit unit = (Unit) inputMap.searchObject(x,y);
+            if (unit.getType() == 0) {
+              objectIcon = new JLabel(new ImageIcon(ty0.getImage()));
+            } else if (unit.getType() == 1) {
+              objectIcon = new JLabel(new ImageIcon(ty1.getImage()));
+            } else if (unit.getType() == 2) {
+              objectIcon = new JLabel(new ImageIcon(ty2.getImage()));
+            } else {
+              objectIcon = new JLabel(new ImageIcon(ty3.getImage()));
+            }
+          } else {
+            Item item = (Item) inputMap.searchObject(x,y);
+            if (item.getItemType() == "PowerUp") {
+              objectIcon = new JLabel(new ImageIcon(pu.getImage()));
+            } else {
+              objectIcon = new JLabel(new ImageIcon(rec.getImage()));
+            }
+          }
           mapLayout.setConstraints(objectIcon,batasan);
           layerPanel.add(objectIcon,batasan);
           layerPanel.setLayer(objectIcon,new Integer(1),0);
         } else {
-          EmptyDrawer gambarEmpty = new EmptyDrawer(x,y);
           JLabel emptyIcon = new JLabel(new ImageIcon(gambarEmpty.getImage()));
           mapLayout.setConstraints(emptyIcon,batasan);
           layerPanel.add(emptyIcon,batasan);
@@ -113,11 +175,21 @@ public class MapViewer extends JPanel {
       }
     }
   }
+
+  /** getter untuk content.
+   * @return Content pada map viewer.
+   */
   public JComponent getContent() {
     return (content);
   }
 
-  public boolean adaPlayer (int x, int y) {
+  /**
+   * Mengecek apakah ada player di x dan y.
+   * @param x parameter x
+   * @param y parameter y
+   * @return true jika ada player di point x dan y
+   */
+  public boolean adaPlayer(int x, int y) {
     int i;
     boolean ada;
     ada = false;
@@ -140,7 +212,13 @@ public class MapViewer extends JPanel {
     } while ((i < countPlayer) && (!ada));
     return (ada);
   }
-  public Unit getXYUnit(int x, int y) {
+  /** getter unit di posisi X dan Y.
+   * @param x posisi x.
+   * @param y posisi y.
+   * @return unit di posisi x dan y.
+   */
+
+  public Unit getAbsisOrdinatUnit(int x, int y) {
     int i;
     int k;
     i = 0;

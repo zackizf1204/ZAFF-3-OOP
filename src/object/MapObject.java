@@ -6,19 +6,31 @@ package object;
  * File : MapObject.java
  */
 public abstract class MapObject {
-  private int absis;
-  private int ordinat;
+  protected int absis;
+  protected int ordinat;
   protected String objectType;
 
+  /**
+   * Konstuktor kelas MapObject.
+   */
   public MapObject() {
     absis = 0;
     ordinat = 0;
   }
 
+  /**
+   * Konstuktor kelas MapObject dengan parameter.
+   */
+
   public MapObject(int absis, int ordinat) {
     this.absis = absis;
     this.ordinat = ordinat;
   }
+
+  /**
+   * Getter objectType.
+   * @return objectType Tipe objek.
+   */
 
   public String getObjectType() {
     return objectType;

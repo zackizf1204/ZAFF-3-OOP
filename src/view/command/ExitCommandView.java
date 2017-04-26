@@ -1,12 +1,15 @@
 package view.command;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 
 /**
  * Created by 13515017 / Putu Arya Pradipta.
@@ -14,6 +17,10 @@ import java.awt.event.MouseListener;
  * FileName : ExitCommandView.java.
  */
 public class ExitCommandView extends CommandView {
+
+  /**
+   * Konstruktor ExitCommandView tanpa parameter.
+   */
   public ExitCommandView() {
     super();
     try {
@@ -74,6 +81,11 @@ public class ExitCommandView extends CommandView {
         setBackground(new Color(0, 0, 0, 0));
       }
     });
+  }
+
+  @Override
+  public int getButtonType() {
+    return 2;
   }
 
 }
