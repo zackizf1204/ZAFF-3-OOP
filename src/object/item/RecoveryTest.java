@@ -25,7 +25,7 @@ class RecoveryTest {
   @Test
   void getAddHp() {
     Recovery recov = new Recovery(3,4);
-    int maxHp = 11;
+    int maxHp = 61;
     int minHp = 0;
     assertTrue((recov.getAddHp() <= maxHp) && (recov.getAddHp() >= minHp));
   }
@@ -33,9 +33,9 @@ class RecoveryTest {
   @Test
   void getAddMp() {
     Recovery recov = new Recovery(3,4);
-    int maxMp = 11;
+    int maxMp = 41;
     int minMp = 0;
-    assertTrue((recov.getAddHp() <= maxMp) && (recov.getAddHp() >= minMp));
+    assertTrue((recov.getAddMp() <= maxMp) && (recov.getAddMp() >= minMp));
   }
 
   @Test

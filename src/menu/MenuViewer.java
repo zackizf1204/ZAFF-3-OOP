@@ -109,7 +109,7 @@ public class MenuViewer extends JPanel {
    */
 
   public void menuShow() {
-    JFrame frame = new JFrame("ZAFF");
+    JFrame frame = new JFrame("Front Line");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(content);
     frame.pack();
