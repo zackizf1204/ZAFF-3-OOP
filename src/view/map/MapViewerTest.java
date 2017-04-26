@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 public class MapViewerTest {
   @Test
-  public void adaPlayer(int x, int y) throws FileNotFoundException {
+  public void adaPlayer() throws FileNotFoundException {
     Map map = new Map(1);
     Player[] list = new Player[1];
     list[0] = new Player("Player0");
@@ -26,7 +26,7 @@ public class MapViewerTest {
   }
 
   @Test
-  public void getAbsisOrdinatUnit(int x, int y) throws FileNotFoundException {
+  public void getAbsisOrdinatUnit() throws FileNotFoundException {
     Map map = new Map(1);
     Player[] list = new Player[1];
     list[0] = new Player("Player0");
@@ -34,6 +34,6 @@ public class MapViewerTest {
     MapViewer mv = new MapViewer(map);
     mv.setListPlayer(list);
     mv.setCountPlayer(1);
-    assertTrue(mv.getAbsisOrdinatUnit(0,0) == list[0].getUnit(0));
+    assertTrue(mv.getAbsisOrdinatUnit(0, 0) == list[0].getUnit(0));
   }
 }

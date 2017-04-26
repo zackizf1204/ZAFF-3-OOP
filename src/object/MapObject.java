@@ -19,7 +19,9 @@ public abstract class MapObject {
   }
 
   /**
-   * Konstuktor kelas MapObject dengan parameter.
+   * Konstruktor kelas MapObject dengan parameter.
+   * @param absis x
+   * @param ordinat y
    */
 
   public MapObject(int absis, int ordinat) {
@@ -36,21 +38,45 @@ public abstract class MapObject {
     return objectType;
   }
 
+  /**
+   * Getter absis.
+   * @return absis
+   */
+
   public int getAbsis() {
     return absis;
   }
+
+  /**
+   * Getter ordinat.
+   * @return ordinat
+   */
 
   public int getOrdinat() {
     return ordinat;
   }
 
+  /**
+   * Setter absis.
+   * @param absis absis input
+   */
+
   public void setAbsis(int absis) {
     this.absis = absis;
   }
 
+  /**
+   * Setter ordinat.
+   * @param ordinat ordinat input.
+   */
+
   public void setOrdinat(int ordinat) {
     this.ordinat = ordinat;
   }
+
+  /**
+   * Setter abstract object type.
+   */
 
   public abstract void setObjectType();
 }

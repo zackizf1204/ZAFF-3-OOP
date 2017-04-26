@@ -10,24 +10,42 @@ import object.MapObject;
 public class Item extends MapObject {
   protected String itemType;
 
+  /**
+   * Konstruktor item tanpa parameter.
+   */
   public Item() {
     super();
     setObjectType();
   }
+
+  /**
+   * Konstruktor item dengan parameter.
+   */
 
   public Item(int inputX, int inputY) {
     super(inputX, inputY);
     setObjectType();
   }
 
+  /**
+   * Getter tipe item.
+   * @return itemType
+   */
   public String getItemType() {
     return itemType;
   }
 
+  /**
+   * Setter item type.
+   * @param itemType tipe item.
+   */
   public void setItemType(String itemType) {
     this.itemType = itemType;
   }
 
+  /**
+   * Implementasi dari method abstract setObjectType.
+   */
   public void setObjectType() {
     objectType = "Item";
   }

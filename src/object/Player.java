@@ -11,6 +11,10 @@ public class Player {
   private int countUnit;
   private boolean gameOver;
 
+  /**
+   * Constructor Player
+   * @param input nama Player.
+   */
   public Player(String input) {
     playerName = input;
     arrayUnit = new Unit [10];
@@ -19,6 +23,13 @@ public class Player {
     gameOver = false;
   }
 
+  /**
+   * Constructor Player.
+   * @param input nama player.
+   * @param type type dari unit pertama.
+   * @param x posisi absis dari unit pertama.
+   * @param y posisi ordinat dari unit pertama.
+   */
   public Player(String input,int type,int x, int y) {
     playerName = input;
     arrayUnit = new Unit [10];
@@ -27,6 +38,10 @@ public class Player {
     gameOver = false;
   }
 
+  /**
+   * menambakan unit pada player.
+   * @param type type unit yang akan ditambahkan.
+   */
   public void addUnit(int type) {
     assert countUnit <= 10 : "Unit Full";
     arrayUnit[countUnit] = new Unit(type,0,0);
@@ -45,6 +60,9 @@ public class Player {
     return countUnit;
   }
 
+  /**
+   * Melakukan pengecekan terhadap seluruh unit player.
+   */
   public void checkUnit() {
     boolean temp = true;
     for (int i = 0 ; i < countUnit ; i++) {
