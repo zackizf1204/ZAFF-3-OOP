@@ -207,6 +207,7 @@ public class MenuViewer extends JPanel {
     }
   }
   /** getter untuk inputPlayer.
+   * @return pilihan Player.
    */
 
   public int getInputPlayer() {
@@ -214,6 +215,7 @@ public class MenuViewer extends JPanel {
     return (inputPlayer);
   }
   /** getter untuk map.
+   * @return pilihan map.
    */
 
   public int getMap() {
@@ -221,12 +223,14 @@ public class MenuViewer extends JPanel {
     return (map);
   }
   /** getter untuk playButton.
+   * @return button play.
    */
 
   public JButton getPlayButton() {
     return (playButton);
   }
   /** getter untuk exitButton.
+   * @return button exit.
    */
 
   public JButton getExitButton() {

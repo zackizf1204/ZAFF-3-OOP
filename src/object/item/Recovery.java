@@ -20,6 +20,8 @@ public class Recovery extends Item {
   }
   /**
    * Konstruktor recovery dengan parameter.
+   * @param inputX masukkan posisi X.
+   * @param inputY masukkan posisi Y.
    */
 
   public Recovery(int inputX, int inputY) {

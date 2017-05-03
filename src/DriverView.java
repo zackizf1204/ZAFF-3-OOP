@@ -39,8 +39,8 @@ public class DriverView {
   private UnitView[] unit = new UnitView[4];
   private JPanel newp = new JPanel(new BorderLayout());
 
-  /**
-   * Konstruktor DriverView tanpa parameter.
+  /** Konstruktor DriverView tanpa parameter.
+   * @param model masukkan model.
    */
   public DriverView(DriverModel model) {
     JFrame frame = new JFrame("ZAFF");

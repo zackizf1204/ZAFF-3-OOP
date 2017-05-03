@@ -20,6 +20,8 @@ public class Item extends MapObject {
 
   /**
    * Konstruktor item dengan parameter.
+   * @param inputX masukkan posisi X.
+   * @param inputY masukkan posisi Y.
    */
 
   public Item(int inputX, int inputY) {

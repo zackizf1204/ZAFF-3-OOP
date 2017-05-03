@@ -8,6 +8,8 @@ import tile.Tile;
 
 /**
  * Created by Finiko on 4/13/2017.
+ * NIM : 13515029
+ * File : Map.java
  */
 public class Map {
   private int sizeX;
@@ -16,13 +18,17 @@ public class Map {
   private Tile[][] dataTiles;
   private int countObject;
 
+  /** getter countObject.
+   * @return countObject.
+   */
   public int getCountObject() {
     return countObject;
   }
 
   /**Constructor map tanpa parameter.
+   * @param nomorMap input masukkan map.
+   * @throws FileNotFoundException jika file tidak ketemu.
    */
-
   public Map(int nomorMap) throws FileNotFoundException {
     sizeX = 15;
     sizeY = 20;

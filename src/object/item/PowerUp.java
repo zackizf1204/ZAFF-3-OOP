@@ -33,6 +33,8 @@ public class PowerUp extends Item {
 
   /**
    * Konstruktor PowerUp dengan parameter.
+   * @param inputX masukkan posisi X.
+   * @param inputY masukkan posisi Y.
    */
 
   public PowerUp(int inputX, int inputY) {

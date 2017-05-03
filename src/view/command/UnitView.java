@@ -32,6 +32,7 @@ public class UnitView extends JPanel {
   /**
    * Konstruktor tanpa parameter.
    * Menginisialisasi unit view dengan tulisan templates dan sprites.
+   * @param i masukkan urutan unit.
    */
   public UnitView(int i) {
     super();
